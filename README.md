@@ -2,7 +2,7 @@
 
 ### What if I gave you a million pieces of paper? 💰
 
-Think it's worthless? What if I told you that Elon Musk will let you to buy a Tesla with these pieces of paper? 
+Think it's worthless? What if I told you that Elon Musk will let you to buy *a Tesla* with these pieces of paper? 
 
 **Money**, in and of it itself, has no actual value. Yet when it moves from one hand to another, it starts to function as a medium of exchange and a storehouse of wealth. 
 
@@ -10,7 +10,7 @@ Think it's worthless? What if I told you that Elon Musk will let you to buy a Te
 
 Mobile payment and virtual currency has revolutionized money transfers to make it faster and more convenient than ever before. [Cash App](https://cash.app/) is one of the fastest growing financial brand in the world, with over 30 million monthly active users. 
 
-With [Cash App](https://cash.app/), any individual can send and receive money with anyone within a matter of minutes... with zero fees. 
+With [Cash App](https://cash.app/), any individual can send and receive money with anyone within a matter of minutes... *with zero fees*. 
 
 ### What if Cash App was invented in the 90s? 💡
 
@@ -23,10 +23,10 @@ It's for you!
 
 During the 90s, a time when tools like [SWIFT](https://en.wikipedia.org/wiki/Society_for_Worldwide_Interbank_Financial_Telecommunication) were used largely for businesses and banking-related transfers, 
 the lifestyle needs of the individual was not being satisfied. 
-With **Cash App '98**, everyone with a bank account can take part in defining an inclusive economy. 
+With **Cash App '98**, everyone with a bank account can take part in defining *an inclusive economy*. 
 
 ### Why build this? 🚀
-Equitable access and freedom with money is the key to an inclusive economy. 
+Equitable access and freedom with money is the key to *an inclusive economy*. 
 
 If we had the tools to empower people during the rise of the internet in the 90s, then more people would have equal access to opportunity. 
 Being a transformation driver has always fuelled me as I create lasting, measurable impact with code. 
@@ -36,7 +36,7 @@ I'll tell you what, I sure don't want to sell sugar water. Do you?
 
 ### User Stories 💁
 
-- As a user, I want to be able to create an account and pick a unique username as my $cashtag.
+- As a user, I want to be able to create an account and pick a unique username as my *$cashtag*.
 - As a user, I want to be able to add/remove my credit card to my list of credit cards.
 - As a user, I want to be able to send and receive money.
 - As a user, I want to be able to view my history of transactions.
