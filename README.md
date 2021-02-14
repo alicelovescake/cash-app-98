@@ -14,7 +14,7 @@ With [Cash App](https://cash.app/), any individual can send and receive money wi
 
 ### What if Cash App was invented in the 90s? 💡
 
-Introducing, **Cash App '98**, a state of the art (at its time) payment app that aims to redefine the value of money by making it universally accessible, at your fingertips. Imagine being able to connect your credit card and send money in an instant rather than enduring long bank wait times and expensive fees. Imagine capitalizing on the power of digital wallets to exceed the limits of what money transfer could do in the 90s. 
+Introducing, **Cash App '98**, a state of the art (for its time) payment app that aims to redefine the value of money by making it universally accessible, at your fingertips. Imagine being able to connect your credit card and send money in an instant rather than enduring long bank wait times and expensive fees. Imagine capitalizing on the power of digital wallets to exceed the limits of what money transfer could do in the 90s. 
 
 Now it is possible with an easy-to-use, desktop app that allows you to navigate your transactions with ease and joy! 
 
@@ -32,7 +32,9 @@ If we had the tools to empower people during the rise of the internet in the 90s
 Being a transformation driver has always fuelled me as I create lasting, measurable impact with code. 
 Steve Jobs famously asked John Sculley if he wanted to sell sugar water for the rest of his life or change the world with Apple.  
 
-I'll tell you what, I sure don't want to sell sugar water. Do you? 
+> I'll tell you what, I sure don't want to sell sugar water. Do you? 
+
+---
 
 ### User Stories 💁
 
@@ -41,6 +43,7 @@ I'll tell you what, I sure don't want to sell sugar water. Do you?
 - As a user, I want to be able to send and receive money.
 - As a user, I want to be able to view my history of transactions.
 - As a user, I want to be able to request money from another account. 
+- As a user, I want to be rewarded for my purchases.
 
 
 
