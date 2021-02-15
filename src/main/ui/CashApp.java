@@ -2,18 +2,17 @@ package ui;
 
 import model.*;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 import static model.BusinessUser.BusinessType.*;
 
 //Cash App
 public class CashApp {
-    private Scanner input;
+    private final Scanner input;
     private User user;
 
-    private User cashAppUser = new BusinessUser("cashapp", "Vancouver, BC", "CashApp", OTHER);
-    private Account cashAppAccount = new Account(cashAppUser, 1000000.00);
+    private final User cashAppUser = new BusinessUser("cashapp", "Vancouver, BC", "CashApp", OTHER);
+    private final Account cashAppAccount = new Account(cashAppUser, 1000000.00);
 
     //EFFECTS: runs the cash app
     public CashApp() {
@@ -158,7 +157,7 @@ public class CashApp {
         user = new PersonalUser(username, location, firstName, lastName);
 
         System.out.println("\nIt's great for you to join us from "
-                + location + "!" + " Your username $" + username + " is ready to be used!\uD83C\uDF89");
+                + location + "!" + " Your username $" + username + " is ready to be used! Woot!");
     }
 
     //MODIFY: this
@@ -189,9 +188,10 @@ public class CashApp {
         user = new BusinessUser(username, location, companyName, type);
 
         System.out.println("\nIt's great for you to join us from "
-                + location + "!" + " Time to take " + companyName + " to the next level! \uD83C\uDF89");
+                + location + "!" + " Time to take " + companyName + " to the next level! Woot!");
     }
 
+    //EFFECTS: process user command to parse out business type
     private BusinessUser.BusinessType processBusinessType(String input) {
         BusinessUser.BusinessType type;
         switch (input) {
@@ -213,10 +213,13 @@ public class CashApp {
         return type;
     }
 
+    //EFFECTS: Prints account balance
     private void runCheckBalanceFlow() {
         System.out.println("\nYour balance is $" + user.getAccount().getBalance() + ".");
     }
 
+    //MODIFY: this
+    //EFFECTS: process user command to deposit into account
     private void runFundAccountFlow() {
         if (user.getAccount().getCreditCards().size() == 0) {
             runAddCreditCardFlow();
@@ -233,6 +236,8 @@ public class CashApp {
         System.out.println("\nYour new balance is $" + user.getAccount().getBalance() + ".");
     }
 
+    //MODIFY: this
+    //EFFECTS: process user command to withdraw funds from account balance
     private void runWithdrawFundsFlow() {
         if (user.getAccount().getCreditCards().size() == 0) {
             runAddCreditCardFlow();
@@ -252,6 +257,8 @@ public class CashApp {
         }
     }
 
+    //MODIFY: this
+    //EFFECTS: process user command to create and add credit card to list of credit cards
     private void runAddCreditCardFlow() {
         System.out.println("\nIt looks like you don't have a credit card on your account. Let's add one now.");
 
@@ -284,6 +291,8 @@ public class CashApp {
         }
     }
 
+    //MODIFY: this
+    //EFFECTS: process user command to send money to default cashapp user
     private void runSendMoneyFlow() {
         System.out.println("\nWe're glad you want to try out our send money flow.");
         System.out.println("\nCashApp is currently in development so you can only send to our account.");
@@ -305,6 +314,8 @@ public class CashApp {
         }
     }
 
+    //MODIFY: this
+    //EFFECTS: process user command to request money from default user
     private void runRequestMoneyFlow() {
         System.out.println("\nWe're glad you want to try out our send money flow.");
         System.out.println("\nCashApp is currently in development so you can only request from our account.");
@@ -326,11 +337,13 @@ public class CashApp {
         }
     }
 
+    //EFFECTS: formats transaction header view
     private void printTransactionHeader() {
         System.out.println("DATE\t\tRECIPIENT\t\tSENDER\t\tAMOUNT\t\tSTATUS");
         System.out.println("=======================================================");
     }
 
+    //EFFECTS: format and print single transaction
     private void printTransaction(Transaction transaction) {
         System.out.println(
                 transaction.getDate() + "\t\t" + transaction.getRecipientUsername() + "\t\t"
@@ -339,6 +352,7 @@ public class CashApp {
         );
     }
 
+    //EFFECTS: prints all pending transactions
     private void printPendingTransactions() {
         if (user.getAccount().getPendingTransactions().size() > 0) {
             System.out.println("\nHere are your PENDING transactions:");
@@ -351,6 +365,7 @@ public class CashApp {
         }
     }
 
+    //EFFECTS: prints all failed transactions
     private void printFailedTransactions() {
         if (user.getAccount().getFailedTransactions().size() > 0) {
             System.out.println("\nHere are your FAILED transactions:");
@@ -363,6 +378,8 @@ public class CashApp {
         }
     }
 
+    //EFFECTS: prints all completed transactions
+
     private void printCompletedTransactions() {
         if (user.getAccount().getCompletedTransactions().size() > 0) {
             System.out.println("\nHere are your COMPLETED transactions:");
@@ -374,6 +391,7 @@ public class CashApp {
             }
         }
     }
+    //EFFECTS: prints all pending, failed, and completed transactions for complete history
 
     private void runTransactionHistoryFlow() {
         printPendingTransactions();
@@ -381,6 +399,8 @@ public class CashApp {
         printCompletedTransactions();
     }
 
+    //MODIFY: this
+    //EFFECTS: displays list of options in credit card menu and process user input
     private void runUpdateCreditCardsFlow() {
         boolean keepGoing = true;
         String command = null;
@@ -426,12 +446,14 @@ public class CashApp {
         }
     }
 
-
+    //EFFECTS: print and format credit card list header
     private void printCreditCardHeader() {
         System.out.println("ID\t\tISSUER\t\tCARD NUM\t\tEXPIRY (M/YY)");
         System.out.println("=======================================================");
     }
 
+    //MODIFY: this
+    //EFFECTS: if list of credit cards not empty, format and print list of credit cards, else prompts user to add card
     private void runListCreditCardFlow() {
         if (user.getAccount().getCreditCards().size() > 0) {
             System.out.println("\nHere are your credit cards:");
@@ -459,6 +481,8 @@ public class CashApp {
         }
     }
 
+    //MODIFY this
+    //EFFECTS: Runs flow to delete credit card from list based on user input
     private void runDeleteCreditCardFlow() {
         runListCreditCardFlow();
 
