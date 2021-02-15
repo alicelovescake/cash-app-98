@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class CreditCard {
     private String cardType;
-    private int cardNumber;
+    private long cardNumber;
     private int expiryYear;
     private int expiryMonth;
     private String id;
@@ -33,7 +33,7 @@ public class CreditCard {
         return cardType;
     }
 
-    public int getCardNumber() {
+    public long getCardNumber() {
         return cardNumber;
     }
 

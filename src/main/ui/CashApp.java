@@ -97,6 +97,21 @@ public class CashApp {
 
     //EFFECTS: display welcome message to user
     private void displayWelcomeMessage() {
+        System.out.println("\n"
+                + "  ______                       __         ______                      \n"
+                + " /      \\                     |  \\       /      \\                     \n"
+                + "|  $$$$$$\\  ______    _______ | $$____  |  $$$$$$\\  ______    ______  \n"
+                + "| $$   \\$$ |      \\  /       \\| $$    \\ | $$__| $$ /      \\  /      \\ \n"
+                + "| $$        \\$$$$$$\\|  $$$$$$$| $$$$$$$\\| $$    $$|  $$$$$$\\|  $$$$$$\\\n"
+                + "| $$   __  /      $$ \\$$    \\ | $$  | $$| $$$$$$$$| $$  | $$| $$  | $$\n"
+                + "| $$__/  \\|  $$$$$$$ _\\$$$$$$\\| $$  | $$| $$  | $$| $$__/ $$| $$__/ $$\n"
+                + " \\$$    $$ \\$$    $$|       $$| $$  | $$| $$  | $$| $$    $$| $$    $$\n"
+                + "  \\$$$$$$   \\$$$$$$$ \\$$$$$$$  \\$$   \\$$ \\$$   \\$$| $$$$$$$ | $$$$$$$ \n"
+                + "                                                  | $$      | $$      \n"
+                + "                                                  | $$      | $$      \n"
+                + "                                                   \\$$       \\$$      \n");
+
+
         System.out.println("Welcome to Cash App '98! \n");
         System.out.println("Our mission is to create an inclusive economy "
                 + "by helping you send, receive, and spend money easier \n");
@@ -107,6 +122,7 @@ public class CashApp {
 
     //EFFECTS: display menu
     private void displayMenu() {
+        System.out.println("\n=======================================================");
         System.out.println("\nHow can we help you today?\n");
         System.out.println("Select from the following options:\n");
         System.out.println("\tb -> check balance");
@@ -117,6 +133,7 @@ public class CashApp {
         System.out.println("\tc -> update credit cards");
         System.out.println("\th -> view transaction history");
         System.out.println("\tq -> quit app");
+        System.out.println("\n=======================================================");
     }
 
     //MODIFY: this
@@ -311,12 +328,13 @@ public class CashApp {
 
     private void printTransactionHeader() {
         System.out.println("DATE\t\tRECIPIENT\t\tSENDER\t\tAMOUNT\t\tSTATUS");
+        System.out.println("=======================================================");
     }
 
     private void printTransaction(Transaction transaction) {
         System.out.println(
                 transaction.getDate() + "\t\t" + transaction.getRecipientUsername() + "\t\t"
-                        + transaction.getSenderUsername()  + "\t\t" + transaction.getAmount()  + "\t\t"
+                        + transaction.getSenderUsername() + "\t\t" + transaction.getAmount() + "\t\t"
                         + transaction.getStatus()
         );
     }
@@ -383,11 +401,13 @@ public class CashApp {
 
     //EFFECTS: display credit card menu
     private void displayCreditCardMenu() {
+        System.out.println("\n=======================================================");
         System.out.println("\nSelect from the following options:\n");
         System.out.println("\tl -> list cards");
         System.out.println("\ta -> add card");
         System.out.println("\td -> delete card");
         System.out.println("\tm -> main menu");
+        System.out.println("\n=======================================================");
     }
 
     //MODIFY: this
@@ -408,7 +428,8 @@ public class CashApp {
 
 
     private void printCreditCardHeader() {
-        System.out.println("ID\t\tISSUER\t\tCARD NUM\t\tEXPIRY MONTH\t\tEXPIRY YEAR");
+        System.out.println("ID\t\tISSUER\t\tCARD NUM\t\tEXPIRY (M/YY)");
+        System.out.println("=======================================================");
     }
 
     private void runListCreditCardFlow() {
@@ -420,10 +441,10 @@ public class CashApp {
                 CreditCard creditCard = (CreditCard) user.getAccount().getCreditCards().get(i);
                 System.out.println(
                         i + 1 + ". "
-                        + "\t\t " + creditCard.getCardType()
-                        + "\t\t" + creditCard.getCardNumber()
-                        + "\t\t" + creditCard.getExpiryMonth()
-                        + "\t\t" + creditCard.getExpiryYear()
+                                + "\t\t " + creditCard.getCardType()
+                                + "\t\t" + creditCard.getCardNumber()
+                                + "\t\t" + creditCard.getExpiryMonth()
+                                + "/" + creditCard.getExpiryYear()
                 );
             }
         } else {
