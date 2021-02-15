@@ -38,7 +38,7 @@ Steve Jobs famously asked John Sculley if he wanted to sell sugar water for the 
 
 ### User Stories 💁
 
-- As a user, I want to be able to create an account and pick a unique username as my *$cashtag*.
+- As a user, I want to be able to create a personal or business account and pick a unique username as my *$cashtag*.
 - As a user, I want to be able to add/remove my credit card to my list of credit cards.
 - As a user, I want to be able to send and receive money.
 - As a user, I want to be able to view my history of transactions.

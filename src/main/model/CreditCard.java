@@ -53,7 +53,6 @@ public class CreditCard {
         return expiryMonth;
     }
 
-
     //MODIFY: this
     //EFFECTS: sets isValid field to true if
     // card expiry year and month < current month and year

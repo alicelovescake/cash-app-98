@@ -5,7 +5,7 @@ public class BusinessUser extends User {
 //    private static final int dailyLimit = 10000;
 
     public enum BusinessType {
-        CAFE, GROCERY, AMAZON, RESTAURANT, ELECTRONICS, STARTUP
+        CAFE, GROCERY, RETAILER, RESTAURANT, OTHER
     }
 
     private BusinessType type;

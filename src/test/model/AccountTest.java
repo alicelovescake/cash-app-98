@@ -20,7 +20,7 @@ class AccountTest {
         testUserA = new PersonalUser("$alicelovescake", "Vancouver", "Alice", "Zhao");
         testCard = new CreditCard("Visa", 123456, 2025, 12);
         testBusinessUser = new BusinessUser(
-                "$amazon", "Seattle", "Amazon", BusinessUser.BusinessType.AMAZON);
+                "$amazon", "Seattle", "Amazon", BusinessUser.BusinessType.RETAILER);
         testAccountA = new Account(testUserA, 100.50);
         testBusinessAccount = new Account(testBusinessUser, 5000);
         testUserB = new PersonalUser

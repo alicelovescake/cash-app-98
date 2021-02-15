@@ -120,10 +120,11 @@ public class Account {
     //REQUIRES: amount >= 0 and valid user of cash app as recipient
     //MODIFY: this
     //EFFECTS: new transaction created with this as sender and recipient as receiver.
-    public void sendMoney(Account recipient, double amount) {
+    public Transaction sendMoney(Account recipient, double amount) {
         Transaction transaction = new Transaction(recipient, this, amount, Transaction.Type.EXCHANGE);
         transactions.add(transaction);
         recipient.addToTransactions(transaction);
+        return transaction;
     }
 
     //REQUIRES: amount >= 0
