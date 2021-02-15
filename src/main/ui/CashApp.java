@@ -87,11 +87,11 @@ public class CashApp {
                 runRequestMoneyFlow();
                 break;
             case "c":
+                runUpdateCreditCardsFlow();
                 break;
             case "h":
                 runTransactionHistoryFlow();
                 break;
-            default:
         }
     }
 
@@ -309,7 +309,149 @@ public class CashApp {
         }
     }
 
+    private void printTransactionHeader() {
+        System.out.println("DATE\t\tRECIPIENT\t\tSENDER\t\tAMOUNT\t\tSTATUS");
+    }
+
+    private void printTransaction(Transaction transaction) {
+        System.out.println(
+                transaction.getDate() + "\t\t" + transaction.getRecipientUsername() + "\t\t"
+                        + transaction.getSenderUsername()  + "\t\t" + transaction.getAmount()  + "\t\t"
+                        + transaction.getStatus()
+        );
+    }
+
+    private void printPendingTransactions() {
+        if (user.getAccount().getPendingTransactions().size() > 0) {
+            System.out.println("\nHere are your PENDING transactions:");
+
+            printTransactionHeader();
+            for (int i = 0; i < user.getAccount().getPendingTransactions().size(); i++) {
+                Transaction transaction = (Transaction) user.getAccount().getPendingTransactions().get(i);
+                printTransaction(transaction);
+            }
+        }
+    }
+
+    private void printFailedTransactions() {
+        if (user.getAccount().getFailedTransactions().size() > 0) {
+            System.out.println("\nHere are your FAILED transactions:");
+
+            printTransactionHeader();
+            for (int i = 0; i < user.getAccount().getFailedTransactions().size(); i++) {
+                Transaction transaction = (Transaction) user.getAccount().getFailedTransactions().get(i);
+                printTransaction(transaction);
+            }
+        }
+    }
+
+    private void printCompletedTransactions() {
+        if (user.getAccount().getCompletedTransactions().size() > 0) {
+            System.out.println("\nHere are your COMPLETED transactions:");
+
+            printTransactionHeader();
+            for (int i = 0; i < user.getAccount().getCompletedTransactions().size(); i++) {
+                Transaction transaction = (Transaction) user.getAccount().getCompletedTransactions().get(i);
+                printTransaction(transaction);
+            }
+        }
+    }
+
     private void runTransactionHistoryFlow() {
-        System.out.println("\nHere are the last 10 transactions in your account:");
+        printPendingTransactions();
+        printFailedTransactions();
+        printCompletedTransactions();
+    }
+
+    private void runUpdateCreditCardsFlow() {
+        boolean keepGoing = true;
+        String command = null;
+
+        while (keepGoing) {
+            displayCreditCardMenu();
+
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("m")) {
+                keepGoing = false;
+            } else {
+                processCreditCardCommand(command);
+            }
+        }
+    }
+
+    //EFFECTS: display credit card menu
+    private void displayCreditCardMenu() {
+        System.out.println("\nSelect from the following options:\n");
+        System.out.println("\tl -> list cards");
+        System.out.println("\ta -> add card");
+        System.out.println("\td -> delete card");
+        System.out.println("\tm -> main menu");
+    }
+
+    //MODIFY: this
+    //EFFECTS: processes user command to run app flows
+    private void processCreditCardCommand(String command) {
+        switch (command) {
+            case "l":
+                runListCreditCardFlow();
+                break;
+            case "a":
+                runAddCreditCardFlow();
+                break;
+            case "d":
+                runDeleteCreditCardFlow();
+                break;
+        }
+    }
+
+
+    private void printCreditCardHeader() {
+        System.out.println("ID\t\tISSUER\t\tCARD NUM\t\tEXPIRY MONTH\t\tEXPIRY YEAR");
+    }
+
+    private void runListCreditCardFlow() {
+        if (user.getAccount().getCreditCards().size() > 0) {
+            System.out.println("\nHere are your credit cards:");
+
+            printCreditCardHeader();
+            for (int i = 0; i < user.getAccount().getCreditCards().size(); i++) {
+                CreditCard creditCard = (CreditCard) user.getAccount().getCreditCards().get(i);
+                System.out.println(
+                        i + 1 + ". "
+                        + "\t\t " + creditCard.getCardType()
+                        + "\t\t" + creditCard.getCardNumber()
+                        + "\t\t" + creditCard.getExpiryMonth()
+                        + "\t\t" + creditCard.getExpiryYear()
+                );
+            }
+        } else {
+            System.out.println("\nYou have no credit cards. Would you like to add one? (y / n)");
+
+            String command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("y")) {
+                runAddCreditCardFlow();
+            }
+        }
+    }
+
+    private void runDeleteCreditCardFlow() {
+        runListCreditCardFlow();
+
+        System.out.println("\nEnter the ID of the card you want to remove (ex. 1):");
+
+        int cardNum = input.nextInt();
+
+        if (cardNum > 0 && cardNum <= user.getAccount().getCreditCards().size()) {
+            CreditCard creditCard = (CreditCard) user.getAccount().getCreditCards().get(cardNum - 1);
+            user.getAccount().deleteCreditCard(creditCard);
+
+            System.out.println("\nYour credit card has been removed.");
+        } else {
+            System.out.println("\nThat is not a valid credit card!");
+        }
     }
 }

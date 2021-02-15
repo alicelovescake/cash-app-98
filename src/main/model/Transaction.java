@@ -27,7 +27,7 @@ public class Transaction {
         this.amount = amount;
         this.sender = sender;
         this.id = UUID.randomUUID().toString();
-        date = LocalDate.now();
+        this.date = LocalDate.now();
         this.status = Status.PENDING;
         this.type = type;
 
@@ -44,6 +44,22 @@ public class Transaction {
 
     public String getId() {
         return id;
+    }
+
+    public String getSenderUsername() {
+        return sender.getUser().getUsername();
+    }
+
+    public String getRecipientUsername() {
+        return recipient.getUser().getUsername();
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     // EFFECTS: Process transaction, status changes to complete if sender has sufficient funds, status FAILED otherwise
