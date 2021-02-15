@@ -26,9 +26,12 @@ public class CreditCardTest {
     @Test
     void testValidateCard(){
         assertTrue(testCard.getIsValid());
-        CreditCard testExpiredCard = new CreditCard
+        CreditCard testExpiredYearCard = new CreditCard
                 ("Visa", 17897, 1999, 11);
-        assertFalse(testExpiredCard.getIsValid());
+        assertFalse(testExpiredYearCard.getIsValid());
+        CreditCard testExpiredMonthCard = new CreditCard
+                ("Visa", 17897, 2020, 1);
+        assertFalse(testExpiredYearCard.getIsValid());
     }
 }
 

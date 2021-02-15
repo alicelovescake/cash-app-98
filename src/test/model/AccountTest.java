@@ -42,6 +42,7 @@ class AccountTest {
         assertEquals(601.0, testAccountA.getBalance());
     }
 
+    @Test
     void testDepositInvalidCreditCard() {
         CreditCard invalidCard = new CreditCard("Visa", 2324, 1990, 1);
         testAccountA.addCreditCard(invalidCard);
@@ -151,9 +152,11 @@ class AccountTest {
         testAccountA.requestMoney(testAccountB, 200);
         testAccountA.requestMoney(testAccountC, 500);
         testAccountA.requestMoney(testAccountB, 700);
+        testAccountA.sendMoney(testAccountB, 1);
         assertEquals(3, testAccountA.getPendingTransactions().size());
         assertEquals(2, testAccountB.getPendingTransactions().size());
         assertEquals(1, testAccountC.getPendingTransactions().size());
+        assertEquals(1, testAccountA.getCompletedTransactions().size());
 
     }
 
@@ -161,6 +164,13 @@ class AccountTest {
     void testAddCreditCard() {
         testAccountA.addCreditCard(testCard);
         assertEquals(1, testAccountA.getCreditCards().size());
+    }
+
+    @Test
+    void testAddInvalidCreditCard() {
+        CreditCard testCard2 = new CreditCard("Visa", 123456, 2000, 12);
+        testAccountA.addCreditCard(testCard2);
+        assertEquals(0, testAccountA.getCreditCards().size());
     }
 
     @Test
