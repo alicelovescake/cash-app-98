@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class PersonalUser extends User {
     private String firstName;
     private String lastName;
-    private static final int dailyLimit = 3000;
+//    private static final int dailyLimit = 3000;
 
 
     //REQUIRES: first and last name has a non-zero length
@@ -16,8 +16,6 @@ public class PersonalUser extends User {
         this.lastName = lastName;
         referredFriends = new ArrayList<>();
     }
-
-    //getters
 
 
     //REQUIRES: valid email address

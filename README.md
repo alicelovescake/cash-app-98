@@ -45,9 +45,12 @@ so that everyone can have equal access to opportunity.  I only have one question
 - As a user, I want to be able to view/add/remove my credit card to my list of credit cards.
 - As a user, I want to be able to deposit and withdraw funds from my account.
 - As a user, I want to be able to send and receive money to other users.
-- As a user, I want to be able to request money from another account.
+- As a user, I want to be able to request money from another user.
 - As a user, I want to be able to view my current balance at any time.
 - As a user, I want to be able to view my history of pending, failed, and completed transactions.
+- As a user, I want to be rewarded for referring my friends to the app.
+- As a user, I want to save all my account changes and transactions to file.
+- As a user, I want to load all my previous account changes and transactions from a file.
  
 
 

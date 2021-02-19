@@ -12,17 +12,18 @@ public class Account {
     private double balance;               // the current balance of the account
     private List<CreditCard> creditCards; // list of credit cards added to this user account
     private List<Transaction> transactions; // list of completed transactions associated to this account
+    private List<Boost> boosts; // list of selected boosts associated to this account
 
     //REQUIRES: valid user of Cash App and initial balance >= 0
     //EFFECTS: creates an account based on the user, balance on account is set
     //         to given initialBalance
-
     public Account(User user, double initialBalance) {
         this.balance = initialBalance;
         this.user = user;
         this.id = UUID.randomUUID().toString();
         this.creditCards = new ArrayList<>();
         this.transactions = new ArrayList<>();
+        this.boosts = new ArrayList<>();
     }
 
     //Getters
@@ -66,9 +67,9 @@ public class Account {
         return failedTransactions;
     }
 
-//    public List getBoosts() {
-//        return boosts;
-//    }
+    public List getBoosts() {
+        return boosts;
+    }
 
     //Setter
     //increment and decrement separate setters to avoid mistakenly wiping out account
