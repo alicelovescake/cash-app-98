@@ -25,15 +25,20 @@ Now it is possible with an easy-to-use, desktop app that allows you to navigate 
 ### Who is Cash App '98 for? 🌐
 It's for you! 
 
-During the 90s, a time when tools like [SWIFT](https://en.wikipedia.org/wiki/Society_for_Worldwide_Interbank_Financial_Telecommunication) were used largely for businesses and banking-related transfers, 
+During the 90s, a time when tools like 
+[SWIFT](https://en.wikipedia.org/wiki/Society_for_Worldwide_Interbank_Financial_Telecommunication) 
+were used largely for businesses and banking-related transfers, 
 the lifestyle needs of the individual was not being satisfied. 
 With **Cash App '98**, everyone with a bank account can take part in defining *an inclusive economy*. 
 
 ### Why build this? 🚀
 Equitable access and freedom with money is the key to *an inclusive economy*.
-Inspired by [Venmo](https://venmo.com/), one of the fastest growing financial brand in the world, with over 60 million 
-monthly active users, Cash App '98 aims to empower people during the rise of the internet in the 90s, 
-so that everyone can have equal access to opportunity.  I only have one question for you:
+Cash App '98 is inspired by modern, 21st century tools like [Venmo](https://venmo.com/) and [Cash App](cash.app), 
+both part of the fastest growing financial brands in the world, with a combined user base of over 100 million monthly 
+active users. Cash App '98 aims to empower people during the rise of the internet in the 90s, 
+so that everyone can have equal access to opportunity. 
+
+There is only one question for you to consider:
 
 > Are you ready to re-invent the future with us?
 
