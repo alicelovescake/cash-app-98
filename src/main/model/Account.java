@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 // Represents an account having an id, associated user, balance, list of credit cards and transactions
 public class Account {
-    private static int nextAccountId = 1;  // tracks id of next account created
     private static String id;                  // account id
     private User user;                   // the account owner name
     private double balance;               // the current balance of the account

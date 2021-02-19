@@ -30,24 +30,23 @@ public class UserTest {
 
     @Test
     void testReferSingleFriend() {
-        testPersonalUser.referFriend("bestfriend@gmail.com");
+        assertTrue(testPersonalUser.referFriend("bestfriend@gmail.com"));
         assertEquals(1, testPersonalUser.getReferralCount());
-        assertEquals(2, testPersonalUser.referFriend("bestfriend10@gmail.com"));
+        assertFalse(testPersonalUser.referralReward());
     }
 
     @Test
-    void testReferMultipleFriends() {
-        testPersonalUser.referFriend("bestfriend@gmail.com");
-        testPersonalUser.referFriend("bestfriend2@gmail.com");
-        testPersonalUser.referFriend("bestfriend3@gmail.com");
-        testPersonalUser.referFriend("bestfriend4@gmail.com");
-        testPersonalUser.referFriend("bestfriend5@gmail.com");
-        testPersonalUser.referFriend("bestfriend6@gmail.com");
-        testPersonalUser.referFriend("aa");
+    void testReferMultipleFriendsReward() {
+        assertTrue(testPersonalUser.referFriend("bestfriend@gmail.com"));
+        assertTrue(testPersonalUser.referFriend("bestfriend2@gmail.com"));
+        assertTrue(testPersonalUser.referFriend("bestfriend3@gmail.com"));
+        assertTrue(testPersonalUser.referFriend("bestfriend4@gmail.com"));
+        assertTrue(testPersonalUser.referFriend("bestfriend5@gmail.com"));
+        assertTrue(testPersonalUser.referFriend("bestfriend6@gmail.com"));
+        assertFalse(testPersonalUser.referFriend("aa"));
+
         assertEquals(1, testPersonalUser.getReferralCount());
-        if (testPersonalUser.getReferralCount() >= testPersonalUser.getReferralCountForReward()) {
-            assertEquals(5, testPersonalUser.account.getBalance());
-        }
+        assertEquals(5, testPersonalUser.account.getBalance());
 
     }
 

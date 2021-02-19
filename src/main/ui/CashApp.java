@@ -11,7 +11,8 @@ public class CashApp {
     private final Scanner input;
     private User user;
 
-    private final User cashAppUser = new BusinessUser("cashapp", "Vancouver, BC", "CashApp", OTHER);
+    private final User cashAppUser =
+            new BusinessUser("cashapp", "Vancouver, BC", "CashApp", OTHER);
     private final Account cashAppAccount = new Account(cashAppUser, 1000000.00);
 
     //EFFECTS: runs the cash app
@@ -91,6 +92,9 @@ public class CashApp {
             case "h":
                 runTransactionHistoryFlow();
                 break;
+            case "a":
+                runReferFriendsFlow();
+                break;
         }
     }
 
@@ -131,6 +135,7 @@ public class CashApp {
         System.out.println("\tr -> request money");
         System.out.println("\tc -> update credit cards");
         System.out.println("\th -> view transaction history");
+        System.out.println("\ta -> refer a friend");
         System.out.println("\tq -> quit app");
         System.out.println("\n=======================================================");
     }
@@ -498,5 +503,52 @@ public class CashApp {
         } else {
             System.out.println("\nThat is not a valid credit card!");
         }
+    }
+
+    //MODIFY: this
+    //EFFECTS: runs flow to refer friends
+    private void runReferFriendsFlow() {
+
+        if (user.getUserType() == User.UserType.BUSINESS) {
+            System.out.println("Sorry, business users are unable to use this feature."
+                    + "Create a personal account for the ability to refer friends!");
+        } else {
+            int referralsLeft = user.getReferralCountForReward() - user.getReferralCount();
+            System.out.println("You have referred " + user.getReferralCount()
+                    + " friends so far. Just " + referralsLeft + " more to go for $"
+                    + user.getCashBackForReferral() + " cash back reward!");
+            System.out.println("Would you like to refer a friend? y/n");
+            processReferFriendsCommand();
+        }
+    }
+
+    private void processReferFriendsCommand() {
+        String command = input.next();
+        command = command.toLowerCase();
+        if (command.equals("y")) {
+            runReferAFriendFlow();
+        } else {
+            displayMenu();
+        }
+    }
+
+    private void runReferAFriendFlow() {
+        System.out.println("We can't wait to welcome your friends to Cash App '98!");
+        System.out.println("What's their email?");
+        String email = input.next();
+        email = email.toLowerCase();
+        Boolean validReferral = user.referFriend(email);
+        int referralsLeft = user.getReferralCountForReward() - user.getReferralCount();
+
+        if (validReferral) {
+            System.out.println("Yay! Your friend will receive an email invitation soon. You now have " + referralsLeft
+                    + " referrals to go before your reward!");
+        }
+
+        if (user.referralReward()) {
+            System.out.println("\n Congrats! $" + user.getCashBackForReferral()
+                    + " has been deposited into your account!");
+        }
+
     }
 }

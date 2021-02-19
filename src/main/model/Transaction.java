@@ -54,6 +54,10 @@ public class Transaction {
         return recipient.getUser().getUsername();
     }
 
+    public User getRecipient() {
+        return recipient.getUser();
+    }
+
     public double getAmount() {
         return amount;
     }
