@@ -58,12 +58,20 @@ public class Transaction {
         return recipient.getUser();
     }
 
+    public Account getSenderAccount() {
+        return sender;
+    }
+
     public double getAmount() {
         return amount;
     }
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     // EFFECTS: Process transaction, status changes to complete if sender has sufficient funds, status FAILED otherwise

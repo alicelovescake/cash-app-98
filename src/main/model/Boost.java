@@ -4,12 +4,14 @@ import java.util.List;
 
 public abstract class Boost {
     protected List<Boost> availableBoosts;
-    protected int cashBack;
+    protected static final int cashBack = 1; // cashback amount given to validatedTransactions
     protected Transaction transaction;
 
     //EFFECTS: Boost is created with current transaction, not yet validated
     public Boost(Transaction transaction) {
-        this.transaction = transaction;
+        if (transaction.getType() == Transaction.Type.EXCHANGE) {
+            this.transaction = transaction;
+        }
     }
 
     // getters
@@ -21,6 +23,6 @@ public abstract class Boost {
         return transaction;
     }
 
-    protected abstract void validateTransaction(Transaction transaction);
+    protected abstract boolean validateTransaction(Transaction transaction);
 
 }
