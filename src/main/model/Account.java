@@ -1,8 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 // Represents an account having an id, associated user, balance, list of credit cards and transactions
@@ -12,7 +10,14 @@ public class Account {
     private double balance;               // the current balance of the account
     private List<CreditCard> creditCards; // list of credit cards added to this user account
     private List<Transaction> transactions; // list of completed transactions associated to this account
-    private List<Boost> boosts; // list of selected boosts associated to this account
+    private Set<Boost> boosts; // list of selected boosts associated to this account
+    private static Boost highRoller = new HighRollerBoost();  // Boost available to account
+    private static Boost shopaholic = new ShopaholicBoost(); // Boost available to account
+    private static Boost foodie = new FoodieBoost();    // Boost available to account
+
+    public enum BoostType {
+        HIGHROLLER, SHOPAHOLIC, FOODIE
+    }
 
     //REQUIRES: valid user of Cash App and initial balance >= 0
     //EFFECTS: creates an account based on the user, balance on account is set
@@ -23,7 +28,7 @@ public class Account {
         this.id = UUID.randomUUID().toString();
         this.creditCards = new ArrayList<>();
         this.transactions = new ArrayList<>();
-        this.boosts = new ArrayList<>();
+        this.boosts = new HashSet<>();
     }
 
     //Getters
@@ -67,7 +72,7 @@ public class Account {
         return failedTransactions;
     }
 
-    public List getBoosts() {
+    public Set getBoosts() {
         return boosts;
     }
 
@@ -142,6 +147,9 @@ public class Account {
         Transaction transaction = new Transaction(company, this, amount, Transaction.Type.EXCHANGE);
         transactions.add(transaction);
         company.addToTransactions(transaction);
+        for (Boost b : boosts) {
+            b.applyBoost(transaction);
+        }
     }
 
     //REQUIRES: amount >= 0 and valid user of cash app
@@ -171,18 +179,42 @@ public class Account {
     }
 
 
-//    //REQUIRE: valid boost
-//    //MODIFY: this
-//    //EFFECTS: add boost to this credit card, returns list of updated boosts
-//    public List addBoost(Boost boost) {
-//        return boosts;
-//    }
-//
-//    //REQUIRE: valid boost that is already on the card
-//    //MODIFY: this
-//    //EFFECTS: remove boost from this credit card, returns list of updated boosts
-//    public List removeBoost(Boost boost) {
-//        return boosts;
-//    }
+    //REQUIRE: valid boost type
+    //MODIFY: this
+    //EFFECTS: add boost to this account (max 2), returns true if boost is added, false otherwise
+    public Boolean addBoost(BoostType boostType) {
+        if (boosts.size() >= 2) {
+            return false;
+        }
+        switch (boostType) {
+            case HIGHROLLER:
+                boosts.add(highRoller);
+                break;
+            case SHOPAHOLIC:
+                boosts.add(shopaholic);
+                break;
+            case FOODIE:
+                boosts.add(foodie);
+                break;
+        }
+        return true;
+    }
+
+    //REQUIRE: valid boost that is already on the card
+    //MODIFY: this
+    //EFFECTS: remove boost from this account, returns true if removed, false otherwise
+    public void removeBoost(BoostType boostType) {
+        switch (boostType) {
+            case HIGHROLLER:
+                boosts.remove(highRoller);
+                break;
+            case SHOPAHOLIC:
+                boosts.remove(shopaholic);
+                break;
+            case FOODIE:
+                boosts.remove(foodie);
+                break;
+        }
+    }
 
 }
