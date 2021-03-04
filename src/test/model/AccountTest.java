@@ -1,6 +1,7 @@
 package model;
 
 
+import model.boosts.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,9 @@ class AccountTest {
     private User testUserB;
     private BusinessUser testBusinessUser;
     private CreditCard testCard;
+    private Boost highRoller;
+    private  Boost shopaholic;
+    private  Boost foodie;
 
     @BeforeEach
     void setUp() {
@@ -26,6 +30,9 @@ class AccountTest {
         testUserB = new PersonalUser
                 ("$moneymaker", "Toronto", "Bob", "Marley");
         testAccountB = new Account(testUserB, 100);
+        highRoller = new HighRollerBoost();
+        shopaholic = new ShopaholicBoost();
+        foodie = new FoodieBoost();
     }
 
     @Test
@@ -202,18 +209,61 @@ class AccountTest {
         assertTrue(testAccountA.getCreditCards().contains(testCard2));
     }
 
-    //    //REQUIRE: valid boost
-//    //MODIFY: this
-//    //EFFECTS: add boost to this credit card, returns list of updated boosts
-//    public List addBoost(Boost boost) {
-//        return boosts;
-//    }
-//
-//    //REQUIRE: valid boost that is already on the card
-//    //MODIFY: this
-//    //EFFECTS: remove boost from this credit card, returns list of updated boosts
-//    public List removeBoost(Boost boost) {
-//        return boosts;
-//    }
+    @Test
+    void testAddSingleBoost() {
+        assertTrue(testAccountA.getBoosts().isEmpty());
+        assertTrue(testAccountA.addBoost(highRoller));
+        assertTrue(testAccountA.getBoosts().size() == 1);
+        assertTrue(testAccountA.getBoosts().contains(highRoller));
+    }
+
+    @Test
+    void testAddMultipleBoosts() {
+        assertTrue(testAccountA.getBoosts().isEmpty());
+        assertTrue(testAccountA.addBoost(highRoller));
+        assertTrue(testAccountA.getBoosts().size() == 1);
+        assertTrue(testAccountA.getBoosts().contains(highRoller));
+
+        assertTrue(testAccountA.addBoost(shopaholic));
+        assertTrue(testAccountA.getBoosts().size() == 2);
+        assertTrue(testAccountA.getBoosts().contains(shopaholic));
+
+        assertFalse(testAccountA.addBoost(foodie));
+        assertTrue(testAccountA.getBoosts().size() == 2);
+        assertFalse(testAccountA.getBoosts().contains(foodie));
+    }
+
+    @Test
+    void removeSingleBoost() {
+        assertTrue(testAccountA.addBoost(highRoller));
+        assertTrue(testAccountA.addBoost(shopaholic));
+        assertTrue(testAccountA.removeBoost(shopaholic));
+        assertTrue(testAccountA.getBoosts().size() == 1);
+        assertFalse(testAccountA.getBoosts().contains(shopaholic));
+    }
+
+    @Test
+    void removeAllBoosts() {
+        assertTrue(testAccountA.addBoost(highRoller));
+        assertTrue(testAccountA.addBoost(shopaholic));
+        assertTrue(testAccountA.removeBoost(shopaholic));
+        assertTrue(testAccountA.getBoosts().size() == 1);
+        assertFalse(testAccountA.getBoosts().contains(shopaholic));
+
+        assertTrue(testAccountA.removeBoost(highRoller));
+        assertTrue(testAccountA.getBoosts().isEmpty());
+    }
+
+    @Test
+    void removeBoostsNotExist() {
+        assertTrue(testAccountA.addBoost(highRoller));
+        assertTrue(testAccountA.addBoost(shopaholic));
+        assertFalse(testAccountA.removeBoost(foodie));
+        assertTrue(testAccountA.getBoosts().size() == 2);
+        assertTrue(testAccountA.getBoosts().contains(shopaholic));
+        assertTrue(testAccountA.getBoosts().contains(highRoller));
+
+
+    }
 }
 

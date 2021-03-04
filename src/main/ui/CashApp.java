@@ -86,6 +86,14 @@ public class CashApp {
             case "r":
                 runRequestMoneyFlow();
                 break;
+            default: processExtraCommands(command);
+        }
+    }
+
+    //MODIFY: this
+    //EFFECTS: processes user command to run app flows
+    private void processExtraCommands(String command) {
+        switch (command) {
             case "c":
                 runUpdateCreditCardsFlow();
                 break;
@@ -265,8 +273,7 @@ public class CashApp {
     //MODIFY: this
     //EFFECTS: process user command to create and add credit card to list of credit cards
     private void runAddCreditCardFlow() {
-        System.out.println("\nIt looks like you don't have a credit card on your account. Let's add one now.");
-
+        runCheckCreditCardAvailable();
         CreditCard creditCard = new CreditCard("", 0, 0, 0);
 
         while (!creditCard.getIsValid()) {
@@ -285,14 +292,22 @@ public class CashApp {
 
             creditCard = new CreditCard(creditCardType, creditCardNumber,
                     creditCardExpiryYear, creditCardExpiryMonth);
-
             if (creditCard.getIsValid()) {
                 user.getAccount().addCreditCard(creditCard);
-
                 System.out.println("\nYour credit card has been added, nice!");
             } else {
                 System.out.println("\nHmm... that card isn't valid. Let's try that again.");
             }
+        }
+    }
+
+    //EFFECTS: check if user has any credit cards on file
+
+    private void runCheckCreditCardAvailable() {
+        if (user.getAccount().getCreditCards().size() == 0) {
+            System.out.println("\nIt looks like you don't have a credit card on your account. Let's add one now.");
+        } else {
+            System.out.println("\nLet's add another credit card to your file!");
         }
     }
 

@@ -1,5 +1,7 @@
 package model;
 
+import model.boosts.*;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -14,10 +16,6 @@ public class Account {
     private static Boost highRoller = new HighRollerBoost();  // Boost available to account
     private static Boost shopaholic = new ShopaholicBoost(); // Boost available to account
     private static Boost foodie = new FoodieBoost();    // Boost available to account
-
-    public enum BoostType {
-        HIGHROLLER, SHOPAHOLIC, FOODIE
-    }
 
     //REQUIRES: valid user of Cash App and initial balance >= 0
     //EFFECTS: creates an account based on the user, balance on account is set
@@ -182,39 +180,23 @@ public class Account {
     //REQUIRE: valid boost type
     //MODIFY: this
     //EFFECTS: add boost to this account (max 2), returns true if boost is added, false otherwise
-    public Boolean addBoost(BoostType boostType) {
+    public Boolean addBoost(Boost boost) {
         if (boosts.size() >= 2) {
             return false;
         }
-        switch (boostType) {
-            case HIGHROLLER:
-                boosts.add(highRoller);
-                break;
-            case SHOPAHOLIC:
-                boosts.add(shopaholic);
-                break;
-            case FOODIE:
-                boosts.add(foodie);
-                break;
-        }
+        boosts.add(boost);
         return true;
     }
 
-    //REQUIRE: valid boost that is already on the card
     //MODIFY: this
     //EFFECTS: remove boost from this account, returns true if removed, false otherwise
-    public void removeBoost(BoostType boostType) {
-        switch (boostType) {
-            case HIGHROLLER:
-                boosts.remove(highRoller);
-                break;
-            case SHOPAHOLIC:
-                boosts.remove(shopaholic);
-                break;
-            case FOODIE:
-                boosts.remove(foodie);
-                break;
+    public Boolean removeBoost(Boost boost) {
+        if (boosts.contains(boost)) {
+            boosts.remove(boost);
+            return true;
+        } else {
+            return false;
         }
-    }
 
+    }
 }
