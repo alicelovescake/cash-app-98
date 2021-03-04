@@ -4,6 +4,7 @@ import model.BusinessUser;
 import model.Transaction;
 import model.User;
 
+// A boost to give cashback for purchases to cafe or restaurants
 public class FoodieBoost implements Boost {
     BoostType boostType;
 

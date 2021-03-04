@@ -3,7 +3,10 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CreditCardTest {
@@ -25,13 +28,23 @@ public class CreditCardTest {
 
     @Test
     void testValidateCard(){
+        LocalDate currentDate = LocalDate.now();
+        int currentMonth = currentDate.getMonthValue();
+        int testMonth = currentMonth == 1 ? 12 : currentMonth - 1;
+
         assertTrue(testCard.getIsValid());
+
         CreditCard testExpiredYearCard = new CreditCard
                 ("Visa", 17897, 1999, 11);
         assertFalse(testExpiredYearCard.getIsValid());
+
         CreditCard testExpiredMonthCard = new CreditCard
-                ("Visa", 17897, 2020, 1);
+                ("Visa", 17897, 2020, testMonth);
         assertFalse(testExpiredMonthCard.getIsValid());
+
+        CreditCard testExpiredCard = new CreditCard
+                ("Visa", 17897, 1999, testMonth);
+        assertFalse(testExpiredCard.getIsValid());
     }
 }
 

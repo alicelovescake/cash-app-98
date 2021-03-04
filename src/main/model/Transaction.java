@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.UUID;
 
+// class representing a transaction every time a purchase or request for money is made
 public class Transaction {
     private Account recipient;
     private Account sender;

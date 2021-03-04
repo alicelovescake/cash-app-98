@@ -5,6 +5,7 @@ import java.time.Month; // import the timeMonth class
 import java.util.List;
 import java.util.UUID;
 
+//Represents a credit card with type, number, expiry month and year
 public class CreditCard {
     private String cardType;
     private long cardNumber;

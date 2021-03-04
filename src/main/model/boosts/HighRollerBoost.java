@@ -1,6 +1,7 @@
 package model.boosts;
 
 import model.Transaction;
+// A boost to give cashback for purchases > 1000
 
 public class HighRollerBoost implements Boost {
     private BoostType boostType;

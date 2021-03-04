@@ -96,5 +96,10 @@ public class BoostTest {
         Transaction transaction2 =
                 new Transaction(testRetailAccount, testAccountA, 100, Transaction.Type.EXCHANGE);
         assertFalse(foodie.applyBoost(transaction2));
+
+        Transaction transactionNoBusinessUser =
+                new Transaction(testAccountA, testAccountA, 100, Transaction.Type.EXCHANGE);
+        assertFalse(foodie.applyBoost(transactionNoBusinessUser));
+        assertFalse(shopaholic.applyBoost(transactionNoBusinessUser));
     }
 }

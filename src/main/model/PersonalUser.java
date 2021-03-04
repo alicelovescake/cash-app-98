@@ -2,10 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+//class representing personal user which can refer friends, none business
 public class PersonalUser extends User {
     private String firstName;
     private String lastName;
-//    private static final int dailyLimit = 3000;
 
 
     //REQUIRES: first and last name has a non-zero length

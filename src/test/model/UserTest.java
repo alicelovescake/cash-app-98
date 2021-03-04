@@ -23,6 +23,9 @@ public class UserTest {
         assertEquals("$yummyfood", testBusinessUser.getUsername());
         assertEquals("Vancouver", testBusinessUser.getLocation());
         assertTrue(testPersonalUser.getId().length() > 0);
+        assertEquals(User.UserType.PERSONAL, testPersonalUser.getUserType());
+        assertEquals(5, testPersonalUser.getCashBackForReferral());
+        assertEquals(5, testPersonalUser.getReferralCountForReward());
 
         assertTrue(testPersonalUser.getAccount().getId() != null);
     }
@@ -49,6 +52,12 @@ public class UserTest {
         assertEquals(1, testPersonalUser.getReferralCount());
         assertEquals(5, testPersonalUser.account.getBalance());
 
+    }
+
+    @Test
+    void testBusinessUserReferFalse(){
+        assertFalse(testBusinessUser.referFriend("hello@gmail.com"));
+        assertFalse(testBusinessUser.referralReward());
     }
 
 

@@ -1,5 +1,6 @@
 package model;
 
+// A class to represent a business user like Amazon, with available methods and type
 public class BusinessUser extends User {
     private String companyName;
 //    private static final int dailyLimit = 10000;

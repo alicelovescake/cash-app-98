@@ -4,6 +4,7 @@ import model.BusinessUser;
 import model.Transaction;
 import model.User;
 
+// A boost to give cashback to purchases made to retailer
 public class ShopaholicBoost implements Boost {
     BoostType boostType;
 

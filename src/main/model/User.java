@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 import java.util.UUID;
 
+// abstract class for user with business and person user extending it.
 public abstract class User {
     private String username;
     private String location;
