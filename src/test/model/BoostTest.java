@@ -86,4 +86,15 @@ public class BoostTest {
         assertFalse(highRoller.applyBoost(transaction));
         assertEquals(1001, testAccountA.getBalance());
     }
+
+    @Test
+    void testApplyBoostFalse(){
+        Transaction transaction =
+                new Transaction(testRestaurantAccount, testAccountA, 100, Transaction.Type.EXCHANGE);
+        assertFalse(shopaholic.applyBoost(transaction));
+
+        Transaction transaction2 =
+                new Transaction(testRetailAccount, testAccountA, 100, Transaction.Type.EXCHANGE);
+        assertFalse(foodie.applyBoost(transaction2));
+    }
 }

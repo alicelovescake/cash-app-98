@@ -31,7 +31,7 @@ public class CreditCardTest {
         assertFalse(testExpiredYearCard.getIsValid());
         CreditCard testExpiredMonthCard = new CreditCard
                 ("Visa", 17897, 2020, 1);
-        assertFalse(testExpiredYearCard.getIsValid());
+        assertFalse(testExpiredMonthCard.getIsValid());
     }
 }
 

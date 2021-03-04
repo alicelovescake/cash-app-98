@@ -30,6 +30,9 @@ public class TransactionTest {
         assertEquals(Transaction.Status.COMPLETE, testTransaction.getStatus());
         assertEquals(0, testSender.getBalance());
         assertEquals(600, testReceiver.getBalance());
+        assertEquals("$alicelovescake", testTransaction.getSenderUsername());
+        assertEquals("$boblovespizza", testTransaction.getRecipientUsername());
+        assertEquals(Transaction.Type.EXCHANGE, testTransaction.getType());
         assertTrue(testTransaction.getId() != null);
     }
 
@@ -74,6 +77,7 @@ public class TransactionTest {
         Transaction testRequestTransaction3 = new Transaction
                 (testReceiver, testSender, 100.0, Transaction.Type.REQUEST);
         assertEquals(Transaction.Status.PENDING, testRequestTransaction3.getStatus());
+        assertEquals(Transaction.Type.REQUEST, testRequestTransaction3.getType());
 
 
         assertEquals(0, testSender.getBalance());

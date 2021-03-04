@@ -84,6 +84,15 @@ class AccountTest {
     }
 
     @Test
+    void testWithdrawlInvalidCard() {
+        CreditCard testExpiredYearCard = new CreditCard
+                ("Visa", 17897, 1999, 11);
+        testAccountA.addCreditCard(testExpiredYearCard);
+        assertFalse(testAccountA.withdraw(testExpiredYearCard, 100.00));
+
+    }
+
+    @Test
     void testSendMoney() {
         testAccountA.sendMoney(testAccountB, 50);
         //Both accountA and B should have added a new transaction to their respective list
@@ -234,7 +243,7 @@ class AccountTest {
     }
 
     @Test
-    void removeSingleBoost() {
+    void testRemoveSingleBoost() {
         assertTrue(testAccountA.addBoost(highRoller));
         assertTrue(testAccountA.addBoost(shopaholic));
         assertTrue(testAccountA.removeBoost(shopaholic));
@@ -243,7 +252,7 @@ class AccountTest {
     }
 
     @Test
-    void removeAllBoosts() {
+    void testRemoveAllBoosts() {
         assertTrue(testAccountA.addBoost(highRoller));
         assertTrue(testAccountA.addBoost(shopaholic));
         assertTrue(testAccountA.removeBoost(shopaholic));
@@ -255,15 +264,29 @@ class AccountTest {
     }
 
     @Test
-    void removeBoostsNotExist() {
+    void testRemoveBoostsNotExist() {
         assertTrue(testAccountA.addBoost(highRoller));
         assertTrue(testAccountA.addBoost(shopaholic));
         assertFalse(testAccountA.removeBoost(foodie));
         assertTrue(testAccountA.getBoosts().size() == 2);
         assertTrue(testAccountA.getBoosts().contains(shopaholic));
         assertTrue(testAccountA.getBoosts().contains(highRoller));
+    }
 
+    @Test
+    void testMakePurchaseBoost() {
+        testAccountA.addBoost(highRoller);
+        testAccountA.deposit(testCard, 1000);
+        testAccountA.makePurchase(testBusinessAccount, 1000);
+        assertEquals(200.5, testAccountA.getBalance());
+    }
 
+    @Test
+    void testMakePurchaseNoBoost() {
+        testAccountA.addBoost(highRoller);
+        testAccountA.deposit(testCard, 1000);
+        testAccountA.makePurchase(testBusinessAccount, 999);
+        assertEquals(101.5, testAccountA.getBalance());
     }
 }
 

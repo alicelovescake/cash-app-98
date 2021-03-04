@@ -43,6 +43,7 @@ public class UserTest {
         assertTrue(testPersonalUser.referFriend("bestfriend4@gmail.com"));
         assertTrue(testPersonalUser.referFriend("bestfriend5@gmail.com"));
         assertTrue(testPersonalUser.referFriend("bestfriend6@gmail.com"));
+        assertFalse(testPersonalUser.referFriend("bestfriend6@gmail.com"));
         assertFalse(testPersonalUser.referFriend("aa"));
 
         assertEquals(1, testPersonalUser.getReferralCount());
