@@ -11,12 +11,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-//CITATION: Structure of this class is modeled after Serialization demo
-public class JsonReader {
+//CITATION: Structure of this interface is modeled after JsonSerializationDemo
+//          URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/
+// Represents a reader that reads account info from JSON data stored in file
+public class JsonAccountReader {
     private String source;
 
     // EFFECTS: constructs reader to read from source file
-    public JsonReader(String source) {
+    public JsonAccountReader(String source) {
         this.source = source;
     }
 

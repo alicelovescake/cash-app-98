@@ -1,7 +1,9 @@
 package ui;
 
 import model.*;
+import model.boosts.Boost;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 import static model.BusinessUser.BusinessType.*;
@@ -12,7 +14,7 @@ public class CashApp {
     private User user;
 
     private final User cashAppUser =
-            new BusinessUser("cashapp", "Vancouver, BC", "CashApp", OTHER);
+            new BusinessUser("cashapp", "Vancouver, BC", "CashApp", RETAILER);
     private final Account cashAppAccount = new Account(cashAppUser, 1000000.00);
 
     //EFFECTS: runs the cash app
@@ -80,13 +82,17 @@ public class CashApp {
             case "w":
                 runWithdrawFundsFlow();
                 break;
+            case "p":
+                runMakePurchaseFlow();
+                break;
             case "s":
                 runSendMoneyFlow();
                 break;
             case "r":
                 runRequestMoneyFlow();
                 break;
-            default: processExtraCommands(command);
+            default:
+                processExtraCommands(command);
         }
     }
 
@@ -94,6 +100,9 @@ public class CashApp {
     //EFFECTS: processes user command to run app flows
     private void processExtraCommands(String command) {
         switch (command) {
+            case "m":
+                runBoostFlow();
+                break;
             case "c":
                 runUpdateCreditCardsFlow();
                 break;
@@ -139,14 +148,17 @@ public class CashApp {
         System.out.println("\tb -> check balance");
         System.out.println("\tf -> fund your account");
         System.out.println("\tw -> withdraw funds");
+        System.out.println("\tp -> make purchase");
         System.out.println("\ts -> send money");
         System.out.println("\tr -> request money");
         System.out.println("\tc -> update credit cards");
+        System.out.println("\tm -> add boosts to earn cashback!");
         System.out.println("\th -> view transaction history");
         System.out.println("\ta -> refer a friend");
         System.out.println("\tq -> quit app");
         System.out.println("\n=======================================================");
     }
+
 
     //MODIFY: this
     //EFFECTS: process user command to create personal account
@@ -271,6 +283,149 @@ public class CashApp {
     }
 
     //MODIFY: this
+    //EFFECTS: process user command to add boosts to account
+    private void runBoostFlow() {
+        System.out.println("CashApp '98 allows you to earn money while you spend! Here are available boosts:\n");
+        System.out.println("\t1. * High-Roller Boost *: Earn 10% cashback for any purchase over $1000 ");
+        System.out.println("\t2. * Shopaholic Boost *: Earn 5% cashback for any retail purchase");
+        System.out.println("\t3. * Foodie Boost *: Earn 3% cashback for any purchase at a cafe or restaurant");
+        System.out.println("\nYou are allowed 2 boosts to your account!");
+        runUpdateBoostFlow();
+    }
+
+    //EFFECTS: display boost menu
+    private void runDisplayBoostMenu() {
+        System.out.println("\n=======================================================");
+        System.out.println("\nSelect from the following options:\n");
+        System.out.println("\tl -> list boosts");
+        System.out.println("\ta -> add boost");
+        System.out.println("\td -> delete boost");
+        System.out.println("\tm -> main menu");
+        System.out.println("\n=======================================================");
+    }
+
+    //MODIFY: this
+    //EFFECTS: processes user command to run boost flow
+    private void processBoostCommand(String command) {
+        switch (command) {
+            case "l":
+                runListBoostFlow();
+                break;
+            case "a":
+                runAddBoostFlow();
+                break;
+            case "d":
+                runDeleteBoostFlow();
+                break;
+        }
+    }
+
+    //MODIFY: this
+    //EFFECTS: if list of credit cards not empty, format and print list of credit cards, else prompts user to add card
+    private void runListBoostFlow() {
+        if (user.getAccount().getBoosts().size() > 0) {
+            System.out.println("\nHere are your Boosts:");
+            Iterator<Boost> itr = user.getAccount().getBoosts().iterator();
+
+            while (itr.hasNext()) {
+                System.out.println(itr.next().getBoostType());
+            }
+
+        } else {
+            System.out.println("\nYou have no boosts. Would you like to add one? (y / n)");
+
+            String command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("y")) {
+                runAddBoostFlow();
+            }
+        }
+    }
+
+    //MODIFY this
+    //EFFECTS: Runs flow to add boosts to list based on user input
+    private void runAddBoostFlow() {
+        System.out.println("\nEnter the ID of the boost you want to add (ex. 1):");
+        System.out.println("\t1. High-Roller Boost");
+        System.out.println("\t2. Shopaholic Boost");
+        System.out.println("\t3. Foodie Boost");
+
+        int initialBoostSize = user.getAccount().getBoosts().size();
+
+        int boostNum = input.nextInt();
+
+        switch (boostNum) {
+            case 1:
+                user.getAccount().addBoost(user.getAccount().getHighRollerBoost());
+                break;
+            case 2:
+                user.getAccount().addBoost(user.getAccount().getShopaholicBoost());
+                break;
+            case 3:
+                user.getAccount().addBoost(user.getAccount().getFoodieBoost());
+                break;
+        }
+        if (initialBoostSize != user.getAccount().getBoosts().size()) {
+            System.out.println("Your boost has been added successfully!");
+        } else {
+            System.out.println("Oops! No boost added! Add boost that you don't currently have!");
+        }
+    }
+
+    //MODIFY this
+    //EFFECTS: Runs flow to delete boosts from list based on user input
+    private void runDeleteBoostFlow() {
+        runListBoostFlow();
+        int initialBoostSize = user.getAccount().getBoosts().size();
+
+        System.out.println("\nEnter the ID of the boost you want to remove (ex. 1):");
+        System.out.println("\t1. High-Roller Boost");
+        System.out.println("\t2. Shopaholic Boost");
+        System.out.println("\t3. Foodie Boost");
+
+        int boostNum = input.nextInt();
+
+        switch (boostNum) {
+            case 1:
+                user.getAccount().removeBoost(user.getAccount().getHighRollerBoost());
+                break;
+            case 2:
+                user.getAccount().removeBoost(user.getAccount().getShopaholicBoost());
+                break;
+            case 3:
+                user.getAccount().removeBoost(user.getAccount().getFoodieBoost());
+                break;
+        }
+        if (initialBoostSize != user.getAccount().getBoosts().size()) {
+            System.out.println("Your boost has been removed successfully!");
+        } else {
+            System.out.println("Oops! No boost removed yet! Remove a boost that you currently have!");
+        }
+
+    }
+
+    //MODIFY: this
+    //EFFECTS: displays list of options in credit card menu and process user input
+    private void runUpdateBoostFlow() {
+        boolean keepGoing = true;
+        String command = null;
+
+        while (keepGoing) {
+            runDisplayBoostMenu();
+
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("m")) {
+                keepGoing = false;
+            } else {
+                processBoostCommand(command);
+            }
+        }
+    }
+
+    //MODIFY: this
     //EFFECTS: process user command to create and add credit card to list of credit cards
     private void runAddCreditCardFlow() {
         runCheckCreditCardAvailable();
@@ -328,6 +483,30 @@ public class CashApp {
 
         if (transaction.getStatus() == Transaction.Status.COMPLETE) {
             System.out.println("\nNice, we got the money. Thanks for helping the development of CashApp.");
+            System.out.println("\nYour new balance is $" + user.getAccount().getBalance() + ".");
+        } else {
+            System.out.println("\nSomething went wrong with the transaction. Perhaps you don't have enough Benjamins.");
+        }
+    }
+
+    //MODIFY: this
+    //EFFECTS: process user command to send money to default cashapp user
+    private void runMakePurchaseFlow() {
+        System.out.println("\nWe're glad you want to make a purchase!");
+        System.out.println("\nCashApp is currently in development so you can only send to our account.");
+
+        // Prompt the user for input but don't use it until we save usernames in a database/file
+        System.out.println("\nWhat is the CashApp username you'd like to send to (psst it's $cashapp)?");
+        String username = input.next();
+
+        System.out.println("\nWhat is your purchase total?");
+        int purchaseAmount = input.nextInt();
+
+        Transaction transaction = user.getAccount().makePurchase(cashAppAccount, purchaseAmount);
+
+        if (transaction.getStatus() == Transaction.Status.COMPLETE) {
+            System.out.println("\nNice, you successfully made your purchase and eligible for cashback! "
+                    + "Thanks for helping the development of CashApp.");
             System.out.println("\nYour new balance is $" + user.getAccount().getBalance() + ".");
         } else {
             System.out.println("\nSomething went wrong with the transaction. Perhaps you don't have enough Benjamins.");

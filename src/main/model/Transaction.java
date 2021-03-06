@@ -75,6 +75,7 @@ public class Transaction {
         return type;
     }
 
+    //MODIFY: this
     // EFFECTS: Process transaction, status changes to complete if sender has sufficient funds, status FAILED otherwise
     public void completeTransaction() {
         if (sender.getBalance() >= amount) {

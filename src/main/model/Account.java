@@ -74,6 +74,18 @@ public class Account {
         return boosts;
     }
 
+    public Boost getHighRollerBoost() {
+        return highRoller;
+    }
+
+    public Boost getShopaholicBoost() {
+        return shopaholic;
+    }
+
+    public Boost getFoodieBoost() {
+        return foodie;
+    }
+
     //Setter
     //increment and decrement separate setters to avoid mistakenly wiping out account
     public void incrementBalance(double amount) {
@@ -141,13 +153,14 @@ public class Account {
     //REQUIRES: amount >= 0 and valid Business user of cash app as recipient
     //MODIFY: this
     //EFFECTS: new transaction created with this as sender and company as receiver, updates list of pending transactions
-    public void makePurchase(Account company, double amount) {
+    public Transaction makePurchase(Account company, double amount) {
         Transaction transaction = new Transaction(company, this, amount, Transaction.Type.EXCHANGE);
         transactions.add(transaction);
         company.addToTransactions(transaction);
         for (Boost b : boosts) {
             b.applyBoost(transaction);
         }
+        return transaction;
     }
 
     //REQUIRES: amount >= 0 and valid user of cash app
