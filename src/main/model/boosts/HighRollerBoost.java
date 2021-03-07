@@ -1,6 +1,7 @@
 package model.boosts;
 
 import model.Transaction;
+import org.json.JSONObject;
 // A boost to give cashback for purchases > 1000
 
 public class HighRollerBoost implements Boost {
@@ -24,6 +25,15 @@ public class HighRollerBoost implements Boost {
     @Override
     public BoostType getBoostType() {
         return boostType;
+    }
+
+    @Override
+    //EFFECTS: returns this boost as a JSON object
+    public JSONObject toJson() {
+        JSONObject boostJson = new JSONObject();
+        boostJson.put("boostType", boostType);
+
+        return boostJson;
     }
 }
 

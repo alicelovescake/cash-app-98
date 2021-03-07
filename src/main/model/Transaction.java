@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
 // class representing a transaction every time a purchase or request for money is made
-public class Transaction {
+public class Transaction implements Writable {
     private Account recipient;
     private Account sender;
     private String id;
@@ -85,5 +88,19 @@ public class Transaction {
         } else {
             this.status = Status.FAILED;
         }
+    }
+
+    @Override
+    //EFFECTS: returns transactions in this account as a JSON object
+    public JSONObject toJson() {
+        JSONObject transactionJson = new JSONObject();
+        transactionJson.put("recipient", recipient);
+        transactionJson.put("sender", sender);
+        transactionJson.put("id", id);
+        transactionJson.put("date", date);
+        transactionJson.put("amount", amount);
+        transactionJson.put("status", status);
+        transactionJson.put("type", type);
+        return transactionJson;
     }
 }

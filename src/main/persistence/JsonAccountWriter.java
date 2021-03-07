@@ -28,10 +28,10 @@ public class JsonAccountWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of account to file
     public void write(Account account) {
-//        JSONObject accountJson = account.toJson();
-
+        JSONObject accountJson = account.toJson();
+        saveToFile(accountJson.toString(TAB));
     }
 
     // MODIFIES: this

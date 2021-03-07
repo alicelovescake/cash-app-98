@@ -3,6 +3,7 @@ package model.boosts;
 import model.BusinessUser;
 import model.Transaction;
 import model.User;
+import org.json.JSONObject;
 
 // A boost to give cashback for purchases to cafe or restaurants
 public class FoodieBoost implements Boost {
@@ -33,6 +34,15 @@ public class FoodieBoost implements Boost {
     @Override
     public BoostType getBoostType() {
         return boostType;
+    }
+
+    @Override
+    //EFFECTS: returns this boost as a JSON object
+    public JSONObject toJson() {
+        JSONObject boostJson = new JSONObject();
+        boostJson.put("boostType", boostType);
+
+        return boostJson;
     }
 }
 

@@ -1,12 +1,15 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDate; // import the LocalDate class
 import java.time.Month; // import the timeMonth class
 import java.util.List;
 import java.util.UUID;
 
 //Represents a credit card with type, number, expiry month and year
-public class CreditCard {
+public class CreditCard implements Writable {
     private String cardType;
     private long cardNumber;
     private int expiryYear;
@@ -59,6 +62,18 @@ public class CreditCard {
     // card expiry year and month < current month and year
     public void validateCard() {
         isValid = expiryYear >= currentYear && expiryMonth > currentMonth;
+    }
+
+    @Override
+    //EFFECTS: returns credit cards in this account as a JSON object
+    public JSONObject toJson() {
+        JSONObject cardJson = new JSONObject();
+        cardJson.put("cardType", cardType);
+        cardJson.put("cardNumber", cardNumber);
+        cardJson.put("id", id);
+        cardJson.put("expiryMonth", expiryMonth);
+        cardJson.put("expiryYear", expiryYear);
+        return cardJson;
     }
 
 }

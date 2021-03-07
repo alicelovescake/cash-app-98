@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.List;
 import java.util.UUID;
 
 // abstract class for user with business and person user extending it.
-public abstract class User {
+public abstract class User implements Writable {
     private String username;
     private String location;
     private String id;
@@ -73,5 +76,17 @@ public abstract class User {
     public abstract Boolean referFriend(String email);
 
     public abstract Boolean referralReward();
+
+    @Override
+    //EFFECTS: returns this boost as a JSON object
+    public JSONObject toJson() {
+        JSONObject userJson = new JSONObject();
+        userJson.put("username", username);
+        userJson.put("location", location);
+        userJson.put("id", id);
+        userJson.put("userType", userType);
+
+        return userJson;
+    }
 
 }

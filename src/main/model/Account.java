@@ -1,12 +1,15 @@
 package model;
 
 import model.boosts.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 // Represents an account having an id, associated user, balance, list of credit cards and transactions
-public class Account {
+public class Account implements Writable {
     private static String id;                  // account id
     private User user;                   // the account owner name
     private double balance;               // the current balance of the account
@@ -212,4 +215,52 @@ public class Account {
         }
 
     }
+
+    @Override
+    //EFFECTS: returns this account as a JSON object
+    public JSONObject toJson() {
+        JSONObject accountJson = new JSONObject();
+        accountJson.put("balance", balance);
+        accountJson.put("id", id);
+        accountJson.put("user", user.toJson());
+        accountJson.put("creditCards", cardsToJson());
+        accountJson.put("transactions", transactionsToJson());
+        accountJson.put("boosts", boostsToJson());
+        return accountJson;
+    }
+
+    //EFFECTS: returns credit cards in this account as a JSON array
+    private JSONArray cardsToJson() {
+        JSONArray jsonCreditCardArray = new JSONArray();
+
+        for (CreditCard c : creditCards) {
+            jsonCreditCardArray.put(c.toJson());
+        }
+
+        return jsonCreditCardArray;
+    }
+
+    //EFFECTS: returns transactions in this account as a JSON array
+    private JSONArray transactionsToJson() {
+        JSONArray jsonTransactionArray = new JSONArray();
+
+        for (Transaction t : transactions) {
+            jsonTransactionArray.put(t.toJson());
+        }
+
+        return jsonTransactionArray;
+    }
+
+    //EFFECTS: returns boosts in this account as a JSON array
+    private JSONArray boostsToJson() {
+        JSONArray jsonBoostsArray = new JSONArray();
+
+        for (Boost b : boosts) {
+            jsonBoostsArray.put(b.toJson());
+        }
+
+        return jsonBoostsArray;
+    }
+
+
 }
