@@ -8,11 +8,11 @@ import java.util.UUID;
 
 // abstract class for user with business and person user extending it.
 public abstract class User implements Writable {
-    private String username;
-    private String location;
-    private String id;
+    protected String username;
+    protected String location;
+    protected String id;
     protected Account account;
-    private UserType userType;
+    protected UserType userType;
     protected int referralCount;
     protected static final int referralCountForReward = 5;
     protected static final int cashBackForReferral = 5;
@@ -75,18 +75,13 @@ public abstract class User implements Writable {
 
     public abstract Boolean referFriend(String email);
 
+    //MODIFY: this
+    //EFFECTS: if referral count is >= number needed for reward, account balance is incremented with cashback and
+    // returns true, false otherwise
+
     public abstract Boolean referralReward();
 
-    @Override
     //EFFECTS: returns this boost as a JSON object
-    public JSONObject toJson() {
-        JSONObject userJson = new JSONObject();
-        userJson.put("username", username);
-        userJson.put("location", location);
-        userJson.put("id", id);
-        userJson.put("userType", userType);
-
-        return userJson;
-    }
+    public abstract JSONObject toJson();
 
 }

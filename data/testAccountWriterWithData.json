@@ -1,0 +1,54 @@
+{
+    "creditCards": [{
+        "cardType": "Visa",
+        "expiryMonth": 12,
+        "id": "85bf939d-84a4-42ad-b17b-74ca7ad32f41",
+        "expiryYear": 2025,
+        "cardNumber": 123456
+    }],
+    "balance": 1005,
+    "id": "f7dec4db-7d74-48e5-83df-6d942eb99e1c",
+    "boosts": [
+        {"boostType": "SHOPAHOLIC"},
+        {"boostType": "FOODIE"}
+    ],
+    "transactions": [{
+        "date": "2021-03-06",
+        "amount": 100,
+        "sender": {
+            "balance": 1005,
+            "user": {
+                "firstName": "Alice",
+                "lastName": "Zhao",
+                "referredFriends": [],
+                "location": "Vancouver",
+                "id": "5f58e88f-4bca-4f66-8c7b-634cbfca272d",
+                "userType": "PERSONAL",
+                "username": "$alicelovescake"
+            }
+        },
+        "recipient": {
+            "balance": 5100,
+            "user": {
+                "companyName": "Amazon",
+                "location": "Seattle",
+                "id": "2a18da7f-1478-4572-95cc-e29d2c73e0cb",
+                "userType": "BUSINESS",
+                "businessType": "RETAILER",
+                "username": "$amazon"
+            }
+        },
+        "id": "7a152f85-b63c-42f8-9c2a-71812872b9d0",
+        "type": "EXCHANGE",
+        "status": "COMPLETE"
+    }],
+    "user": {
+        "firstName": "Alice",
+        "lastName": "Zhao",
+        "referredFriends": [],
+        "location": "Vancouver",
+        "id": "5f58e88f-4bca-4f66-8c7b-634cbfca272d",
+        "userType": "PERSONAL",
+        "username": "$alicelovescake"
+    }
+}

@@ -7,6 +7,7 @@ import model.boosts.FoodieBoost;
 import model.boosts.ShopaholicBoost;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,7 +16,9 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
+//CITATION: Structure of this interface is modeled after JsonSerializationDemo
+//          URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/
+// Represents test class for Json writer account
 public class JsonAccountWriterTest extends JsonAccountTest{
     private Account testPersonalAccount;
     private User testUser;
@@ -25,7 +28,7 @@ public class JsonAccountWriterTest extends JsonAccountTest{
     private Boost shopaholic;
     private Boost foodie;
 
-    @Before
+    @BeforeEach
     void setup() {
         testUser = new PersonalUser("$alicelovescake", "Vancouver", "Alice", "Zhao");
         testPersonalAccount = new Account(testUser, 100);

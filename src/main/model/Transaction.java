@@ -94,13 +94,22 @@ public class Transaction implements Writable {
     //EFFECTS: returns transactions in this account as a JSON object
     public JSONObject toJson() {
         JSONObject transactionJson = new JSONObject();
-        transactionJson.put("recipient", recipient);
-        transactionJson.put("sender", sender);
+        transactionJson.put("recipient", accountToJson(recipient));
+        transactionJson.put("sender", accountToJson(sender));
         transactionJson.put("id", id);
         transactionJson.put("date", date);
         transactionJson.put("amount", amount);
         transactionJson.put("status", status);
         transactionJson.put("type", type);
         return transactionJson;
+    }
+
+    //EFFECTS: returns account as JSON object
+    public JSONObject accountToJson(Account acc) {
+        JSONObject accountJson = new JSONObject();
+        accountJson.put("user", acc.getUser().toJson());
+        accountJson.put("balance", acc.getBalance());
+
+        return accountJson;
     }
 }

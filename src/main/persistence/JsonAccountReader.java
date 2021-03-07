@@ -1,6 +1,8 @@
 package persistence;
 
 import model.Account;
+import model.BusinessUser;
+import model.PersonalUser;
 import model.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,12 +46,57 @@ public class JsonAccountReader {
 
     // EFFECTS: parses account from JSON object and returns it
     private Account parseAccount(JSONObject jsonObject) {
-        return null;
+        int balance = jsonObject.getInt("balance");
+        JSONObject jsonUser = jsonObject.getJSONObject("user");
+        String userType = jsonUser.getString("userType");
+        String userName = jsonUser.getString("username");
+        String location = jsonUser.getString("location");
+        User user;
+
+        if (User.UserType.valueOf(userType) == User.UserType.PERSONAL) {
+            String firstName = jsonUser.getString("firstName");
+            String lastName = jsonUser.getString("lastName");
+            user = new PersonalUser(userName, location, firstName, lastName);
+        } else {
+            String companyName = jsonUser.getString("companyName");
+            String businessType = jsonUser.getString("businessType");
+            user = new BusinessUser(userName, location, companyName, BusinessUser.BusinessType.valueOf(businessType));
+        }
+
+        Account account = new Account(user, balance);
+        addTransactions(account, jsonObject);
+        return account;
+
     }
 
     // MODIFIES: account
-    // EFFECTS: parses changes from JSON object and adds them to account
-    private void addChanges(Account acc, JSONObject jsonObject) {
+    // EFFECTS: parses transactions from JSON object and adds them to account
+    private void addTransactions(Account account, JSONObject jsonObject) {
+        JSONArray transactionArray = jsonObject.getJSONArray("transactions");
+        for (Object t : transactionArray) {
+            JSONObject nextTransaction = (JSONObject) t;
+            addTransaction(account, nextTransaction);
+        }
+    }
+
+    // MODIFIES: account
+    // EFFECTS: parses transactions from JSON object and adds them to account
+    private void addTransaction(Account account, JSONObject transaction) {
+        int cardNumber = transaction.getInt("cardNumber");
+        int expiryMonth = transaction.getInt("expiryMonth");
+        int expiryYear = transaction.getInt("expiryYear");
+
+    }
+
+
+    // MODIFIES: account
+    // EFFECTS: parses transactions from JSON object and adds them to account
+    private void addCreditCard(Account account, JSONObject creditCard) {
+        String cardType = creditCard.getString("cardType");
+        int cardNumber = creditCard.getInt("cardNumber");
+        int expiryMonth = creditCard.getInt("expiryMonth");
+        int expiryYear = creditCard.getInt("expiryYear");
+
     }
 
     // MODIFIES: account

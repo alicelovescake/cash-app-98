@@ -1,0 +1,16 @@
+{
+    "creditCards": [],
+    "balance": 100,
+    "id": "7fb5a08f-b213-4f01-9901-8305aa5edf8d",
+    "boosts": [],
+    "transactions": [],
+    "user": {
+        "firstName": "Alice",
+        "lastName": "Zhao",
+        "referredFriends": [],
+        "location": "Vancouver",
+        "id": "7daa2465-bace-4b0f-920f-5d7ada9b15e4",
+        "userType": "PERSONAL",
+        "username": "$alicelovescake"
+    }
+}
