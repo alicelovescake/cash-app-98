@@ -8,6 +8,8 @@ import model.boosts.Boost;
 import model.boosts.BoostType;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,8 +33,8 @@ public class JsonAccountTest {
 
     protected void checkTransaction(Account recipient, Account sender, String id, LocalDate date, double amount,
                                     Transaction.Status status, Transaction.Type type, Transaction transaction) {
-        assertEquals(recipient, transaction.getRecipient());
-        assertEquals(sender, transaction.getSenderAccount());
+        assertEquals(recipient.getId(), transaction.getRecipientAccount().getId());
+        assertEquals(sender.getId(), transaction.getSenderAccount().getId());
         assertEquals(id, transaction.getId());
         assertEquals(date, transaction.getDate());
         assertEquals(amount, transaction.getAmount());
@@ -40,8 +42,12 @@ public class JsonAccountTest {
         assertEquals(type, transaction.getType());
     }
 
-    protected void checkBoost(Boost boost, Set<Boost> boosts) {
-        assertTrue(boosts.contains(boost));
+    protected void checkBoost(BoostType type, Set<Boost> boosts) {
+        List<BoostType> types = new ArrayList<>();
+        for (Boost b : boosts) {
+            types.add(b.getBoostType());
+        }
+        assertTrue(types.contains(type));
     }
 
 

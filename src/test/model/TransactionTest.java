@@ -22,7 +22,8 @@ public class TransactionTest {
                 ("$boblovespizza", "Vancouver", "Bob", "Marley");
         testSender = new Account(testUserSender, 100.0);
         testReceiver = new Account(testUserReceiver, 500.0);
-        testTransaction = new Transaction(testReceiver, testSender, 100.0, Transaction.Type.EXCHANGE);
+        testTransaction = new Transaction(testReceiver, testSender, 100.0, Transaction.Type.EXCHANGE,
+                Transaction.Status.PENDING);
     }
 
     @Test
@@ -42,7 +43,7 @@ public class TransactionTest {
         assertEquals(Transaction.Status.COMPLETE, testTransaction.getStatus());
         //confirms second transaction went through (sender/receiver switched)
         Transaction testTransaction2 = new Transaction
-                (testSender, testReceiver, 50.0, Transaction.Type.EXCHANGE);
+                (testSender, testReceiver, 50.0, Transaction.Type.EXCHANGE, Transaction.Status.PENDING);
         assertEquals(Transaction.Status.COMPLETE, testTransaction2.getStatus());
         //confirms final balance
         assertEquals(50, testSender.getBalance());
@@ -56,8 +57,25 @@ public class TransactionTest {
 
         //confirms second transaction failed because of insufficient funds
         Transaction testTransaction2 = new Transaction
-                (testReceiver, testSender, 1000.0, Transaction.Type.EXCHANGE);
+                (testReceiver, testSender, 1000.0, Transaction.Type.EXCHANGE, Transaction.Status.PENDING);
         assertEquals(Transaction.Status.FAILED, testTransaction2.getStatus());
+
+        //confirms final balance
+        assertEquals(0, testSender.getBalance());
+        assertEquals(600, testReceiver.getBalance());
+
+
+    }
+
+    @Test
+    void testIncompleteTransactionStatus(){
+        //confirms first transaction went through
+        assertEquals(Transaction.Status.COMPLETE, testTransaction.getStatus());
+
+        //confirms second transaction failed because of complete status
+        Transaction testTransaction2 = new Transaction
+                (testReceiver, testSender, 1000.0, Transaction.Type.EXCHANGE, Transaction.Status.COMPLETE);
+        assertEquals(Transaction.Status.COMPLETE, testTransaction2.getStatus());
 
         //confirms final balance
         assertEquals(0, testSender.getBalance());
@@ -68,14 +86,14 @@ public class TransactionTest {
     void testRequestTransaction(){
         //single request
         Transaction testRequestTransaction = new Transaction
-                (testReceiver, testSender, 100.0, Transaction.Type.REQUEST);
+                (testReceiver, testSender, 100.0, Transaction.Type.REQUEST, Transaction.Status.PENDING);
         assertEquals(Transaction.Status.PENDING, testRequestTransaction.getStatus());
         // multiple requests
         Transaction testRequestTransaction2 = new Transaction
-                (testReceiver, testSender, 100.0, Transaction.Type.REQUEST);
+                (testReceiver, testSender, 100.0, Transaction.Type.REQUEST, Transaction.Status.PENDING);
         assertEquals(Transaction.Status.PENDING, testRequestTransaction2.getStatus());
         Transaction testRequestTransaction3 = new Transaction
-                (testReceiver, testSender, 100.0, Transaction.Type.REQUEST);
+                (testReceiver, testSender, 100.0, Transaction.Type.REQUEST, Transaction.Status.PENDING);
         assertEquals(Transaction.Status.PENDING, testRequestTransaction3.getStatus());
         assertEquals(Transaction.Type.REQUEST, testRequestTransaction3.getType());
 

@@ -26,16 +26,16 @@ public class Transaction implements Writable {
     private Status status;
     private Type type;
 
-    public Transaction(Account recipient, Account sender, double amount, Type type) {
+    public Transaction(Account recipient, Account sender, double amount, Type type, Status status) {
         this.recipient = recipient;
         this.amount = amount;
         this.sender = sender;
         this.id = UUID.randomUUID().toString();
         this.date = LocalDate.now();
-        this.status = Status.PENDING;
+        this.status = status;
         this.type = type;
 
-        if (this.type != Type.REQUEST) {
+        if (this.type != Type.REQUEST && this.status == Status.PENDING) {
             completeTransaction();
         }
 
@@ -62,6 +62,10 @@ public class Transaction implements Writable {
         return recipient.getUser();
     }
 
+    public Account getRecipientAccount() {
+        return recipient;
+    }
+
     public Account getSenderAccount() {
         return sender;
     }
@@ -76,6 +80,11 @@ public class Transaction implements Writable {
 
     public Type getType() {
         return type;
+    }
+
+    //setter
+    public void setId(String id) {
+        this.id = id;
     }
 
     //MODIFY: this
@@ -109,6 +118,7 @@ public class Transaction implements Writable {
         JSONObject accountJson = new JSONObject();
         accountJson.put("user", acc.getUser().toJson());
         accountJson.put("balance", acc.getBalance());
+        accountJson.put("id", acc.getId());
 
         return accountJson;
     }

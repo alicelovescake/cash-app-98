@@ -62,9 +62,13 @@ public abstract class User implements Writable {
         return cashBackForReferral;
     }
 
-
     public int getReferralCountForReward() {
         return referralCountForReward;
+    }
+
+    //setter
+    public void setId(String id) {
+        this.id = id;
     }
 
     //REQUIRES: valid email address

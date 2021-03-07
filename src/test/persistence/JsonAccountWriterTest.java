@@ -116,8 +116,8 @@ public class JsonAccountWriterTest extends JsonAccountTest{
             Transaction testTransaction = (Transaction) testPersonalAccount.getCompletedTransactions().get(0);
             checkTransaction(testBusinessAccount, testPersonalAccount, testTransaction.getId(), testTransaction.getDate(),
                     100, Transaction.Status.COMPLETE, Transaction.Type.EXCHANGE, transactions.get(0));
-            checkBoost(shopaholic, boosts);
-            checkBoost(foodie, boosts);
+            checkBoost(shopaholic.getBoostType(), boosts);
+            checkBoost(foodie.getBoostType(), boosts);
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

@@ -23,17 +23,7 @@ public class JsonAccountReaderTest extends JsonAccountTest {
     private Account testBusinessAccount;
     private Boost shopaholic;
     private Boost foodie;
-
-    @BeforeEach
-    void setup() {
-        testUser = new PersonalUser("$alicelovescake", "Vancouver", "Alice", "Zhao");
-        testPersonalAccount = new Account(testUser, 100);
-        testBusinessUser = new BusinessUser(
-                "$amazon", "Seattle", "Amazon", BusinessUser.BusinessType.RETAILER);
-        testBusinessAccount = new Account(testBusinessUser, 5000);
-        shopaholic = new ShopaholicBoost();
-        foodie = new FoodieBoost();
-    }
+    private CreditCard testCard;
 
     @Test
     void testReaderNonExistentFile() {
@@ -65,8 +55,28 @@ public class JsonAccountReaderTest extends JsonAccountTest {
 
     @Test
     void testReadAccountWithAddedData() {
-        JsonAccountReader reader = new JsonAccountReader("./data/testAccountWriterWithData.json");
+        testUser = new PersonalUser("$alicelovescake", "Vancouver", "Alice", "Zhao");
+        testPersonalAccount = new Account(testUser, 100);
+        testBusinessUser = new BusinessUser(
+                "$amazon", "Seattle", "Amazon", BusinessUser.BusinessType.RETAILER);
+        testBusinessAccount = new Account(testBusinessUser, 5000);
+        testCard = new CreditCard("Visa", 123456, 2025, 12);
+        shopaholic = new ShopaholicBoost();
+        foodie = new FoodieBoost();
+        testPersonalAccount.addCreditCard(testCard);
+        testPersonalAccount.deposit(testCard, 1000);
+        testPersonalAccount.addBoost(shopaholic);
+        testPersonalAccount.addBoost(foodie);
+        testPersonalAccount.makePurchase(testBusinessAccount, 100);
+
+        JsonAccountWriter testAccountWriter =
+                new JsonAccountWriter("./data/testAccountWriterWithData.json");
+
         try {
+            testAccountWriter.open();
+            testAccountWriter.write(testPersonalAccount);
+            testAccountWriter.close();
+            JsonAccountReader reader = new JsonAccountReader("./data/testAccountWriterWithData.json");
             Account readPersonalAccount = reader.read();
 
             //check fields with keys: Balance and account id
@@ -89,8 +99,8 @@ public class JsonAccountReaderTest extends JsonAccountTest {
             Transaction testTransaction = (Transaction) testPersonalAccount.getCompletedTransactions().get(0);
             checkTransaction(testBusinessAccount, testPersonalAccount, testTransaction.getId(), testTransaction.getDate(),
                     100, Transaction.Status.COMPLETE, Transaction.Type.EXCHANGE, transactions.get(0));
-            checkBoost(shopaholic, boosts);
-            checkBoost(foodie, boosts);
+            checkBoost(shopaholic.getBoostType(), boosts);
+            checkBoost(foodie.getBoostType(), boosts);
         } catch (IOException e) {
             fail("Oops! This file cannot be read");
         }

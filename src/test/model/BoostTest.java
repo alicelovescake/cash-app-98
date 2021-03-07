@@ -51,7 +51,8 @@ public class BoostTest {
     void testApplyBoostHighRollerCashBack(){
         testAccountA.addBoost(highRoller);
         Transaction transaction =
-                new Transaction(testRetailAccount, testAccountA, 1000, Transaction.Type.EXCHANGE);
+                new Transaction(testRetailAccount, testAccountA, 1000, Transaction.Type.EXCHANGE,
+                        Transaction.Status.PENDING);
         assertTrue(highRoller.applyBoost(transaction));
         assertEquals(1100, testAccountA.getBalance());
     }
@@ -60,7 +61,8 @@ public class BoostTest {
     void testApplyBoostShopaholicCashBack(){
         testAccountA.addBoost(shopaholic);
         Transaction transaction =
-                new Transaction(testRetailAccount, testAccountA, 100, Transaction.Type.EXCHANGE);
+                new Transaction(testRetailAccount, testAccountA, 100, Transaction.Type.EXCHANGE,
+                        Transaction.Status.PENDING);
         assertTrue(shopaholic.applyBoost(transaction));
         assertEquals(1905, testAccountA.getBalance());
     }
@@ -69,12 +71,14 @@ public class BoostTest {
     void testApplyBoostFoodieCashBack(){
         testAccountA.addBoost(foodie);
         Transaction transaction =
-                new Transaction(testCafeAccount, testAccountA, 10, Transaction.Type.EXCHANGE);
+                new Transaction(testCafeAccount, testAccountA, 10, Transaction.Type.EXCHANGE,
+                        Transaction.Status.PENDING);
         assertTrue(foodie.applyBoost(transaction));
         assertEquals(1990.30, testAccountA.getBalance());
 
         Transaction transaction2 =
-                new Transaction(testRestaurantAccount, testAccountA, 100, Transaction.Type.EXCHANGE);
+                new Transaction(testRestaurantAccount, testAccountA, 100, Transaction.Type.EXCHANGE,
+                        Transaction.Status.PENDING);
         assertTrue(foodie.applyBoost(transaction2));
         assertEquals(1893.3, testAccountA.getBalance());
     }
@@ -82,7 +86,8 @@ public class BoostTest {
     @Test
     void testApplyBoostNoCashBack(){
         Transaction transaction =
-                new Transaction(testRetailAccount, testAccountA, 999, Transaction.Type.EXCHANGE);
+                new Transaction(testRetailAccount, testAccountA, 999, Transaction.Type.EXCHANGE,
+                        Transaction.Status.PENDING);
         assertFalse(highRoller.applyBoost(transaction));
         assertEquals(1001, testAccountA.getBalance());
     }
@@ -90,15 +95,18 @@ public class BoostTest {
     @Test
     void testApplyBoostFalse(){
         Transaction transaction =
-                new Transaction(testRestaurantAccount, testAccountA, 100, Transaction.Type.EXCHANGE);
+                new Transaction(testRestaurantAccount, testAccountA, 100, Transaction.Type.EXCHANGE,
+                        Transaction.Status.PENDING);
         assertFalse(shopaholic.applyBoost(transaction));
 
         Transaction transaction2 =
-                new Transaction(testRetailAccount, testAccountA, 100, Transaction.Type.EXCHANGE);
+                new Transaction(testRetailAccount, testAccountA, 100, Transaction.Type.EXCHANGE,
+                        Transaction.Status.PENDING);
         assertFalse(foodie.applyBoost(transaction2));
 
         Transaction transactionNoBusinessUser =
-                new Transaction(testAccountA, testAccountA, 100, Transaction.Type.EXCHANGE);
+                new Transaction(testAccountA, testAccountA, 100, Transaction.Type.EXCHANGE,
+                        Transaction.Status.PENDING);
         assertFalse(foodie.applyBoost(transactionNoBusinessUser));
         assertFalse(shopaholic.applyBoost(transactionNoBusinessUser));
     }

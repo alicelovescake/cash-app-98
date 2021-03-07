@@ -90,6 +90,10 @@ public class Account implements Writable {
     }
 
     //Setter
+    public void setId(String id) {
+        this.id = id;
+    }
+
     //increment and decrement separate setters to avoid mistakenly wiping out account
     public void incrementBalance(double amount) {
         this.balance += amount;
@@ -139,7 +143,8 @@ public class Account implements Writable {
     //MODIFY: this
     //EFFECTS: new transaction created with this as sender and recipient as receiver.
     public Transaction sendMoney(Account recipient, double amount) {
-        Transaction transaction = new Transaction(recipient, this, amount, Transaction.Type.EXCHANGE);
+        Transaction transaction = new Transaction(recipient, this, amount, Transaction.Type.EXCHANGE,
+                Transaction.Status.PENDING);
         transactions.add(transaction);
         recipient.addToTransactions(transaction);
         return transaction;
@@ -157,7 +162,8 @@ public class Account implements Writable {
     //MODIFY: this
     //EFFECTS: new transaction created with this as sender and company as receiver, updates list of pending transactions
     public Transaction makePurchase(Account company, double amount) {
-        Transaction transaction = new Transaction(company, this, amount, Transaction.Type.EXCHANGE);
+        Transaction transaction = new Transaction(company, this, amount, Transaction.Type.EXCHANGE,
+                Transaction.Status.PENDING);
         transactions.add(transaction);
         company.addToTransactions(transaction);
         for (Boost b : boosts) {
@@ -170,7 +176,11 @@ public class Account implements Writable {
     //MODIFY: this
     //EFFECTS: new transaction is created, updates list of pending transactions
     public Transaction requestMoney(Account user, double amount) {
-        Transaction transaction = new Transaction(this, user, amount, Transaction.Type.REQUEST);
+        Transaction transaction = new Transaction(this,
+                user,
+                amount,
+                Transaction.Type.REQUEST,
+                Transaction.Status.PENDING);
         transactions.add(transaction);
         user.addToTransactions(transaction);
         return transaction;
