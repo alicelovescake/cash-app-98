@@ -2,7 +2,11 @@ package ui;
 
 import model.*;
 import model.boosts.Boost;
+import persistence.JsonAccountReader;
+import persistence.JsonAccountWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -10,8 +14,11 @@ import static model.BusinessUser.BusinessType.*;
 
 //Cash App
 public class CashApp {
+    private static final String JSON_ACCOUNT_STORE = "./data/account.json";
     private final Scanner input;
     private User user;
+    private JsonAccountReader jsonAccountReader;
+    private JsonAccountWriter jsonAccountWriter;
 
     private final User cashAppUser =
             new BusinessUser("cashapp", "Vancouver, BC", "CashApp", RETAILER);
@@ -20,9 +27,9 @@ public class CashApp {
     //EFFECTS: runs the cash app
     public CashApp() {
         input = new Scanner(System.in);
-
-        runCreateAccountFlow();
-
+        jsonAccountWriter = new JsonAccountWriter(JSON_ACCOUNT_STORE);
+        jsonAccountReader = new JsonAccountReader(JSON_ACCOUNT_STORE);
+        runLoginFlow();
         runApp();
     }
 
@@ -49,9 +56,51 @@ public class CashApp {
     }
 
     //MODIFY: this
+    //EFFECTS: process user input to login or signup
+    private void runLoginFlow() {
+        displayWelcomeMessage();
+        String command = input.next();
+        command = command.toLowerCase();
+        processLoginFlow(command);
+    }
+
+    //MODIFY: this
+    //EFFECTS: processes user command to create account or load previous account
+    private void processLoginFlow(String command) {
+        if (command.equals("s")) {
+            runCreateAccountFlow();
+        } else if (command.equals("l")) {
+            loadAccountFlow();
+        } else {
+            System.out.println("Please select s or l to login!");
+        }
+    }
+
+    //MODIFY: this
+    //EFFECTS: loads account from JSON file if it exists
+
+    private void loadAccountFlow() {
+        try {
+            Account account = jsonAccountReader.read();
+            user = account.getUser();
+
+            user.setAccount(account);
+
+            System.out.println(account.getBalance());
+            System.out.println("Welcome back " + account.getUser().getUsername()
+                    + "! Your info was successfully loaded!");
+        } catch (IOException e) {
+            System.out.println("Oops! We were unable to read from your file: " + JSON_ACCOUNT_STORE);
+            runCreateAccountFlow();
+        }
+    }
+
+    //MODIFY: this
     //EFFECTS: process user input to create new user and account
     private void runCreateAccountFlow() {
-        displayWelcomeMessage();
+        System.out.println("Would you like to create a personal or business account? \n");
+        System.out.println("\tp -> personal");
+        System.out.println("\tb -> business");
         String command = input.next();
         command = command.toLowerCase();
         processAccountCreation(command);
@@ -112,6 +161,9 @@ public class CashApp {
             case "a":
                 runReferFriendsFlow();
                 break;
+            case "save":
+                saveAccountFlow();
+                break;
         }
     }
 
@@ -135,9 +187,9 @@ public class CashApp {
         System.out.println("Welcome to Cash App '98! \n");
         System.out.println("Our mission is to create an inclusive economy "
                 + "by helping you send, receive, and spend money easier \n");
-        System.out.println("Would you like to create a personal or business account? \n");
-        System.out.println("\tp -> personal");
-        System.out.println("\tb -> business");
+        System.out.println("Would you like to create an account or login? \n");
+        System.out.println("\ts -> sign-up");
+        System.out.println("\tl -> login");
     }
 
     //EFFECTS: display menu
@@ -156,6 +208,7 @@ public class CashApp {
         System.out.println("\th -> view transaction history");
         System.out.println("\ta -> refer a friend");
         System.out.println("\tq -> quit app");
+        System.out.println("\tsave -> save your account changes!");
         System.out.println("\n=======================================================");
     }
 
@@ -716,6 +769,8 @@ public class CashApp {
         }
     }
 
+    //MODIFY: this
+    //EFFECTS: processes user command to to refer friends
     private void processReferFriendsCommand() {
         String command = input.next();
         command = command.toLowerCase();
@@ -726,6 +781,8 @@ public class CashApp {
         }
     }
 
+    //MODIFY: this
+    //EFFECTS: processes user input to refer friends
     private void runReferAFriendFlow() {
         System.out.println("We can't wait to welcome your friends to Cash App '98!");
         System.out.println("What's their email?");
@@ -745,4 +802,18 @@ public class CashApp {
         }
 
     }
+
+    //EFFECTS: saves account activities to file
+    private void saveAccountFlow() {
+        try {
+            jsonAccountWriter.open();
+            jsonAccountWriter.write(user.getAccount());
+            jsonAccountWriter.close();
+            System.out.println("Hooray! Your account info was successfully saved");
+        } catch (FileNotFoundException e) {
+            System.out.println("Oops! We were unable to save your account activities to: " + JSON_ACCOUNT_STORE);
+        }
+    }
+
+
 }

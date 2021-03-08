@@ -77,9 +77,9 @@ public class JsonAccountReader {
 
         Transaction transaction = new Transaction(modelRecipientAcc, modelSenderAcc,
                 amount, Transaction.Type.valueOf(type), Transaction.Status.valueOf(status));
-        System.out.println(transaction.getId());
+
         transaction.setId(id);
-        System.out.println(transaction.getId());
+
         account.addToTransactions(transaction);
     }
 

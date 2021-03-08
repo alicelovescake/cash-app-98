@@ -71,6 +71,10 @@ public abstract class User implements Writable {
         this.id = id;
     }
 
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     //REQUIRES: valid email address
     //MODIFY: this
     //EFFECTS: User adds email of friend to make a referral to cash app,
