@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.Assert.fail;
 //CITATION: Structure of this interface is modeled after JsonSerializationDemo
 //          URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/
 // Represents test class for Json writer account
