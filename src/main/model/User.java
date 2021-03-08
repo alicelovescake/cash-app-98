@@ -66,6 +66,12 @@ public abstract class User implements Writable {
         return referralCountForReward;
     }
 
+    public List<String> getReferredFriends() {
+        return referredFriends;
+    }
+
+    ;
+
     //setter
     public void setId(String id) {
         this.id = id;

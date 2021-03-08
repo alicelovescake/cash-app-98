@@ -1,7 +1,7 @@
 {
     "creditCards": [],
     "balance": 100,
-    "id": "79120b83-8559-48cc-bd24-d43cabf7313b",
+    "id": "7ebe1d6c-e16d-4a78-bd6d-48c62a9809af",
     "boosts": [],
     "transactions": [],
     "user": {
@@ -9,7 +9,7 @@
         "lastName": "Zhao",
         "referredFriends": [],
         "location": "Vancouver",
-        "id": "e152575f-736b-4ce7-be93-d9912d9488b6",
+        "id": "faddde9a-e0c4-4cff-94c4-1adc692e2bb8",
         "userType": "PERSONAL",
         "username": "$alicelovescake"
     }

@@ -119,23 +119,23 @@ public class JsonAccountReader {
     private void addBoost(Account acc, JSONObject boostJson) {
         String boostType = boostJson.getString("boostType");
         BoostType enumType = BoostType.valueOf(boostType);
-        Boost boost;
+        Boost boost = null;
 
         switch (enumType) {
             case SHOPAHOLIC:
                 boost = new ShopaholicBoost();
                 break;
-            case FOODIE: 
+            case FOODIE:
                 boost = new FoodieBoost();
                 break;
             case HIGHROLLER:
                 boost = new HighRollerBoost();
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + enumType);
         }
 
+
         acc.addBoost(boost);
+
 
     }
 

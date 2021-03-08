@@ -85,6 +85,7 @@ public class JsonAccountWriterTest extends JsonAccountTest{
             testPersonalAccount.addBoost(foodie);
             //balance should be 1100 - 100 + 5 cashback = 1005, completed transaction size 1
             testPersonalAccount.makePurchase(testBusinessAccount, 100);
+            testPersonalAccount.getUser().referFriend("mybestfriend@gmail.com");
             JsonAccountWriter testAccountWriter =
                     new JsonAccountWriter("./data/testAccountWriterWithData.json");
             testAccountWriter.open();

@@ -3,6 +3,7 @@ package persistence;
 import model.*;
 import model.boosts.Boost;
 import model.boosts.FoodieBoost;
+import model.boosts.HighRollerBoost;
 import model.boosts.ShopaholicBoost;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ public class JsonAccountReaderTest extends JsonAccountTest {
     private Account testBusinessAccount;
     private Boost shopaholic;
     private Boost foodie;
+    private Boost highRoller;
     private CreditCard testCard;
 
     @Test
@@ -60,11 +62,15 @@ public class JsonAccountReaderTest extends JsonAccountTest {
         testCard = new CreditCard("Visa", 123456, 2025, 12);
         shopaholic = new ShopaholicBoost();
         foodie = new FoodieBoost();
+        highRoller = new HighRollerBoost();
         testPersonalAccount.addCreditCard(testCard);
         testPersonalAccount.deposit(testCard, 1000);
         testPersonalAccount.addBoost(shopaholic);
         testPersonalAccount.addBoost(foodie);
+        testPersonalAccount.addBoost(highRoller);
         testPersonalAccount.makePurchase(testBusinessAccount, 100);
+        testPersonalAccount.getUser().referFriend("mybestfriend@gmail.com");
+
 
         JsonAccountWriter testAccountWriter =
                 new JsonAccountWriter("./data/testAccountWriterWithData.json");
@@ -98,9 +104,9 @@ public class JsonAccountReaderTest extends JsonAccountTest {
                     100, Transaction.Status.COMPLETE, Transaction.Type.EXCHANGE, transactions.get(0));
             checkBoost(shopaholic.getBoostType(), boosts);
             checkBoost(foodie.getBoostType(), boosts);
+
         } catch (IOException e) {
             Assertions.fail("Oops! This file cannot be read");
         }
-
     }
 }
