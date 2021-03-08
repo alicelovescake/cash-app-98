@@ -4,17 +4,14 @@ import model.*;
 import model.boosts.Boost;
 import model.boosts.FoodieBoost;
 import model.boosts.ShopaholicBoost;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonAccountReaderTest extends JsonAccountTest {
     private Account testPersonalAccount;
@@ -30,7 +27,7 @@ public class JsonAccountReaderTest extends JsonAccountTest {
         JsonAccountReader invalidReader = new JsonAccountReader("./data/fileNotFound.json");
         try {
             Account testAccount = invalidReader.read();
-            fail("IOException expected");
+            Assertions.fail("IOException expected");
         } catch (IOException e) {
             // all pass
         }
@@ -48,7 +45,7 @@ public class JsonAccountReaderTest extends JsonAccountTest {
             assertEquals(0, readAccount.getCompletedTransactions().size());
 
         } catch(IOException e) {
-            fail("Oops! This file cannot be read");
+            Assertions.fail("Oops! This file cannot be read");
         }
 
     }
@@ -102,7 +99,7 @@ public class JsonAccountReaderTest extends JsonAccountTest {
             checkBoost(shopaholic.getBoostType(), boosts);
             checkBoost(foodie.getBoostType(), boosts);
         } catch (IOException e) {
-            fail("Oops! This file cannot be read");
+            Assertions.fail("Oops! This file cannot be read");
         }
 
     }

@@ -2,10 +2,8 @@ package persistence;
 
 import model.*;
 import model.boosts.Boost;
-import model.boosts.BoostType;
 import model.boosts.FoodieBoost;
 import model.boosts.ShopaholicBoost;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 //CITATION: Structure of this interface is modeled after JsonSerializationDemo
 //          URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/
@@ -45,7 +43,7 @@ public class JsonAccountWriterTest extends JsonAccountTest{
         try {
             JsonAccountWriter InvalidAccountWriter = new JsonAccountWriter("./data/my\0illegal:fileName.json");
             InvalidAccountWriter.open();
-            fail("Should have caught file not found exception");
+            Assertions.fail("Should have caught file not found exception");
         } catch (IOException e) {
             // pass
         }
@@ -65,14 +63,14 @@ public class JsonAccountWriterTest extends JsonAccountTest{
 
             //check fields with keys: Balance and account id
             Assertions.assertEquals(100, readPersonalAccount.getBalance());
-            assertEquals(readPersonalAccount.getId(), testPersonalAccount.getId());
+            Assertions.assertEquals(readPersonalAccount.getId(), testPersonalAccount.getId());
 
             assertEquals(0, readPersonalAccount.getCreditCards().size());
             assertEquals(0, readPersonalAccount.getBoosts().size());
             assertEquals(0, readPersonalAccount.getCompletedTransactions().size());
 
         } catch (IOException e) {
-            fail("Exception should not have been thrown");
+            Assertions.fail("Exception should not have been thrown");
         }
     }
 
@@ -120,7 +118,7 @@ public class JsonAccountWriterTest extends JsonAccountTest{
             checkBoost(foodie.getBoostType(), boosts);
 
         } catch (IOException e) {
-            fail("Exception should not have been thrown");
+            Assertions.fail("Exception should not have been thrown");
         }
     }
 
