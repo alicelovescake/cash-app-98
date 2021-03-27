@@ -56,6 +56,7 @@ There is only one question for you to consider:
 - As a user, I want to be rewarded for referring my friends to the app.
 - As a user, I want to save all my account changes and transactions to file.
 - As a user, I want to load all my previous account changes and transactions from a file.
+- As a user, I can create, view and edit my account through a graphical user interface.
  
 
 
