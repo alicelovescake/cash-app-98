@@ -2,45 +2,45 @@
     "creditCards": [{
         "cardType": "Visa",
         "expiryMonth": 12,
-        "id": "6a8d36cc-4163-4b3b-8b60-03fdb1a8cdad",
+        "id": "a5d44fe3-9a2a-47ed-acc7-4f78cfe15a7b",
         "expiryYear": 2025,
         "cardNumber": 123456
     }],
     "balance": 1005,
-    "id": "dc76a9fd-4413-4d6f-b94f-fad8b9a6f27f",
+    "id": "852c4315-3c6d-4bcd-8e51-98a15f96746f",
     "boosts": [
-        {"boostType": "FOODIE"},
-        {"boostType": "SHOPAHOLIC"}
+        {"boostType": "SHOPAHOLIC"},
+        {"boostType": "FOODIE"}
     ],
     "transactions": [{
-        "date": "2021-03-07",
+        "date": "2021-03-10",
         "amount": 100,
         "sender": {
             "balance": 1005,
-            "id": "dc76a9fd-4413-4d6f-b94f-fad8b9a6f27f",
+            "id": "852c4315-3c6d-4bcd-8e51-98a15f96746f",
             "user": {
                 "firstName": "Alice",
                 "lastName": "Zhao",
                 "referredFriends": ["mybestfriend@gmail.com"],
                 "location": "Vancouver",
-                "id": "08c4b519-0fe6-471a-b1b1-d3eefde2b2e9",
+                "id": "bba57b7f-3f38-4167-b7f5-f7db35d199b1",
                 "userType": "PERSONAL",
                 "username": "$alicelovescake"
             }
         },
         "recipient": {
             "balance": 5100,
-            "id": "dc76a9fd-4413-4d6f-b94f-fad8b9a6f27f",
+            "id": "852c4315-3c6d-4bcd-8e51-98a15f96746f",
             "user": {
                 "companyName": "Amazon",
                 "location": "Seattle",
-                "id": "2b6cee63-91de-4d8f-af76-e1a6b6381a76",
+                "id": "ed9e0a77-7d24-4fa4-a785-17e25bc2e41e",
                 "userType": "BUSINESS",
                 "businessType": "RETAILER",
                 "username": "$amazon"
             }
         },
-        "id": "b827b329-12ae-426a-85cd-b5aa46e623f7",
+        "id": "36f099f5-d0bc-40cc-8e01-a9916bec2dee",
         "type": "EXCHANGE",
         "status": "COMPLETE"
     }],
@@ -49,7 +49,7 @@
         "lastName": "Zhao",
         "referredFriends": ["mybestfriend@gmail.com"],
         "location": "Vancouver",
-        "id": "08c4b519-0fe6-471a-b1b1-d3eefde2b2e9",
+        "id": "bba57b7f-3f38-4167-b7f5-f7db35d199b1",
         "userType": "PERSONAL",
         "username": "$alicelovescake"
     }

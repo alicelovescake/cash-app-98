@@ -9,5 +9,7 @@ public interface Boost extends Writable {
 
     boolean applyBoost(Transaction transaction);
 
+//Getters
+
     BoostType getBoostType();
 }

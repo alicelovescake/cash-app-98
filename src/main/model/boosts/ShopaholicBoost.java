@@ -16,7 +16,10 @@ public class ShopaholicBoost implements Boost {
     }
 
     @Override
-    // user gets 5 times cashback percentage (5%) for total purchase
+    // REQUIRE: valid transaction
+    // MODIFY: this
+    // EFFECTS: If transaction recipient user type is Retailer, user gets 5 times cashback percentage (10%)
+    // for total purchase
     public boolean applyBoost(Transaction transaction) {
         User user = transaction.getRecipient();
 

@@ -15,8 +15,10 @@ public class FoodieBoost implements Boost {
         boostType = BoostType.FOODIE;
     }
 
-    // user gets 3 times cashback percentage (3%) for total purchase
-
+    // REQUIRE: valid transaction
+    // MODIFY: this
+    // EFFECTS: If transaction recipient user type is Restaurant or cafe, user gets user gets 3 times cashback
+    // percentage (3%)for total purchase
     @Override
     public boolean applyBoost(Transaction transaction) {
         User user = transaction.getRecipient();

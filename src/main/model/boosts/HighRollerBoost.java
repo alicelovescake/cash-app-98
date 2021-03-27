@@ -13,7 +13,9 @@ public class HighRollerBoost implements Boost {
     }
 
     @Override
-    // user gets 5 times cashback percentage (5%) for total purchase
+    // REQUIRE: valid transaction
+    // MODIFY: this
+    // EFFECTS: If transaction amount >= 1000, user gets 5 times cashback percentage (10%) for total purchase
     public boolean applyBoost(Transaction transaction) {
         if (transaction.getAmount() >= 1000) {
             transaction.getSenderAccount().incrementBalance(cashBack * 10 * transaction.getAmount());

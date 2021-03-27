@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 //class representing personal user which can refer friends, none business
 public class PersonalUser extends User {
