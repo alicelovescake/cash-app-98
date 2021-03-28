@@ -10,12 +10,12 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class WelcomePage extends JPanel implements ActionListener {
-    JPanel app;
+    MainApp app;
     JButton createAccButton = new JButton("Create Account");
     JButton loginButton = new JButton("Login");
 
     // EFFECTS: constructor that creates welcome page
-    public WelcomePage(JPanel app) {
+    public WelcomePage(MainApp app) {
         this.app = app;
         add(displayWelcomeLabel());
 
@@ -41,26 +41,26 @@ public class WelcomePage extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        CardLayout cl = (CardLayout) (this.app.getLayout());
-        JsonAccountReader jsonAccountReader = MainApp.getJsonReader();
+        CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());
+        JsonAccountReader jsonAccountReader = this.app.getJsonReader();
 
         if (e.getSource() == createAccButton) {
-            cl.show(this.app, Pages.CREATE_ACCOUNT.name());
+            cl.show(this.app.getContainer(), Pages.CREATE_ACCOUNT.name());
 
         } else if (e.getSource() == loginButton) {
             try {
                 Account account = jsonAccountReader.read();
-                MainApp.setUser(account.getUser());
-                MainApp.getUser().setAccount(account);
+                this.app.setUser(account.getUser());
+                this.app.getUser().setAccount(account);
                 //TODO: Add success banner on top of menu page
                 JLabel successLabel = new JLabel("Welcome back " + account.getUser().getUsername()
                         + "! Your info was successfully loaded!");
-                cl.show(this.app, Pages.MENU.name());
+                cl.show(this.app.getContainer(), Pages.MENU.name());
 
             } catch (IOException exception) {
                 //TODO: Add error banner on top of create account page
                 JLabel noAccountLabel = new JLabel("Oops! We were unable to read from your file!");
-                cl.show(this.app, Pages.CREATE_ACCOUNT.name());
+                cl.show(this.app.getContainer(), Pages.CREATE_ACCOUNT.name());
             }
         }
     }

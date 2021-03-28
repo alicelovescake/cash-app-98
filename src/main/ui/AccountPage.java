@@ -28,11 +28,11 @@ public class AccountPage extends JPanel implements ActionListener {
 
     JButton submitButton = new JButton("Create Account!");
 
-    JPanel app;
+    MainApp app;
 
 // Constructs account page with radio buttons and text fields
 
-    public AccountPage(JPanel app) {
+    public AccountPage(MainApp app) {
         this.app = app;
 
         setLayout(new GridLayout(0, 2, 10, 10));
@@ -115,7 +115,7 @@ public class AccountPage extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        CardLayout cl = (CardLayout) (this.app.getLayout());
+        CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());
         User createdUser;
         BusinessType type;
 
@@ -132,11 +132,12 @@ public class AccountPage extends JPanel implements ActionListener {
                 createdUser = new BusinessUser(usernameData, locationData, businessNameData, type);
             }
 
-            MainApp.setUser(createdUser);
+            this.app.setUser(createdUser);
+
             JLabel successLabel = new JLabel("It's great for you to join us from "
                     + locationData + "!" + " Your username $" + usernameData + " is ready to be used! Woooot!");
             //TODO: Success message on top of menu page
-            cl.show(this.app, Pages.MENU.name());
+            cl.show(this.app.getContainer(), Pages.MENU.name());
         }
     }
 

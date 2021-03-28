@@ -6,53 +6,80 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.List;
 
 public class CreditCardPage extends JPanel implements ActionListener {
-    private JPanel app;
+    private MainApp app;
     private JButton addCreditCardButton = new JButton("Add New Card");
     private JButton removeCardButton = new JButton("Remove Card");
     private JList creditCardsJList;
     private DefaultListModel listModel;
-
-    private List<CreditCard> creditCardList = new ArrayList<CreditCard>();
-    CreditCard card1 = new CreditCard("VISA", 424, 2024, 5);
-    CreditCard card2 = new CreditCard("MASTERCARD", 11111, 2029, 2);
+    private List<CreditCard> creditCardList;
 
     //EFFECTS: constructor to create credit card page that displays options for updating credit cards
-    public CreditCardPage(JPanel app) {
+    public CreditCardPage(MainApp app) {
         this.app = app;
-        creditCardList.add(card1);
-        creditCardList.add(card2);
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent evt) {
+                removeAll();
+
+                createPage();
+
+                revalidate();
+                repaint();
+            }
+        });
+    }
+
+    public void createPage() {
+        listModel = new DefaultListModel();
 
         addCreditCardButton.addActionListener(this);
         add(addCreditCardButton);
 
-        listModel = new DefaultListModel();
+        if (this.app.getUser() != null) {
+            creditCardList = this.app.getUser().getAccount().getCreditCards();
 
-        for (CreditCard c : creditCardList) {
-            listModel.addElement(c.getCardType() + " "
-                    + String.valueOf(c.getCardNumber()));
+            for (CreditCard c : creditCardList) {
+                listModel.addElement(c.getCardNumber());
+            }
+
+            creditCardsJList = new JList(listModel);
+            creditCardsJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+            add(creditCardsJList);
         }
 
-        creditCardsJList = new JList(listModel);
-        creditCardsJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        add(creditCardsJList);
-
         removeCardButton.addActionListener(this);
-        add(new ReturnToMenuButton(app));
+        add(new ReturnToMenuButton(this.app.getContainer()));
         add(removeCardButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        CardLayout cl = (CardLayout) (this.app.getLayout());
+        CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());
+
         if (e.getSource() == addCreditCardButton) {
-            cl.show(this.app, Pages.ADD_CREDIT_CARD.name());
+            cl.show(this.app.getContainer(), Pages.ADD_CREDIT_CARD.name());
         } else if (e.getSource() == removeCardButton) {
             int index = creditCardsJList.getSelectedIndex();
-            listModel.remove(index);
+
+            if (index >= 0) {
+                Object cardToRemove = listModel.remove(index);
+                creditCardsJList.clearSelection();
+
+                List<CreditCard> existingCreditCards = this.app.getUser().getAccount().getCreditCards();
+                for (int i = 0; i < existingCreditCards.size(); i++) {
+                    CreditCard c = existingCreditCards.get(i);
+                    if (Long.toString(c.getCardNumber()).equals(cardToRemove.toString())) {
+                        existingCreditCards.remove(c);
+                    }
+                }
+            }
         }
     }
 }

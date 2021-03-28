@@ -4,6 +4,7 @@ import model.Account;
 import model.PersonalUser;
 import model.Transaction;
 import model.User;
+import sun.applet.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionHistoryPage extends JPanel implements ActionListener {
-    JPanel app;
+    MainApp app;
 
     private User testUserSender = new PersonalUser("$alicelovescake", "Vancouver",
             "Alice", "Zhao");
@@ -28,7 +29,7 @@ public class TransactionHistoryPage extends JPanel implements ActionListener {
     private List<Transaction> transactions = new ArrayList<>();
 
     //EFFECTS: constructor to create send money page that displays transaction history
-    public TransactionHistoryPage(JPanel app) {
+    public TransactionHistoryPage(MainApp app) {
         this.app = app;
         transactions.add(testTransaction);
         transactions.add(testTransaction2);
@@ -54,7 +55,7 @@ public class TransactionHistoryPage extends JPanel implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(table);
 
         add(scrollPane);
-        add(new ReturnToMenuButton(app));
+        add(new ReturnToMenuButton(this.app.getContainer()));
     }
 
     @Override

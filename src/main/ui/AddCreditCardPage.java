@@ -1,12 +1,14 @@
 package ui;
 
+import model.CreditCard;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddCreditCardPage extends JPanel implements ActionListener {
-    JPanel app;
+    MainApp app;
     JButton confirmButton = new JButton("Confirm Add Credit Card");
     TextField typeField;
     TextField numField;
@@ -14,25 +16,19 @@ public class AddCreditCardPage extends JPanel implements ActionListener {
     TextField expiryMonthField;
 
     //EFFECTS: constructor to add a new credit card to account
-    public AddCreditCardPage(JPanel app) {
+    public AddCreditCardPage(MainApp app) {
         this.app = app;
         setLayout(new GridLayout(0, 2, 5, 5));
 
-        typeField = new TextField();
-        typeField.setSize(new Dimension(100, 5));
+        initializeFields();
         JLabel typeLabel = new JLabel("Credit Card Type:");
 
-        numField = new TextField();
-        numField.setSize(new Dimension(100, 5));
         JLabel numLabel = new JLabel("Credit Card Number:");
 
-        expiryYearField = new TextField();
-        expiryYearField.setSize(new Dimension(100, 30));
         JLabel expiryYearLabel = new JLabel("Credit Card Expiry Year:");
 
-        expiryMonthField = new TextField();
-        expiryMonthField.setSize(new Dimension(100, 30));
         JLabel expiryMonthLabel = new JLabel("Credit Card Expiry Month:");
+        confirmButton.setActionCommand("CREDIT_CARD_ADDED");
         confirmButton.addActionListener(this);
 
         add(typeLabel);
@@ -46,12 +42,34 @@ public class AddCreditCardPage extends JPanel implements ActionListener {
         add(confirmButton);
     }
 
+    public void initializeFields() {
+        typeField = new TextField();
+        typeField.setPreferredSize(new Dimension(100, 5));
+        numField = new TextField();
+        numField.setPreferredSize(new Dimension(100, 5));
+        expiryYearField = new TextField();
+        expiryYearField.setPreferredSize(new Dimension(100, 30));
+        expiryMonthField = new TextField();
+        expiryMonthField.setPreferredSize(new Dimension(100, 30));
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        CardLayout cl = (CardLayout) (this.app.getLayout());
+        CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());
 
         if (e.getSource() == confirmButton) {
-            cl.show(this.app, Pages.CREDIT_CARD.name());
+            String typeData = typeField.getText();
+            int numData = Integer.valueOf(numField.getText());
+            int monthData = Integer.valueOf(expiryMonthField.getText());
+            int yearData = Integer.valueOf(expiryYearField.getText());
+            CreditCard card = new CreditCard(typeData, numData, yearData, monthData);
+            this.app.getUser().getAccount().addCreditCard(card);
+            System.out.println(card);
+            System.out.println(this.app.getUser().getAccount().getCreditCards());
+            this.app.revalidate();
+            this.app.repaint();
+            //TODO: add success message
+            cl.show(this.app.getContainer(), Pages.CREDIT_CARD.name());
         }
     }
 }

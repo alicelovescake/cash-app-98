@@ -8,23 +8,16 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class WithdrawalPage extends JPanel implements ActionListener, ItemListener {
-    JPanel app;
+    MainApp app;
     JButton confirmButton = new JButton("Confirm Withdraw");
+    int numCreditCardsAvailable;
+    TextField amountField;
 
-    public WithdrawalPage(JPanel app) {
+    public WithdrawalPage(MainApp app) {
         this.app = app;
         JPanel creditCardPane = new JPanel();
 
-        String[] creditCards = {"Placeholder Card 1", "Placeholder Card 2"};
-
-        JComboBox cb = new JComboBox(creditCards);
-
-        cb.setEditable(false);
-        cb.addItemListener(this);
-
-        creditCardPane.add(cb);
-
-        TextField amountField = new TextField();
+        amountField = new TextField();
         amountField.setPreferredSize(new Dimension(100, 30));
         JLabel amountLabel = new JLabel("Withdraw Amount:");
 
@@ -34,14 +27,42 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
         add(amountLabel);
         add(amountField);
         add(confirmButton);
-        add(new ReturnToMenuButton(this.app));
+        add(new ReturnToMenuButton(this.app.getContainer()));
+    }
+
+    //EFFECTS: determines if user has any credit cards on file
+    public int numCreditCardsAvailable() {
+        this.numCreditCardsAvailable = this.app.getUser() == null ? 0 : this.app.getUser().getAccount()
+                .getCreditCards().size();
+        return numCreditCardsAvailable;
+    }
+
+    //EFFECTS: loops over credit cards available and displays in combo box
+    public void addCreditCardDisplay(JPanel creditCardPane) {
+        List userCards = (List) this.app.getUser().getAccount().getCreditCards();
+        String[] creditCards = new String[numCreditCardsAvailable];
+
+        for (int i = 0; i < numCreditCardsAvailable; i++) {
+            creditCards[i] = userCards.getItem(i);
+        }
+
+        JComboBox cb = new JComboBox(creditCards);
+
+        cb.setEditable(false);
+        cb.addItemListener(this);
+
+        creditCardPane.add(cb);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        CardLayout cl = (CardLayout) (this.app.getLayout());
+        CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());
         if (e.getSource() == confirmButton) {
-            cl.show(this.app, Pages.MENU.name());
+            String amountData = amountField.getText();
+            int withdrawAmt = Integer.valueOf(amountData);
+            this.app.getUser().getAccount().decrementBalance(withdrawAmt);
+
+            cl.show(this.app.getContainer(), Pages.MENU.name());
         }
     }
 

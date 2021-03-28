@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class MenuPage extends JPanel implements ActionListener {
     JButton button;
-    JPanel app;
+    MainApp app;
     JLabel balanceLabel;
     JLabel balanceAmountLabel;
     double balance;
@@ -24,12 +24,12 @@ public class MenuPage extends JPanel implements ActionListener {
     static final String SAVE_LOGOUT = "Save and Log out";
 
     //EFFECTS: constructor to create menu card for to display options
-    public MenuPage(JPanel app) {
+    public MenuPage(MainApp app) {
         this.app = app;
-
+        System.out.println(MainApp.getUser());
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        balance = MainApp.getUser() == null ? 0 : MainApp.getUser().getAccount().getBalance();
+        balance = this.app.getUser() == null ? 0 : this.app.getUser().getAccount().getBalance();
         balanceAmountLabel = new JLabel("$ " + balance);
         balanceLabel = new JLabel("Cash Balance");
 
@@ -62,22 +62,22 @@ public class MenuPage extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        CardLayout cl = (CardLayout) (app.getLayout());
+        CardLayout cl = (CardLayout) (app.getContainer().getLayout());
         switch (command) {
             case ADD_CASH:
-                cl.show(app, Pages.DEPOSIT.name());
+                cl.show(this.app.getContainer(), Pages.DEPOSIT.name());
                 break;
             case CASH_OUT:
-                cl.show(app, Pages.WITHDRAW.name());
+                cl.show(this.app.getContainer(), Pages.WITHDRAW.name());
                 break;
             case MAKE_PURCHASE:
-                cl.show(app, Pages.PURCHASE.name());
+                cl.show(this.app.getContainer(), Pages.PURCHASE.name());
                 break;
             case REQUEST_MONEY:
-                cl.show(app, Pages.REQUEST.name());
+                cl.show(this.app.getContainer(), Pages.REQUEST.name());
                 break;
             case SEND_MONEY:
-                cl.show(app, Pages.SEND.name());
+                cl.show(this.app.getContainer(), Pages.SEND.name());
                 break;
             default:
                 processExtraCommands(command, cl);
@@ -89,13 +89,13 @@ public class MenuPage extends JPanel implements ActionListener {
     public void processExtraCommands(String command, CardLayout cl) {
         switch (command) {
             case UPDATE_CREDIT_CARDS:
-                cl.show(app, Pages.CREDIT_CARD.name());
+                cl.show(this.app.getContainer(), Pages.CREDIT_CARD.name());
                 break;
             case TRANSACTION_HISTORY:
-                cl.show(app, Pages.TRANSACTION.name());
+                cl.show(this.app.getContainer(), Pages.TRANSACTION.name());
                 break;
             case SAVE_LOGOUT:
-                cl.show(app, Pages.WELCOME.name());
+                cl.show(this.app.getContainer(), Pages.WELCOME.name());
                 break;
         }
     }

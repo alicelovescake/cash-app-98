@@ -20,7 +20,7 @@ public class MainApp extends JFrame implements ActionListener {
     private static JsonAccountWriter jsonAccountWriter = new JsonAccountWriter(JSON_ACCOUNT_STORE);
     private static User user;
 
-    private JPanel app;
+    private JPanel container;
 
     public MainApp() {
         super("Cash App '98");
@@ -38,6 +38,10 @@ public class MainApp extends JFrame implements ActionListener {
 
     public static User getUser() {
         return user;
+    }
+
+    public JPanel getContainer() {
+        return container;
     }
 
     //Setters
@@ -61,38 +65,38 @@ public class MainApp extends JFrame implements ActionListener {
     //MODIFY: this
     //EFFECTS: Creates app layout and adds all pages to app
     public void initializeAppPages() {
-        app = new JPanel(new CardLayout());
-        JPanel welcomePage = new WelcomePage(app);
-        JPanel createAccountPage = new AccountPage(app);
-        JPanel createMenuPage = new MenuPage(app);
-        JPanel addCashPage = new DepositPage(app);
-        JPanel cashOutPage = new WithdrawalPage(app);
-        JPanel createPurchasePage = new PurchasePage(app);
+        container = new JPanel(new CardLayout());
+        JPanel welcomePage = new WelcomePage(this);
+        JPanel createAccountPage = new AccountPage(this);
+        JPanel createMenuPage = new MenuPage(this);
+        JPanel addCashPage = new DepositPage(this);
+        JPanel cashOutPage = new WithdrawalPage(this);
+        JPanel createPurchasePage = new PurchasePage(this);
 
-        app.add(welcomePage, Pages.WELCOME.name());
-        app.add(createAccountPage, Pages.CREATE_ACCOUNT.name());
-        app.add(createMenuPage, Pages.MENU.name());
-        app.add(addCashPage, Pages.DEPOSIT.name());
-        app.add(cashOutPage, Pages.WITHDRAW.name());
-        app.add(createPurchasePage, Pages.PURCHASE.name());
+        container.add(welcomePage, Pages.WELCOME.name());
+        container.add(createAccountPage, Pages.CREATE_ACCOUNT.name());
+        container.add(createMenuPage, Pages.MENU.name());
+        container.add(addCashPage, Pages.DEPOSIT.name());
+        container.add(cashOutPage, Pages.WITHDRAW.name());
+        container.add(createPurchasePage, Pages.PURCHASE.name());
         initializeMoreAppPages();
-        add(app, BorderLayout.CENTER);
+        add(container, BorderLayout.CENTER);
     }
 
     //MODIFY: this
     //EFFECTS: Creates app layout and adds all pages to app
     public void initializeMoreAppPages() {
-        JPanel requestMoneyPage = new RequestMoneyPage(app);
-        JPanel sendMoneyPage = new SendMoneyPage(app);
-        JPanel creditCardPage = new CreditCardPage(app);
-        JPanel addCreditCard = new AddCreditCardPage(app);
-        JPanel transactionHistoryPage = new TransactionHistoryPage(app);
+        JPanel requestMoneyPage = new RequestMoneyPage(this);
+        JPanel sendMoneyPage = new SendMoneyPage(this);
+        JPanel creditCardPage = new CreditCardPage(this);
+        JPanel addCreditCard = new AddCreditCardPage(this);
+        JPanel transactionHistoryPage = new TransactionHistoryPage(this);
 
-        app.add(requestMoneyPage, Pages.REQUEST.name());
-        app.add(sendMoneyPage, Pages.SEND.name());
-        app.add(creditCardPage, Pages.CREDIT_CARD.name());
-        app.add(addCreditCard, Pages.ADD_CREDIT_CARD.name());
-        app.add(transactionHistoryPage, Pages.TRANSACTION.name());
+        container.add(requestMoneyPage, Pages.REQUEST.name());
+        container.add(sendMoneyPage, Pages.SEND.name());
+        container.add(creditCardPage, Pages.CREDIT_CARD.name());
+        container.add(addCreditCard, Pages.ADD_CREDIT_CARD.name());
+        container.add(transactionHistoryPage, Pages.TRANSACTION.name());
     }
 
     // Starts CashApp

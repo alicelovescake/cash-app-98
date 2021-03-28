@@ -192,6 +192,8 @@ public class Account implements Writable {
     public void addCreditCard(CreditCard newCard) {
         if (newCard.getIsValid()) {
             creditCards.add(newCard);
+        } else {
+            System.out.println("Invalid credit card!");
         }
     }
 
