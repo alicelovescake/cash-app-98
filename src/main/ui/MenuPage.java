@@ -1,9 +1,12 @@
 package ui;
 
+import persistence.JsonAccountWriter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 //class that creates menu card for to display options to users and directs them to other pages
 
@@ -95,8 +98,26 @@ public class MenuPage extends JPanel implements ActionListener {
                 cl.show(this.app.getContainer(), Pages.TRANSACTION.name());
                 break;
             case SAVE_LOGOUT:
+                add(saveAccountInfo());
                 cl.show(this.app.getContainer(), Pages.WELCOME.name());
                 break;
         }
+    }
+
+    //MODIFY: JSON file
+    //EFFECTS: saves account activities to file
+    public JLabel saveAccountInfo() {
+        JsonAccountWriter writer = this.app.getJsonWriter();
+        JLabel status;
+        try {
+            writer.open();
+            writer.write(this.app.getUser().getAccount());
+            writer.close();
+            status = new JLabel("Hooray! Your account info was successfully saved");
+        } catch (FileNotFoundException e) {
+            status = new JLabel("Oops! We were unable to save your account activities to: "
+                    + this.app.getAccountStore());
+        }
+        return status;
     }
 }

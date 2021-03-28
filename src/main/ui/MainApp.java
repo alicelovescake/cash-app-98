@@ -36,6 +36,10 @@ public class MainApp extends JFrame implements ActionListener {
         return jsonAccountWriter;
     }
 
+    public static String getAccountStore() {
+        return JSON_ACCOUNT_STORE;
+    }
+
     public static User getUser() {
         return user;
     }
