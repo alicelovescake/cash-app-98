@@ -5,9 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//class that creates menu card for to display options to users and directs them to other pages
+
 public class MenuPage extends JPanel implements ActionListener {
     JButton button;
     JPanel app;
+    JLabel balanceLabel;
+    JLabel balanceAmountLabel;
+    double balance;
 
     static final String ADD_CASH = "Add Cash";
     static final String CASH_OUT = "Cash Out";
@@ -18,12 +23,18 @@ public class MenuPage extends JPanel implements ActionListener {
     static final String TRANSACTION_HISTORY = "View Transaction History";
     static final String SAVE_LOGOUT = "Save and Log out";
 
-    //EFFECTS: constructor to create menu card for to display options to users
+    //EFFECTS: constructor to create menu card for to display options
     public MenuPage(JPanel app) {
         this.app = app;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        balance = MainApp.getUser() == null ? 0 : MainApp.getUser().getAccount().getBalance();
+        balanceAmountLabel = new JLabel("$ " + balance);
+        balanceLabel = new JLabel("Cash Balance");
+
+        add(balanceAmountLabel);
+        add(balanceLabel);
         addMenuButton(ADD_CASH);
         addMenuButton(CASH_OUT);
         addMenuButton(MAKE_PURCHASE);
@@ -32,6 +43,7 @@ public class MenuPage extends JPanel implements ActionListener {
         addMenuButton(UPDATE_CREDIT_CARDS);
         addMenuButton(TRANSACTION_HISTORY);
         addMenuButton(SAVE_LOGOUT);
+
     }
 
 

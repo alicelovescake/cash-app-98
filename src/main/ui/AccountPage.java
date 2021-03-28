@@ -4,12 +4,12 @@ import model.BusinessUser;
 import model.BusinessUser.BusinessType;
 import model.PersonalUser;
 import model.User;
-import ui.Pages;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//class to create account creation page that accepts user input to create an account
 
 public class AccountPage extends JPanel implements ActionListener {
     TextField username;
@@ -19,10 +19,18 @@ public class AccountPage extends JPanel implements ActionListener {
     TextField businessName;
     ButtonGroup group;
     ButtonGroup businessTypeGroup;
+    JRadioButton personalAccButton;
+    JRadioButton businessAccButton;
+    JRadioButton cafeButton;
+    JRadioButton groceryButton;
+    JRadioButton retailButton;
+    JRadioButton resButton;
 
-    JButton submitButton = new JButton("Submit");
+    JButton submitButton = new JButton("Create Account!");
 
     JPanel app;
+
+// Constructs account page with radio buttons and text fields
 
     public AccountPage(JPanel app) {
         this.app = app;
@@ -30,23 +38,11 @@ public class AccountPage extends JPanel implements ActionListener {
         setLayout(new GridLayout(0, 2, 10, 10));
 
         submitButton.addActionListener(this);
+        initializeRadioButtons();
 
-        JRadioButton personalAccButton = new JRadioButton("Personal Account");
-        personalAccButton.setActionCommand("Personal");
-        JRadioButton businessAccButton = new JRadioButton("Business Account");
-        businessAccButton.setActionCommand("Business");
         group = new ButtonGroup();
         group.add(personalAccButton);
         group.add(businessAccButton);
-
-        JRadioButton cafeButton = new JRadioButton(BusinessType.CAFE.name());
-        cafeButton.setActionCommand("cafe");
-        JRadioButton groceryButton = new JRadioButton(BusinessType.GROCERY.name());
-        groceryButton.setActionCommand("grocery");
-        JRadioButton retailButton = new JRadioButton(BusinessType.RETAILER.name());
-        retailButton.setActionCommand("retail");
-        JRadioButton resButton = new JRadioButton(BusinessType.RESTAURANT.name());
-        resButton.setActionCommand("rest");
 
         businessTypeGroup = new ButtonGroup();
         businessTypeGroup.add(cafeButton);
@@ -62,6 +58,22 @@ public class AccountPage extends JPanel implements ActionListener {
         add(resButton);
         generateTextFields();
         add(submitButton);
+    }
+
+    //EFFECTS: instantiates all radio buttons and sets action command
+    public void initializeRadioButtons() {
+        personalAccButton = new JRadioButton("Personal Account");
+        personalAccButton.setActionCommand("Personal");
+        businessAccButton = new JRadioButton("Business Account");
+        businessAccButton.setActionCommand("Business");
+        cafeButton = new JRadioButton(BusinessType.CAFE.name());
+        cafeButton.setActionCommand("cafe");
+        groceryButton = new JRadioButton(BusinessType.GROCERY.name());
+        groceryButton.setActionCommand("grocery");
+        retailButton = new JRadioButton(BusinessType.RETAILER.name());
+        retailButton.setActionCommand("retail");
+        resButton = new JRadioButton(BusinessType.RESTAURANT.name());
+        resButton.setActionCommand("rest");
     }
 
     //MODIFY: this:
@@ -106,7 +118,6 @@ public class AccountPage extends JPanel implements ActionListener {
         CardLayout cl = (CardLayout) (this.app.getLayout());
         User createdUser;
         BusinessType type;
-        type = findType();
 
         if (e.getSource() == submitButton) {
             String usernameData = username.getText();
@@ -117,6 +128,7 @@ public class AccountPage extends JPanel implements ActionListener {
             if (group.getSelection().getActionCommand().equals("Personal")) {
                 createdUser = new PersonalUser(usernameData, locationData, firstNameData, lastNameData);
             } else {
+                type = findType();
                 createdUser = new BusinessUser(usernameData, locationData, businessNameData, type);
             }
 
@@ -144,7 +156,8 @@ public class AccountPage extends JPanel implements ActionListener {
             case "grocery":
                 type = BusinessType.GROCERY;
                 break;
-            default: type = BusinessType.OTHER;
+            default:
+                type = BusinessType.OTHER;
         }
 
         return type;
