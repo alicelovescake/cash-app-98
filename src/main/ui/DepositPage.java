@@ -31,13 +31,11 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener 
 
         confirmButton.addActionListener(this);
 
-        JButton returnToMenuButton = new ReturnToMenuButton(this.app);
-
         add(creditCardPane);
         add(amountLabel);
         add(amountField);
         add(confirmButton);
-        add(returnToMenuButton);
+        add(new ReturnToMenuButton(app));
     }
 
 

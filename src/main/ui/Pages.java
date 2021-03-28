@@ -11,4 +11,5 @@ public enum Pages {
     SEND,
     CREDIT_CARD,
     TRANSACTION,
+    ADD_CREDIT_CARD,
 }

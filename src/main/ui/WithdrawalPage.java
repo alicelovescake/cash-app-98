@@ -30,13 +30,11 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
 
         confirmButton.addActionListener(this);
 
-        JButton returnToMenuButton = new ReturnToMenuButton(this.app);
-
         add(creditCardPane);
         add(amountLabel);
         add(amountField);
         add(confirmButton);
-        add(returnToMenuButton);
+        add(new ReturnToMenuButton(this.app));
     }
 
     @Override
