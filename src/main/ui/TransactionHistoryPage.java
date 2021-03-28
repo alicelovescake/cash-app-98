@@ -1,7 +1,6 @@
 package ui;
 
 import model.*;
-import sun.applet.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,9 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
 import java.util.List;
 
+// This class creates a page to display transaction history of the user
 public class TransactionHistoryPage extends JPanel implements ActionListener {
     MainApp app;
 
@@ -19,7 +18,8 @@ public class TransactionHistoryPage extends JPanel implements ActionListener {
     private List<Transaction> pendingTransactions;
     private List<Transaction> failedTransactions;
 
-    //EFFECTS: constructor to create send money page that displays transaction history
+    //Effects: constructor that create page & adds component & action listener to update and revalidate page
+    // when component changes.
     public TransactionHistoryPage(MainApp app) {
         this.app = app;
 
@@ -27,14 +27,14 @@ public class TransactionHistoryPage extends JPanel implements ActionListener {
             @Override
             public void componentShown(ComponentEvent evt) {
                 removeAll();
-
                 createPage();
-
                 revalidate();
                 repaint();
             }
         });
     }
+    //MODIFY: this
+    //EFFECTS: creates page that displays and adds a table to app with completed, pending, and failed transactions
 
     public void createPage() {
         setLayout(new GridLayout(0, 1));

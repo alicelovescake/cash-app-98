@@ -11,14 +11,12 @@ import java.awt.event.ComponentEvent;
 import java.io.FileNotFoundException;
 
 //class that creates menu card for to display options to users and directs them to other pages
-
 public class MenuPage extends JPanel implements ActionListener {
     JButton button;
     MainApp app;
     JLabel balanceLabel;
     JLabel balanceAmountLabel;
     double balance;
-
 
     static final String ADD_CASH = "Add Cash";
     static final String CASH_OUT = "Cash Out";
@@ -29,7 +27,8 @@ public class MenuPage extends JPanel implements ActionListener {
     static final String TRANSACTION_HISTORY = "View Transaction History";
     static final String SAVE_LOGOUT = "Save and Log out";
 
-    //EFFECTS: constructor to create menu card for to display options
+    //Effects: constructor that create page & adds component & action listener to update and revalidate page
+    // when component changes.
     public MenuPage(MainApp app) {
         this.app = app;
 
@@ -46,6 +45,8 @@ public class MenuPage extends JPanel implements ActionListener {
         });
     }
 
+    //MODIFY: this
+    //EFFECTS: Create menu page to display options available to user, including updated current balance, adds to panel
     public void createPage() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -65,9 +66,6 @@ public class MenuPage extends JPanel implements ActionListener {
         addMenuButton(TRANSACTION_HISTORY);
         addMenuButton(SAVE_LOGOUT);
     }
-
-
-
 
     //MODIFY: this
     //EFFECTS: Create button and label for each menu option

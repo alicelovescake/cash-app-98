@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+//class that creates withdraw page that allows user to cash out of account
 public class WithdrawalPage extends JPanel implements ActionListener, ItemListener {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Withdraw");
@@ -13,6 +14,8 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
     JLabel missingCardLabel = new JLabel("Oops! Looks like you don't have a card on file to withdraw");
     TextField amountField;
 
+    //Effects: constructor that create page & adds component & action listener to update and revalidate page
+    // when component changes.
     public WithdrawalPage(MainApp app) {
         this.app = app;
 
@@ -31,6 +34,8 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
         confirmButton.addActionListener(this);
         addCreditCardBtn.addActionListener(this);
     }
+    //MODIFY: this
+    //EFFECTS: creates page that displays credit cards and allows user to input what amount they want to withdraw
 
     public void createPage() {
         if (this.app.getUser() != null) {
@@ -56,6 +61,8 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
         add(new ReturnToMenuButton(this.app.getContainer()));
     }
 
+    //Modify: this
+    //Effects: displays all credit cards on account and adds this panel to app
     public void displayCreditCards() {
         JPanel creditCardPane = new JPanel();
 
@@ -78,6 +85,7 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
         add(creditCardPane);
     }
 
+    // EFFECTS: action listener that listens to confirm button click, checks balance and redirects to main menu
     @Override
     public void actionPerformed(ActionEvent e) {
         CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());
@@ -88,6 +96,8 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
         }
     }
 
+    //MODIFY: this
+    //EFFECTS: checks balance of user account, if sufficient funds, adjusts balance and success msg, else error msg.
     public void checkBalance() {
         String amountData = amountField.getText();
         int withdrawAmt = Integer.valueOf(amountData);

@@ -1,5 +1,6 @@
 package ui;
 
+//Lists all possible pages on cash app
 public enum Pages {
     WELCOME,
     CREATE_ACCOUNT,

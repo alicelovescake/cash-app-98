@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+//class that creates page to allow user to add new credit card
 public class AddCreditCardPage extends JPanel implements ActionListener {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Add Credit Card");
@@ -17,7 +18,8 @@ public class AddCreditCardPage extends JPanel implements ActionListener {
     TextField expiryYearField;
     TextField expiryMonthField;
 
-    //EFFECTS: constructor to add a new credit card to account
+    //Effects: constructor that create page & adds component & action listener to update and revalidate page
+    // when component changes.
     public AddCreditCardPage(MainApp app) {
         this.app = app;
 
@@ -36,6 +38,8 @@ public class AddCreditCardPage extends JPanel implements ActionListener {
         confirmButton.addActionListener(this);
     }
 
+    //MODIFY: this
+    //EFFECTS: create page to gather user input for credit card info and adds it to panel
     public void createPage() {
         setLayout(new GridLayout(0, 2, 5, 5));
 
@@ -60,6 +64,8 @@ public class AddCreditCardPage extends JPanel implements ActionListener {
         add(confirmButton);
     }
 
+    // Modify: this
+    //EFFECTS: initializes new text fields and sets preferred dimensions
     public void initializeFields() {
         typeField = new TextField();
         typeField.setPreferredSize(new Dimension(100, 5));
@@ -71,6 +77,9 @@ public class AddCreditCardPage extends JPanel implements ActionListener {
         expiryMonthField.setPreferredSize(new Dimension(100, 30));
     }
 
+    //MODIFY: this
+    //EFFECTS: implements action listener method to switch pages based on button click & create new credit card to add
+    //to account. If card is valid, sets success status message, else error msg.
     @Override
     public void actionPerformed(ActionEvent e) {
         CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());

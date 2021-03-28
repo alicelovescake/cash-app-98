@@ -7,14 +7,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
+// This class creates a page for user to deposit cash into account
 public class DepositPage extends JPanel implements ActionListener, ItemListener {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Deposit");
     JButton addCreditCardBtn = new JButton("Add card");
     JLabel missingCardLabel = new JLabel("Oops! Looks like you don't have a card on file to deposit");
-    JLabel successLabel;
     TextField amountField;
 
+    //Effects: constructor that create page & adds component & action listener to update and revalidate page
+    // when component changes.
     public DepositPage(MainApp app) {
         this.app = app;
 
@@ -22,9 +24,7 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener 
             @Override
             public void componentShown(ComponentEvent evt) {
                 removeAll();
-
                 createPage();
-
                 revalidate();
                 repaint();
             }
@@ -34,6 +34,8 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener 
         addCreditCardBtn.addActionListener(this);
     }
 
+    //MODIFY: this
+    //EFFECTS: creates page that displays available credit cards and accepts user input for amount to deposit
     public void createPage() {
         if (this.app.getUser() != null) {
             int creditCardCount = this.app.getUser().getAccount().getCreditCards().size();
@@ -57,6 +59,8 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener 
         add(new ReturnToMenuButton(this.app.getContainer()));
     }
 
+    //MODIFY: this
+    //EFFECTS: add credit card panel to app which displays credit cards in a combo box
     public void displayCreditCards() {
         int creditCardCount = this.app.getUser().getAccount().getCreditCards().size();
 
@@ -80,7 +84,8 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener 
         add(creditCardPane);
     }
 
-
+    // EFFECTS: action listener that listens to confirm button click, deposits money & redirects to main menu
+    // Also listens to add credit card button click, redirects to add credit card page.
     @Override
     public void actionPerformed(ActionEvent e) {
         CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());

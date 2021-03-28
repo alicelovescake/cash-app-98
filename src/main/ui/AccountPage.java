@@ -32,8 +32,8 @@ public class AccountPage extends JPanel implements ActionListener {
 
     MainApp app;
 
-// Constructs account page with radio buttons and text fields
-
+//MODIFY: this
+//EFFECTS: creates page that displays and adds a table to app with completed, pending, and failed transactions
     public AccountPage(MainApp app) {
         this.app = app;
 
@@ -52,6 +52,8 @@ public class AccountPage extends JPanel implements ActionListener {
         submitButton.addActionListener(this);
     }
 
+    //MODIFY: this
+    // EFFECTS: Creates account page with radio buttons and text fields and adds to this panel
     public void createPage() {
         setLayout(new GridLayout(0, 2, 10, 10));
 

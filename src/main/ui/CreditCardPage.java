@@ -10,6 +10,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.List;
 
+// class to create credit card page that displays options for updating credit cards
 public class CreditCardPage extends JPanel implements ActionListener {
     private MainApp app;
     private JButton addCreditCardButton = new JButton("Add New Card");
@@ -18,7 +19,8 @@ public class CreditCardPage extends JPanel implements ActionListener {
     private DefaultListModel listModel;
     private List<CreditCard> creditCardList;
 
-    //EFFECTS: constructor to create credit card page that displays options for updating credit cards
+    //Effects: constructor that create page & adds component & action listener to update and revalidate page
+    // when component changes.
     public CreditCardPage(MainApp app) {
         this.app = app;
 
@@ -38,6 +40,8 @@ public class CreditCardPage extends JPanel implements ActionListener {
         removeCardButton.addActionListener(this);
     }
 
+    //MODIFY: this
+    //EFFECTS: creates page that displays available credit cards
     public void createPage() {
         listModel = new DefaultListModel();
 
@@ -59,6 +63,8 @@ public class CreditCardPage extends JPanel implements ActionListener {
         add(new ReturnToMenuButton(this.app.getContainer()));
         add(removeCardButton);
     }
+    //MODIFY: this
+    // EFFECTS: action listener that listens to add btn to redirects page & remove btn to remove card
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -26,6 +26,7 @@ public class Transaction implements Writable {
     private Status status;
     private Type type;
 
+    //EFFECTS: constructor sets fields and checks if type is not request and it is pending, then complete transaction
     public Transaction(Account recipient, Account sender, double amount, Type type, Status status) {
         this.recipient = recipient;
         this.amount = amount;

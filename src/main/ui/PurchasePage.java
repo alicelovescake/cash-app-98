@@ -12,13 +12,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+//class that creates purchase page that allows user to send money for purchase
 public class PurchasePage extends JPanel implements ActionListener {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Purchase");
     TextField sendAmount;
     TextField recipientUsername;
 
-    //EFFECTS: constructor to create purchase page that accepts user input for recipient and amount
+    //MODIFY: this
+    //EFFECTS: creates page that displays and adds a table to app with completed, pending, and failed transactions
     public PurchasePage(MainApp app) {
         this.app = app;
 
@@ -37,6 +39,8 @@ public class PurchasePage extends JPanel implements ActionListener {
         confirmButton.addActionListener(this);
     }
 
+    //MODIFY: this
+    //EFFECTS: creates page that displays credit cards and allows user to input what amount they want to purchase
     public void createPage() {
         recipientUsername = new TextField();
         recipientUsername.setPreferredSize(new Dimension(100, 30));
@@ -53,6 +57,7 @@ public class PurchasePage extends JPanel implements ActionListener {
         add(confirmButton);
     }
 
+    // EFFECTS: action listener that listens to confirm button click, checks balance and redirects to main menu
     @Override
     public void actionPerformed(ActionEvent e) {
         CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());

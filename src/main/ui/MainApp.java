@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 //CITATION: Structure of this GUI is modeled after SimpleDrawingPlayer
 //          URL: https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Complete
+//Main class that starts up cash app when new instance is created
 public class MainApp extends JFrame implements ActionListener {
 
     public static final int WIDTH = 450;
@@ -53,7 +54,7 @@ public class MainApp extends JFrame implements ActionListener {
         return status;
     }
 
-    //Setter
+    //Setters
     public void setStatus(String msg) {
         status.setText(msg);
     }
@@ -119,8 +120,6 @@ public class MainApp extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        String command = e.getActionCommand();
-//        CardLayout cl = (CardLayout) (app.getLayout());
 
     }
 

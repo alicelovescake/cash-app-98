@@ -4,25 +4,42 @@ import model.Account;
 import model.BusinessUser;
 import model.Transaction;
 import model.User;
-import sun.applet.Main;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
+//class that creates send money page that allows user to send funds to another user
 public class SendMoneyPage extends JPanel implements ActionListener {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Send");
     TextField recipientUsername;
     TextField sendAmount;
 
-    //EFFECTS: constructor to create send money page that accepts user input for recipient and amount
+    //Effects: constructor that create page & adds component & action listener to update and revalidate page
+    // when component changes.
     public SendMoneyPage(MainApp app) {
         this.app = app;
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent evt) {
+                removeAll();
 
+                createPage();
+
+                revalidate();
+                repaint();
+            }
+        });
         confirmButton.addActionListener(this);
+    }
 
+    //MODIFY: this
+    //EFFECTS: creates page that allows user to input what amount they want to send
+    public void createPage() {
         recipientUsername = new TextField();
         recipientUsername.setPreferredSize(new Dimension(100, 30));
         JLabel usernameLabel = new JLabel("Recipient Username:");
@@ -38,6 +55,8 @@ public class SendMoneyPage extends JPanel implements ActionListener {
         add(confirmButton);
     }
 
+
+    // EFFECTS: action listener that listens to confirm button click, checks balance & redirects to main menu
     @Override
     public void actionPerformed(ActionEvent e) {
         CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());

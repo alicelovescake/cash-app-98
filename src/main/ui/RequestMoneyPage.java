@@ -12,13 +12,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+//class that creates request money page that allows user to request funds from another user
 public class RequestMoneyPage extends JPanel implements ActionListener {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Request");
     TextField recipientUsername;
     TextField requestAmount;
 
-    //EFFECTS: constructor to create request money page that accepts user input for recipient and amount
+    //Effects: constructor that adds component & action listener to update and revalidate page when component changes.
     public RequestMoneyPage(MainApp app) {
         this.app = app;
 
@@ -37,6 +38,8 @@ public class RequestMoneyPage extends JPanel implements ActionListener {
         confirmButton.addActionListener(this);
     }
 
+    //MODIFY: this
+    //EFFECTS: creates page that accepts user input for request amount and recipient. Adds to app.
     public void createPage() {
         recipientUsername = new TextField();
         recipientUsername.setPreferredSize(new Dimension(100, 30));
@@ -52,6 +55,9 @@ public class RequestMoneyPage extends JPanel implements ActionListener {
         add(requestAmount);
         add(confirmButton);
     }
+    //MODIFY: this
+    // EFFECTS: action listener that listens to confirm button click, creates/add new transaction, sets success message &
+    // redirects to main menu
 
     @Override
     public void actionPerformed(ActionEvent e) {

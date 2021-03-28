@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+//class that creates welcome page that contains create account and login options
 public class WelcomePage extends JPanel implements ActionListener {
     MainApp app;
     JButton createAccButton = new JButton("Create Account");
@@ -36,9 +37,9 @@ public class WelcomePage extends JPanel implements ActionListener {
 
         return welcomeLabel;
     }
+
     //MODIFY: this
     //EFFECTS: loads account from JSON file if it exists, create account with given input for create Account Button
-
     @Override
     public void actionPerformed(ActionEvent e) {
         CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());

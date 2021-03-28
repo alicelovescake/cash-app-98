@@ -4,8 +4,6 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.time.LocalDate; // import the LocalDate class
-import java.time.Month; // import the timeMonth class
-import java.util.List;
 import java.util.UUID;
 
 //Represents a credit card with type, number, expiry month and year
