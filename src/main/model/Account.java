@@ -100,7 +100,9 @@ public class Account implements Writable {
     }
 
     public void decrementBalance(double amount) {
-        this.balance -= amount;
+        if (amount < this.balance) {
+            this.balance -= amount;
+        }
     }
 
     //MODIFY: this

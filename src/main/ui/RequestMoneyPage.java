@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class RequestMoneyPage extends JPanel implements ActionListener {
     MainApp app;
@@ -20,8 +22,22 @@ public class RequestMoneyPage extends JPanel implements ActionListener {
     public RequestMoneyPage(MainApp app) {
         this.app = app;
 
-        confirmButton.addActionListener(this);
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent evt) {
+                removeAll();
 
+                createPage();
+
+                revalidate();
+                repaint();
+            }
+        });
+
+        confirmButton.addActionListener(this);
+    }
+
+    public void createPage() {
         recipientUsername = new TextField();
         recipientUsername.setPreferredSize(new Dimension(100, 30));
         JLabel usernameLabel = new JLabel("Recipient Username:");
@@ -49,8 +65,9 @@ public class RequestMoneyPage extends JPanel implements ActionListener {
 
         if (e.getSource() == confirmButton) {
             Transaction newTransaction = new Transaction(recipientAccount, senderAccount, requestAmtData,
-                    Transaction.Type.EXCHANGE, Transaction.Status.PENDING);
+                    Transaction.Type.REQUEST, Transaction.Status.PENDING);
             this.app.getUser().getAccount().addToTransactions(newTransaction);
+            this.app.setStatus("Success! Your request went through!");
 
             cl.show(this.app.getContainer(), Pages.MENU.name());
         }

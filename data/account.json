@@ -1,0 +1,31 @@
+{
+    "creditCards": [
+        {
+            "cardType": "vis",
+            "expiryMonth": 5,
+            "id": "71a4bd83-3c66-44e0-b826-7192f06be546",
+            "expiryYear": 2040,
+            "cardNumber": 40404
+        },
+        {
+            "cardType": "visa",
+            "expiryMonth": 5,
+            "id": "48c03610-06a3-42e3-9bf3-cbbb8489e409",
+            "expiryYear": 2040,
+            "cardNumber": 666
+        }
+    ],
+    "balance": 1203714,
+    "id": "c4899777-cf90-4c41-a781-ebe75748ed2d",
+    "boosts": [],
+    "transactions": [],
+    "user": {
+        "firstName": "asds",
+        "lastName": "asdas",
+        "referredFriends": [],
+        "location": "adsa",
+        "id": "961d2269-4f98-4cda-9d9d-0754daccd0c8",
+        "userType": "PERSONAL",
+        "username": "asdasd"
+    }
+}

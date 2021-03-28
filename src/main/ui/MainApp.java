@@ -19,6 +19,7 @@ public class MainApp extends JFrame implements ActionListener {
     private static JsonAccountReader jsonAccountReader = new JsonAccountReader(JSON_ACCOUNT_STORE);
     private static JsonAccountWriter jsonAccountWriter = new JsonAccountWriter(JSON_ACCOUNT_STORE);
     private static User user;
+    private JLabel status = new JLabel();
 
     private JPanel container;
 
@@ -48,7 +49,15 @@ public class MainApp extends JFrame implements ActionListener {
         return container;
     }
 
-    //Setters
+    public JLabel getStatus() {
+        return status;
+    }
+
+    //Setter
+    public void setStatus(String msg) {
+        status.setText(msg);
+    }
+
     public static void setUser(User user) {
         MainApp.user = user;
     }

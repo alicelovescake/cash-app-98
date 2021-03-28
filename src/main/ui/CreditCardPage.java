@@ -33,12 +33,14 @@ public class CreditCardPage extends JPanel implements ActionListener {
                 repaint();
             }
         });
+
+        addCreditCardButton.addActionListener(this);
+        removeCardButton.addActionListener(this);
     }
 
     public void createPage() {
         listModel = new DefaultListModel();
 
-        addCreditCardButton.addActionListener(this);
         add(addCreditCardButton);
 
         if (this.app.getUser() != null) {
@@ -54,7 +56,6 @@ public class CreditCardPage extends JPanel implements ActionListener {
             add(creditCardsJList);
         }
 
-        removeCardButton.addActionListener(this);
         add(new ReturnToMenuButton(this.app.getContainer()));
         add(removeCardButton);
     }

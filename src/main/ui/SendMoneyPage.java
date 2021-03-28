@@ -43,15 +43,14 @@ public class SendMoneyPage extends JPanel implements ActionListener {
         CardLayout cl = (CardLayout) (this.app.getContainer().getLayout());
 
         if (e.getSource() == confirmButton) {
-            add(checkBalance());
+            checkBalance();
             cl.show(this.app.getContainer(), Pages.MENU.name());
         }
     }
 
     //MODIFY: app user balance
     //EFFECTS: checks if user has enough funds to send money, decrements balance if true, error message if false
-    public JLabel checkBalance() {
-        JLabel status;
+    public void checkBalance() {
         int sendAmtData = Integer.valueOf(sendAmount.getText());
         int currentBalance = (int) this.app.getUser().getAccount().getBalance();
         User recipientUser = new BusinessUser(recipientUsername.getText(), "Seattle", "Amazon",
@@ -61,17 +60,14 @@ public class SendMoneyPage extends JPanel implements ActionListener {
         Account senderAccount = this.app.getUser().getAccount();
 
         if (currentBalance - sendAmtData >= 0) {
-            status = new JLabel("Congrats! Your money was sent to " + recipientUsername.getText());
+            this.app.setStatus("Congrats! $" + sendAmtData + " was sent to " + recipientUsername.getText());
             this.app.getUser().getAccount().decrementBalance(sendAmtData);
 
             Transaction newTransaction = new Transaction(recipientAccount, senderAccount, sendAmtData,
                     Transaction.Type.EXCHANGE, Transaction.Status.PENDING);
             this.app.getUser().getAccount().addToTransactions(newTransaction);
         } else {
-            status = new JLabel("Oops...looks like you don't have enough funds");
+            this.app.setStatus("Oops...looks like you don't have enough funds");
         }
-
-        return status;
-
     }
 }

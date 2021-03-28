@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 //class to create account creation page that accepts user input to create an account
 
 public class AccountPage extends JPanel implements ActionListener {
@@ -35,9 +37,24 @@ public class AccountPage extends JPanel implements ActionListener {
     public AccountPage(MainApp app) {
         this.app = app;
 
-        setLayout(new GridLayout(0, 2, 10, 10));
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent evt) {
+                removeAll();
+
+                createPage();
+
+                revalidate();
+                repaint();
+            }
+        });
 
         submitButton.addActionListener(this);
+    }
+
+    public void createPage() {
+        setLayout(new GridLayout(0, 2, 10, 10));
+
         initializeRadioButtons();
 
         group = new ButtonGroup();
@@ -64,14 +81,19 @@ public class AccountPage extends JPanel implements ActionListener {
     public void initializeRadioButtons() {
         personalAccButton = new JRadioButton("Personal Account");
         personalAccButton.setActionCommand("Personal");
+
         businessAccButton = new JRadioButton("Business Account");
         businessAccButton.setActionCommand("Business");
+
         cafeButton = new JRadioButton(BusinessType.CAFE.name());
         cafeButton.setActionCommand("cafe");
+
         groceryButton = new JRadioButton(BusinessType.GROCERY.name());
         groceryButton.setActionCommand("grocery");
+
         retailButton = new JRadioButton(BusinessType.RETAILER.name());
         retailButton.setActionCommand("retail");
+
         resButton = new JRadioButton(BusinessType.RESTAURANT.name());
         resButton.setActionCommand("rest");
     }
@@ -134,9 +156,9 @@ public class AccountPage extends JPanel implements ActionListener {
 
             this.app.setUser(createdUser);
 
-            JLabel successLabel = new JLabel("It's great for you to join us from "
+            this.app.setStatus("It's great for you to join us from "
                     + locationData + "!" + " Your username $" + usernameData + " is ready to be used! Woooot!");
-            //TODO: Success message on top of menu page
+
             cl.show(this.app.getContainer(), Pages.MENU.name());
         }
     }

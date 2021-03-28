@@ -50,16 +50,17 @@ public class WelcomePage extends JPanel implements ActionListener {
         } else if (e.getSource() == loginButton) {
             try {
                 Account account = jsonAccountReader.read();
+
                 this.app.setUser(account.getUser());
                 this.app.getUser().setAccount(account);
-                //TODO: Add success banner on top of menu page
-                JLabel successLabel = new JLabel("Welcome back " + account.getUser().getUsername()
+
+                this.app.setStatus("Welcome back " + account.getUser().getUsername()
                         + "! Your info was successfully loaded!");
+
                 cl.show(this.app.getContainer(), Pages.MENU.name());
 
             } catch (IOException exception) {
-                //TODO: Add error banner on top of create account page
-                JLabel noAccountLabel = new JLabel("Oops! We were unable to read from your file!");
+                this.app.setStatus("Oops! We were unable to read from your file!");
                 cl.show(this.app.getContainer(), Pages.CREATE_ACCOUNT.name());
             }
         }

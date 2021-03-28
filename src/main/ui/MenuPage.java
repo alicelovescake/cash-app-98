@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.FileNotFoundException;
 
 //class that creates menu card for to display options to users and directs them to other pages
@@ -16,6 +18,7 @@ public class MenuPage extends JPanel implements ActionListener {
     JLabel balanceLabel;
     JLabel balanceAmountLabel;
     double balance;
+
 
     static final String ADD_CASH = "Add Cash";
     static final String CASH_OUT = "Cash Out";
@@ -29,13 +32,28 @@ public class MenuPage extends JPanel implements ActionListener {
     //EFFECTS: constructor to create menu card for to display options
     public MenuPage(MainApp app) {
         this.app = app;
-        System.out.println(MainApp.getUser());
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent evt) {
+                removeAll();
+
+                createPage();
+
+                revalidate();
+                repaint();
+            }
+        });
+    }
+
+    public void createPage() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         balance = this.app.getUser() == null ? 0 : this.app.getUser().getAccount().getBalance();
         balanceAmountLabel = new JLabel("$ " + balance);
         balanceLabel = new JLabel("Cash Balance");
 
+        add(this.app.getStatus());
         add(balanceAmountLabel);
         add(balanceLabel);
         addMenuButton(ADD_CASH);
@@ -46,8 +64,9 @@ public class MenuPage extends JPanel implements ActionListener {
         addMenuButton(UPDATE_CREDIT_CARDS);
         addMenuButton(TRANSACTION_HISTORY);
         addMenuButton(SAVE_LOGOUT);
-
     }
+
+
 
 
     //MODIFY: this
@@ -98,7 +117,7 @@ public class MenuPage extends JPanel implements ActionListener {
                 cl.show(this.app.getContainer(), Pages.TRANSACTION.name());
                 break;
             case SAVE_LOGOUT:
-                add(saveAccountInfo());
+                saveAccountInfo();
                 cl.show(this.app.getContainer(), Pages.WELCOME.name());
                 break;
         }
@@ -106,18 +125,16 @@ public class MenuPage extends JPanel implements ActionListener {
 
     //MODIFY: JSON file
     //EFFECTS: saves account activities to file
-    public JLabel saveAccountInfo() {
+    public void saveAccountInfo() {
         JsonAccountWriter writer = this.app.getJsonWriter();
-        JLabel status;
+
         try {
             writer.open();
             writer.write(this.app.getUser().getAccount());
             writer.close();
-            status = new JLabel("Hooray! Your account info was successfully saved");
+            this.app.setStatus("Congrats! Account was successfully saved");
         } catch (FileNotFoundException e) {
-            status = new JLabel("Oops! We were unable to save your account activities to: "
-                    + this.app.getAccountStore());
+            this.app.setStatus("Oops! Something went wrong with saving your file");
         }
-        return status;
     }
 }
