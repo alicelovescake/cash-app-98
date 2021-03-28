@@ -88,122 +88,35 @@ public class MainApp extends JFrame implements ActionListener, ItemListener {
     public void initializeAppPages() {
         app = new JPanel(new CardLayout());
 
-        JPanel welcomeCard = createWelcomeCard();
+        JPanel welcomePage = new WelcomePage(app);
         JPanel createAccountPage = new AccountPage(app);
         JPanel createMenuPage = new MenuPage(app);
         JPanel addCashPage = new DepositPage(app);
         JPanel cashOutPage = new WithdrawalPage(app);
-        JPanel createPurchaseCard = createMoneyExchangeCard("Purchase");
-        JPanel requestMoneyCard = createMoneyExchangeCard("Request");
-        JPanel sendMoneyCard = createMoneyExchangeCard("Send");
-        JPanel updateCreditCards = updateCreditCards();
+        JPanel createPurchasePage = new PurchasePage(app);
+        JPanel requestMoneyPage = new RequestMoneyPage(app);
+        JPanel sendMoneyPage = new SendMoneyPage(app);
+        JPanel creditCardPage = new CreditCardPage(app);
         JPanel addCreditCard = addCreditCards();
-        JPanel transactionHistory = transactionHistory();
+        JPanel transactionHistoryPage = new TransactionHistoryPage(app);
 
 
-        app.add(welcomeCard, WELCOME_CARD);
+        app.add(welcomePage, Pages.WELCOME.name());
         app.add(createAccountPage, Pages.CREATE_ACCOUNT.name());
         app.add(createMenuPage, Pages.MENU.name());
         app.add(addCashPage, Pages.DEPOSIT.name());
-        app.add(cashOutPage, CASH_OUT_CARD);
-        app.add(createPurchaseCard, PURCHASE_CARD);
-//        appPages.add(requestMoneyCard, REQUEST_MONEY);
-//        appPages.add(sendMoneyCard, SEND_MONEY);
-        app.add(updateCreditCards, CREDIT_CARDS_CARD);
+        app.add(cashOutPage, Pages.WITHDRAW.name());
+        app.add(createPurchasePage, Pages.PURCHASE.name());
+        app.add(requestMoneyPage, Pages.REQUEST.name());
+        app.add(sendMoneyPage, Pages.SEND.name());
+
+        app.add(creditCardPage, Pages.CREDIT_CARD.name());
         app.add(addCreditCard, ADD_CREDIT_CARD_CARD);
-//        appPages.add(transactionHistory, TRANSACTION_HISTORY);
+        app.add(transactionHistoryPage, Pages.TRANSACTION.name());
         add(app, BorderLayout.CENTER);
     }
 
-    // MODIFY: this
-    // EFFECTS: creates welcome cards for create account and login
 
-    public JPanel createWelcomeCard() {
-        JPanel welcomeCard = new JPanel();
-
-        welcomeCard.add(displayWelcomeLabel());
-
-        JButton createAccButton = new JButton("Create Account");
-        createAccButton.setActionCommand(ACCOUNT_PAGE);
-        createAccButton.addActionListener(this);
-
-        JButton loginButton = new JButton("Login");
-        loginButton.setActionCommand(LOGIN_CARD);
-        loginButton.addActionListener(this);
-
-        welcomeCard.add(createAccButton);
-        welcomeCard.add(loginButton);
-
-        return welcomeCard;
-    }
-
-    //MODIFY: this
-    //EFFECTS: displays welcome label as first screen that greets users
-    public JLabel displayWelcomeLabel() {
-        JLabel welcomeLabel = new JLabel();
-
-        welcomeLabel.setText("Welcome to Cash App '98! Our mission is to create an inclusive economy"
-                + " by helping you send, receive, and spend money easier");
-
-        return welcomeLabel;
-    }
-
-
-
-    //MODIFY: this
-    //EFFECTS: creates page to make purchase/send money/request money by accepting user input for recipient and amount
-    public JPanel createMoneyExchangeCard(String type) {
-        JPanel purchaseCard = new JPanel();
-        JButton purchaseButton = new JButton("Confirm " + type);
-        purchaseButton.setActionCommand(CONFIRM_PURCHASE);
-        purchaseButton.addActionListener(this);
-
-        TextField recipientUsername = new TextField();
-        recipientUsername.setPreferredSize(new Dimension(100, 30));
-        JLabel usernameLabel = new JLabel("Recipient Username:");
-
-        TextField sendAmount = new TextField();
-        sendAmount.setPreferredSize(new Dimension(100, 30));
-        JLabel amountLabel = new JLabel(type + " Amount:");
-
-        purchaseCard.add(usernameLabel);
-        purchaseCard.add(recipientUsername);
-        purchaseCard.add(amountLabel);
-        purchaseCard.add(sendAmount);
-        purchaseCard.add(purchaseButton);
-        return purchaseCard;
-    }
-
-    //MODIFY: this
-    //EFFECTS: creates page to deposit or withdraw money into account
-    public JPanel moveCashCard(String type) {
-        JPanel moveCashCard = new JPanel();
-        JPanel creditCardPane = new JPanel();
-
-        String[] creditCards = {"Placeholder Card 1", "Placeholder Card 2"};
-
-        JComboBox cb = new JComboBox(creditCards);
-
-        cb.setEditable(false);
-        cb.addItemListener(this);
-
-        creditCardPane.add(cb);
-
-        TextField amountField = new TextField();
-        amountField.setPreferredSize(new Dimension(100, 30));
-        JLabel amountLabel = new JLabel(type + " Amount:");
-
-        JButton confirmButton = new JButton("Confirm " + type);
-        confirmButton.setActionCommand(CONFIRM_CASH_MOVEMENT);
-        confirmButton.addActionListener(this);
-
-        moveCashCard.add(creditCardPane);
-        moveCashCard.add(amountLabel);
-        moveCashCard.add(amountField);
-        moveCashCard.add(confirmButton);
-
-        return moveCashCard;
-    }
 
     //MODIFY: this
     //EFFECTS: creates page to update and list all credit cards in account
