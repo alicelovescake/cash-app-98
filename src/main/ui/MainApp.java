@@ -18,32 +18,23 @@ public class MainApp extends JFrame implements ActionListener, ItemListener {
     public static final int WIDTH = 450;
     public static final int HEIGHT = 800;
     static final String LOGIN_CARD = "login";
-    static final String ACCOUNT_CARD = "createAccount";
+    static final String ACCOUNT_PAGE = "createAccount";
     static final String WELCOME_CARD = "welcomeUser";
     static final String MENU_CARD = "menuOptions";
-    static final String ADD_CASH_CARD = "addCash";
     static final String CASH_OUT_CARD = "cashOut";
     static final String PURCHASE_CARD = "makePurchase";
     static final String CREDIT_CARDS_CARD = "updateCreditCards";
     static final String ADD_CREDIT_CARD_CARD = "addCreditCardPage";
 
     static final String CREATE_ACCOUNT = "submitAccountDetails";
-    static final String ADD_CASH = "Add Cash";
     static final String CONFIRM_CASH_MOVEMENT = "confirmDeposit";
-    static final String CASH_OUT = "Cash Out";
-    static final String MAKE_PURCHASE = "Make Purchase";
     static final String CONFIRM_PURCHASE = "confirmPurchase";
-    static final String REQUEST_MONEY = "Request Money";
-    static final String SEND_MONEY = "Send Money";
-    static final String UPDATE_CREDIT_CARDS = "Update Credit Cards";
     static final String ADD_CREDIT_CARD = "addCreditCard";
     static final String REMOVE_CREDIT_CARD = "removeCreditCard";
     static final String CONFIRM_ADD_CREDIT_CARD = "confirmAddCreditCard";
-    static final String TRANSACTION_HISTORY = "View Transaction History";
-    static final String SAVE_LOGOUT = "Save and Log out";
     static final String SHOW_MENU = "return to menu";
 
-    private JPanel appCards;
+    private JPanel app;
     private JList creditCardsJList;
     private DefaultListModel listModel;
     private JButton returnToMenuButton;
@@ -95,11 +86,13 @@ public class MainApp extends JFrame implements ActionListener, ItemListener {
     //MODIFY: this
     //EFFECTS: Creates card layout to welcome user to create account or login
     public void initializeAppPages() {
+        app = new JPanel(new CardLayout());
+
         JPanel welcomeCard = createWelcomeCard();
-        JPanel createAccountCard = createAccountCard();
-        JPanel createMenuCard = createMenuCard();
-        JPanel addCashCard = moveCashCard("Deposit");
-        JPanel cashOutCard = moveCashCard("Withdrawal");
+        JPanel createAccountPage = new AccountPage(app);
+        JPanel createMenuPage = new MenuPage(app);
+        JPanel addCashPage = new DepositPage(app);
+        JPanel cashOutPage = new WithdrawalPage(app);
         JPanel createPurchaseCard = createMoneyExchangeCard("Purchase");
         JPanel requestMoneyCard = createMoneyExchangeCard("Request");
         JPanel sendMoneyCard = createMoneyExchangeCard("Send");
@@ -107,19 +100,19 @@ public class MainApp extends JFrame implements ActionListener, ItemListener {
         JPanel addCreditCard = addCreditCards();
         JPanel transactionHistory = transactionHistory();
 
-        appCards = new JPanel(new CardLayout());
-        appCards.add(welcomeCard, WELCOME_CARD);
-        appCards.add(createAccountCard, ACCOUNT_CARD);
-        appCards.add(createMenuCard, MENU_CARD);
-        appCards.add(addCashCard, ADD_CASH_CARD);
-        appCards.add(cashOutCard, CASH_OUT_CARD);
-        appCards.add(createPurchaseCard, PURCHASE_CARD);
-        appCards.add(requestMoneyCard, REQUEST_MONEY);
-        appCards.add(sendMoneyCard, SEND_MONEY);
-        appCards.add(updateCreditCards, CREDIT_CARDS_CARD);
-        appCards.add(addCreditCard, ADD_CREDIT_CARD_CARD);
-        appCards.add(transactionHistory, TRANSACTION_HISTORY);
-        add(appCards, BorderLayout.CENTER);
+
+        app.add(welcomeCard, WELCOME_CARD);
+        app.add(createAccountPage, Pages.CREATE_ACCOUNT.name());
+        app.add(createMenuPage, Pages.MENU.name());
+        app.add(addCashPage, Pages.DEPOSIT.name());
+        app.add(cashOutPage, CASH_OUT_CARD);
+        app.add(createPurchaseCard, PURCHASE_CARD);
+//        appPages.add(requestMoneyCard, REQUEST_MONEY);
+//        appPages.add(sendMoneyCard, SEND_MONEY);
+        app.add(updateCreditCards, CREDIT_CARDS_CARD);
+        app.add(addCreditCard, ADD_CREDIT_CARD_CARD);
+//        appPages.add(transactionHistory, TRANSACTION_HISTORY);
+        add(app, BorderLayout.CENTER);
     }
 
     // MODIFY: this
@@ -131,7 +124,7 @@ public class MainApp extends JFrame implements ActionListener, ItemListener {
         welcomeCard.add(displayWelcomeLabel());
 
         JButton createAccButton = new JButton("Create Account");
-        createAccButton.setActionCommand(ACCOUNT_CARD);
+        createAccButton.setActionCommand(ACCOUNT_PAGE);
         createAccButton.addActionListener(this);
 
         JButton loginButton = new JButton("Login");
@@ -155,88 +148,7 @@ public class MainApp extends JFrame implements ActionListener, ItemListener {
         return welcomeLabel;
     }
 
-    //MODIFY: this
-    //EFFECTS: creates card for create account page that allows input
-    public JPanel createAccountCard() {
-        JPanel accountCard = new JPanel();
-        accountCard.setLayout(new GridLayout(0, 2, 10, 10));
 
-        JButton submitButton = new JButton("Submit");
-        submitButton.setActionCommand(CREATE_ACCOUNT);
-        submitButton.addActionListener(this);
-
-        JRadioButton personalAccButton = new JRadioButton("Personal Account");
-        JRadioButton businessAccButton = new JRadioButton("Business Account");
-
-        ButtonGroup group = new ButtonGroup();
-        group.add(personalAccButton);
-        group.add(businessAccButton);
-
-        accountCard.add(personalAccButton);
-        accountCard.add(businessAccButton);
-
-        accountCard = generateTextFields(accountCard);
-
-        accountCard.add(submitButton);
-
-        return accountCard;
-    }
-
-    //MODIFY: this:
-    //EFFECTS: creates text fields for username, first name, last name, and location
-    public JPanel generateTextFields(JPanel accountCard) {
-        TextField username = new TextField();
-        JLabel usernameLabel = new JLabel("Username:");
-
-        TextField firstName = new TextField();
-        JLabel firstNameLabel = new JLabel("First Name:");
-
-        TextField lastname = new TextField();
-        JLabel lastNameLabel = new JLabel("Last Name:");
-
-        TextField location = new TextField();
-        JLabel locationLabel = new JLabel("Location:");
-
-        accountCard.add(usernameLabel);
-        accountCard.add(username);
-
-        accountCard.add(firstNameLabel);
-        accountCard.add(firstName);
-
-        accountCard.add(lastNameLabel);
-        accountCard.add(lastname);
-
-        accountCard.add(locationLabel);
-        accountCard.add(location);
-
-        return accountCard;
-    }
-
-    //MODIFY: this
-    //EFFECTS: creates menu card for to display options to users
-    public JPanel createMenuCard() {
-        JPanel menuCard = new JPanel();
-        menuCard.setLayout(new BoxLayout(menuCard, BoxLayout.Y_AXIS));
-        addMenuButton(ADD_CASH, menuCard);
-        addMenuButton(CASH_OUT, menuCard);
-        addMenuButton(MAKE_PURCHASE, menuCard);
-        addMenuButton(REQUEST_MONEY, menuCard);
-        addMenuButton(SEND_MONEY, menuCard);
-        addMenuButton(UPDATE_CREDIT_CARDS, menuCard);
-        addMenuButton(TRANSACTION_HISTORY, menuCard);
-        addMenuButton(SAVE_LOGOUT, menuCard);
-        return menuCard;
-    }
-
-    //MODIFY: this
-    //EFFECTS: Create button and label for each menu option
-    public void addMenuButton(String text, JPanel card) {
-        JButton button = new JButton(text);
-        button.setAlignmentX(card.CENTER_ALIGNMENT);
-        button.setActionCommand(text);
-        button.addActionListener(this);
-        card.add(button);
-    }
 
     //MODIFY: this
     //EFFECTS: creates page to make purchase/send money/request money by accepting user input for recipient and amount
@@ -403,25 +315,25 @@ public class MainApp extends JFrame implements ActionListener, ItemListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        CardLayout cl = (CardLayout) (appCards.getLayout());
+        CardLayout cl = (CardLayout) (app.getLayout());
 
         switch (command) {
-            case ACCOUNT_CARD:
-                cl.show(appCards, ACCOUNT_CARD);
+            case ACCOUNT_PAGE:
+                cl.show(app, String.valueOf(Pages.CREATE_ACCOUNT));
                 break;
             case CREATE_ACCOUNT:
             case CONFIRM_PURCHASE:
             case CONFIRM_CASH_MOVEMENT:
             case SHOW_MENU:
             case CONFIRM_ADD_CREDIT_CARD:
-                cl.show(appCards, MENU_CARD);
+                cl.show(app, MENU_CARD);
                 break;
-            case ADD_CASH:
-                cl.show(appCards, ADD_CASH_CARD);
-                break;
-            case CASH_OUT:
-                cl.show(appCards, CASH_OUT_CARD);
-                break;
+//            case ADD_CASH:
+//                cl.show(appPages, ADD_CASH_CARD);
+//                break;
+//            case CASH_OUT:
+//                cl.show(appPages, CASH_OUT_CARD);
+//                break;
             default:
                 processExtraCommands(command, cl);
         }
@@ -429,28 +341,28 @@ public class MainApp extends JFrame implements ActionListener, ItemListener {
 
     public void processExtraCommands(String command, CardLayout cl) {
         switch (command) {
-            case MAKE_PURCHASE:
-                cl.show(appCards, PURCHASE_CARD);
-                break;
-            case SEND_MONEY:
-                cl.show(appCards, SEND_MONEY);
-                break;
-            case REQUEST_MONEY:
-                cl.show(appCards, REQUEST_MONEY);
-                break;
-            case UPDATE_CREDIT_CARDS:
-                cl.show(appCards, CREDIT_CARDS_CARD);
-                break;
+//            case MAKE_PURCHASE:
+//                cl.show(appPages, PURCHASE_CARD);
+//                break;
+//            case SEND_MONEY:
+//                cl.show(appPages, SEND_MONEY);
+//                break;
+//            case REQUEST_MONEY:
+//                cl.show(appPages, REQUEST_MONEY);
+//                break;
+//            case UPDATE_CREDIT_CARDS:
+//                cl.show(appPages, CREDIT_CARDS_CARD);
+//                break;
             case ADD_CREDIT_CARD:
-                cl.show(appCards, ADD_CREDIT_CARD_CARD);
+                cl.show(app, ADD_CREDIT_CARD_CARD);
                 break;
             case REMOVE_CREDIT_CARD:
                 int index = creditCardsJList.getSelectedIndex();
                 listModel.remove(index);
                 break;
-            case TRANSACTION_HISTORY:
-                cl.show(appCards, TRANSACTION_HISTORY);
-                break;
+//            case TRANSACTION_HISTORY:
+//                cl.show(appPages, TRANSACTION_HISTORY);
+//                break;
         }
 
 
