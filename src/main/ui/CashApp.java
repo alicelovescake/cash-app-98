@@ -86,7 +86,6 @@ public class CashApp {
 
             user.setAccount(account);
 
-            System.out.println(account.getBalance());
             System.out.println("Welcome back " + account.getUser().getUsername()
                     + "! Your info was successfully loaded!");
         } catch (IOException e) {
