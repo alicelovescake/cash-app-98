@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -24,7 +23,7 @@ public class WelcomePage extends JPanel implements ActionListener {
             .getAudioInputStream(new File("./data/ch-ching.wav").getAbsoluteFile());
     private Clip clip = AudioSystem.getClip();
 
-    // EFFECTS: constructor that creates welcome page
+    // EFFECTS: constructor that creates welcome page, adds component listener and audio clip
     public WelcomePage(MainApp app) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         this.app = app;
 
@@ -52,6 +51,8 @@ public class WelcomePage extends JPanel implements ActionListener {
         loginButton.addActionListener(this);
     }
 
+    //MODIFY: this
+    //EFFECTS: creates welcome page with logo and create account/login button
     public void createPage() {
         try {
             ImageIcon imageIcon = new ImageIcon("./data/logo.png"); // load the image to a imageIcon

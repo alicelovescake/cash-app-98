@@ -1,6 +1,5 @@
 package ui;
 
-import com.sun.tools.javac.comp.Flow;
 import model.BusinessUser;
 import model.BusinessUser.BusinessType;
 import model.PersonalUser;
@@ -12,8 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-//class to create account creation page that accepts user input to create an account
 
+//class to create account creation page that accepts user input to create an account
 public class AccountPage extends JPanel implements ActionListener {
     TextField username;
     TextField firstName;
