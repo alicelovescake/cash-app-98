@@ -37,24 +37,38 @@ public class PurchasePage extends JPanel implements ActionListener {
         });
 
         confirmButton.addActionListener(this);
+
+        setOpaque(false);
     }
 
     //MODIFY: this
     //EFFECTS: creates page that displays credit cards and allows user to input what amount they want to purchase
     public void createPage() {
-        recipientUsername = new TextField();
-        recipientUsername.setPreferredSize(new Dimension(100, 30));
-        JLabel usernameLabel = new JLabel("Recipient Username:");
+        new PageTitle(this, "Make Purchase");
 
-        sendAmount = new TextField();
-        sendAmount.setPreferredSize(new Dimension(100, 30));
-        JLabel amountLabel = new JLabel("Purchase Amount:");
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
+        JLabel usernameLabel = new JLabel("Recipient Username:");
+        recipientUsername = new TextField();
+        recipientUsername.setPreferredSize(new Dimension(200, 30));
 
         add(usernameLabel);
         add(recipientUsername);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
+        JLabel amountLabel = new JLabel("Purchase Amount:");
+        sendAmount = new TextField();
+        sendAmount.setPreferredSize(new Dimension(200, 30));
+
         add(amountLabel);
         add(sendAmount);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
         add(confirmButton);
+
+        add(new ReturnToMenuButton(app.getContainer()));
     }
 
     // EFFECTS: action listener that listens to confirm button click, checks balance and redirects to main menu

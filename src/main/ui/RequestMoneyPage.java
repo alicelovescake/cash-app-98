@@ -36,28 +36,42 @@ public class RequestMoneyPage extends JPanel implements ActionListener {
         });
 
         confirmButton.addActionListener(this);
+
+        setOpaque(false);
     }
 
     //MODIFY: this
     //EFFECTS: creates page that accepts user input for request amount and recipient. Adds to app.
     public void createPage() {
-        recipientUsername = new TextField();
-        recipientUsername.setPreferredSize(new Dimension(100, 30));
-        JLabel usernameLabel = new JLabel("Recipient Username:");
+        new PageTitle(this, "Request Money");
 
-        requestAmount = new TextField();
-        requestAmount.setPreferredSize(new Dimension(100, 30));
-        JLabel amountLabel = new JLabel("Request Amount:");
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
+        JLabel usernameLabel = new JLabel("Recipient Username:");
+        recipientUsername = new TextField();
+        recipientUsername.setPreferredSize(new Dimension(200, 30));
 
         add(usernameLabel);
         add(recipientUsername);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
+        JLabel amountLabel = new JLabel("Request Amount:");
+        requestAmount = new TextField();
+        requestAmount.setPreferredSize(new Dimension(200, 30));
+
         add(amountLabel);
         add(requestAmount);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
         add(confirmButton);
+
+        add(new ReturnToMenuButton(app.getContainer()));
     }
     //MODIFY: this
-    // EFFECTS: action listener that listens to confirm button click, creates/add new transaction, sets success message &
-    // redirects to main menu
+    // EFFECTS: action listener that listens to confirm button click, creates/add new transaction,
+    // sets success message & redirects to main menu
 
     @Override
     public void actionPerformed(ActionEvent e) {

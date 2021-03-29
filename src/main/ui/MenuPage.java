@@ -18,6 +18,7 @@ public class MenuPage extends JPanel implements ActionListener {
     JLabel balanceAmountLabel;
     double balance;
 
+    static final String ADD_CREDIT_CARD = "Add Credit Card";
     static final String ADD_CASH = "Add Cash";
     static final String CASH_OUT = "Cash Out";
     static final String MAKE_PURCHASE = "Make Purchase";
@@ -43,6 +44,8 @@ public class MenuPage extends JPanel implements ActionListener {
                 repaint();
             }
         });
+
+        setOpaque(false);
     }
 
     //MODIFY: this
@@ -51,19 +54,64 @@ public class MenuPage extends JPanel implements ActionListener {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         balance = this.app.getUser() == null ? 0 : this.app.getUser().getAccount().getBalance();
-        balanceAmountLabel = new JLabel("$ " + balance);
-        balanceLabel = new JLabel("Cash Balance");
 
-        add(this.app.getStatus());
+        balanceAmountLabel = new JLabel("$" + balance);
+        balanceAmountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        balanceAmountLabel.setFont(new Font(balanceAmountLabel.getName(), Font.BOLD, 45));
+
+        balanceLabel = new JLabel("BALANCE");
+        balanceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        balanceLabel.setForeground(Color.DARK_GRAY);
+
+        addAppStatus();
+
         add(balanceAmountLabel);
         add(balanceLabel);
+        add(Box.createRigidArea(new Dimension(5, 25)));
+
+        int creditCardCount = this.app.getUser().getAccount().getCreditCards().size();
+
+        if (creditCardCount == 0) {
+            addMenuButton(ADD_CREDIT_CARD);
+        } else {
+            addMenu();
+        }
+    }
+
+    //MODIFY: this
+    //EFFECTS: Adds app status
+    public void addAppStatus() {
+        add(Box.createRigidArea(new Dimension(5, 25)));
+        JLabel appStatus = this.app.getStatus();
+
+        appStatus.setAlignmentX(Component.CENTER_ALIGNMENT);
+        appStatus.setBackground(new Color(48, 127, 60));
+        appStatus.setForeground(Color.WHITE);
+        appStatus.setOpaque(true);
+        appStatus.setFont(new Font(appStatus.getName(), Font.BOLD, 12));
+
+        add(appStatus);
+        add(Box.createRigidArea(new Dimension(5, 25)));
+    }
+
+    //MODIFY: this
+    //EFFECTS: Adds menu
+    public void addMenu() {
         addMenuButton(ADD_CASH);
         addMenuButton(CASH_OUT);
+        add(Box.createRigidArea(new Dimension(5, 25)));
+
         addMenuButton(MAKE_PURCHASE);
         addMenuButton(REQUEST_MONEY);
         addMenuButton(SEND_MONEY);
+        add(Box.createRigidArea(new Dimension(5, 25)));
+
         addMenuButton(UPDATE_CREDIT_CARDS);
+        add(Box.createRigidArea(new Dimension(5, 25)));
+
         addMenuButton(TRANSACTION_HISTORY);
+        add(Box.createRigidArea(new Dimension(5, 25)));
+
         addMenuButton(SAVE_LOGOUT);
     }
 
@@ -117,6 +165,9 @@ public class MenuPage extends JPanel implements ActionListener {
             case SAVE_LOGOUT:
                 saveAccountInfo();
                 cl.show(this.app.getContainer(), Pages.WELCOME.name());
+                break;
+            case ADD_CREDIT_CARD:
+                cl.show(this.app.getContainer(), Pages.ADD_CREDIT_CARD.name());
                 break;
         }
     }

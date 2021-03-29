@@ -27,17 +27,21 @@ public class TransactionHistoryPage extends JPanel implements ActionListener {
             @Override
             public void componentShown(ComponentEvent evt) {
                 removeAll();
+
                 createPage();
+
                 revalidate();
                 repaint();
             }
         });
+
+        setOpaque(false);
     }
     //MODIFY: this
     //EFFECTS: creates page that displays and adds a table to app with completed, pending, and failed transactions
 
     public void createPage() {
-        setLayout(new GridLayout(0, 1));
+        new PageTitle(this, "Transactions");
 
         String[] columnNames = {"DATE", "RECIPIENT", "SENDER", "AMOUNT", "STATUS"};
         Object[][] data = new Object[0][columnNames.length];
@@ -61,8 +65,12 @@ public class TransactionHistoryPage extends JPanel implements ActionListener {
         JTable table = new JTable(data, columnNames);
         table.setEnabled(false);
         JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(400, 250));
 
         add(scrollPane);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
         add(new ReturnToMenuButton(this.app.getContainer()));
     }
 

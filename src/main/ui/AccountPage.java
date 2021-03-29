@@ -1,5 +1,6 @@
 package ui;
 
+import com.sun.tools.javac.comp.Flow;
 import model.BusinessUser;
 import model.BusinessUser.BusinessType;
 import model.PersonalUser;
@@ -28,7 +29,7 @@ public class AccountPage extends JPanel implements ActionListener {
     JRadioButton retailButton;
     JRadioButton resButton;
 
-    JButton submitButton = new JButton("Create Account!");
+    JButton submitButton = new JButton("Create Account");
 
     MainApp app;
 
@@ -50,42 +51,59 @@ public class AccountPage extends JPanel implements ActionListener {
         });
 
         submitButton.addActionListener(this);
+
+        setOpaque(false);
     }
 
     //MODIFY: this
     // EFFECTS: Creates account page with radio buttons and text fields and adds to this panel
     public void createPage() {
-        setLayout(new GridLayout(0, 2, 10, 10));
+        new PageTitle(this, "Create Account");
 
-        initializeRadioButtons();
+        initializeAccountRadioButtons();
 
-        group = new ButtonGroup();
-        group.add(personalAccButton);
-        group.add(businessAccButton);
+        add(Box.createRigidArea(new Dimension(400, 25)));
 
-        businessTypeGroup = new ButtonGroup();
-        businessTypeGroup.add(cafeButton);
-        businessTypeGroup.add(groceryButton);
-        businessTypeGroup.add(retailButton);
-        businessTypeGroup.add(resButton);
+        initializeBusinessRadioButtons();
 
-        add(personalAccButton);
-        add(businessAccButton);
-        add(cafeButton);
-        add(groceryButton);
-        add(retailButton);
-        add(resButton);
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
         generateTextFields();
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
         add(submitButton);
     }
 
-    //EFFECTS: instantiates all radio buttons and sets action command
-    public void initializeRadioButtons() {
+    //EFFECTS: instantiates account radio buttons and sets action command
+    public void initializeAccountRadioButtons() {
+        JPanel accountButtons = new JPanel();
+        accountButtons.setLayout(new GridLayout(1, 0, 10, 10));
+        accountButtons.setOpaque(false);
+        accountButtons.setPreferredSize(new Dimension(400, 20));
+
         personalAccButton = new JRadioButton("Personal Account");
         personalAccButton.setActionCommand("Personal");
 
         businessAccButton = new JRadioButton("Business Account");
         businessAccButton.setActionCommand("Business");
+
+        group = new ButtonGroup();
+        group.add(personalAccButton);
+        group.add(businessAccButton);
+
+        accountButtons.add(personalAccButton);
+        accountButtons.add(businessAccButton);
+
+        add(accountButtons);
+    }
+
+    //EFFECTS: instantiates all radio buttons and sets action command
+    public void initializeBusinessRadioButtons() {
+        JPanel businessButtons = new JPanel();
+        businessButtons.setLayout(new GridLayout(0, 2, 10, 10));
+        businessButtons.setOpaque(false);
+        businessButtons.setPreferredSize(new Dimension(400, 50));
 
         cafeButton = new JRadioButton(BusinessType.CAFE.name());
         cafeButton.setActionCommand("cafe");
@@ -98,40 +116,69 @@ public class AccountPage extends JPanel implements ActionListener {
 
         resButton = new JRadioButton(BusinessType.RESTAURANT.name());
         resButton.setActionCommand("rest");
+
+        businessTypeGroup = new ButtonGroup();
+        businessTypeGroup.add(cafeButton);
+        businessTypeGroup.add(groceryButton);
+        businessTypeGroup.add(retailButton);
+        businessTypeGroup.add(resButton);
+
+        businessButtons.add(cafeButton);
+        businessButtons.add(groceryButton);
+        businessButtons.add(retailButton);
+        businessButtons.add(resButton);
+
+        add(businessButtons);
     }
 
     //MODIFY: this:
     //EFFECTS: creates text fields for username, first name, last name, and location
     public void generateTextFields() {
-        username = new TextField();
         JLabel usernameLabel = new JLabel("Username:");
-
-        firstName = new TextField();
-        JLabel firstNameLabel = new JLabel("First Name:");
-
-        lastname = new TextField();
-        JLabel lastNameLabel = new JLabel("Last Name:");
-
-        businessName = new TextField();
-        JLabel businessNameLabel = new JLabel("Business Name (if applicable):");
-
-        location = new TextField();
-        JLabel locationLabel = new JLabel("Location:");
-
+        username = new TextField();
+        username.setPreferredSize(new Dimension(200, 30));
         add(usernameLabel);
         add(username);
 
-        add(firstNameLabel);
-        add(firstName);
+        add(Box.createRigidArea(new Dimension(400, 25)));
 
-        add(lastNameLabel);
-        add(lastname);
+        generateNameTextFields();
 
+        JLabel businessNameLabel = new JLabel("Business Name:");
+        businessName = new TextField();
+        businessName.setPreferredSize(new Dimension(200, 30));
+        add(businessNameLabel);
+        add(businessName);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
+        JLabel locationLabel = new JLabel("Location:");
+        location = new TextField();
+        location.setPreferredSize(new Dimension(200, 30));
         add(locationLabel);
         add(location);
 
-        add(businessNameLabel);
-        add(businessName);
+        add(Box.createRigidArea(new Dimension(400, 25)));
+    }
+
+    //MODIFY: this:
+    //EFFECTS: creates text fields for name
+    public void generateNameTextFields() {
+        JLabel firstNameLabel = new JLabel("First Name:");
+        firstName = new TextField();
+        firstName.setPreferredSize(new Dimension(200, 30));
+        add(firstNameLabel);
+        add(firstName);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
+        JLabel lastNameLabel = new JLabel("Last Name:");
+        lastname = new TextField();
+        lastname.setPreferredSize(new Dimension(200, 30));
+        add(lastNameLabel);
+        add(lastname);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
     }
 
     //MODIFY: this

@@ -24,7 +24,9 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener 
             @Override
             public void componentShown(ComponentEvent evt) {
                 removeAll();
+
                 createPage();
+
                 revalidate();
                 repaint();
             }
@@ -32,26 +34,37 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener 
 
         confirmButton.addActionListener(this);
         addCreditCardBtn.addActionListener(this);
+
+        setOpaque(false);
     }
 
     //MODIFY: this
     //EFFECTS: creates page that displays available credit cards and accepts user input for amount to deposit
     public void createPage() {
+        new PageTitle(this, "Deposit");
+
         if (this.app.getUser() != null) {
             int creditCardCount = this.app.getUser().getAccount().getCreditCards().size();
 
             if (creditCardCount == 0) {
                 add(missingCardLabel);
+
+                add(Box.createRigidArea(new Dimension(400, 25)));
+
                 add(addCreditCardBtn);
             } else {
                 displayCreditCards();
+                add(Box.createRigidArea(new Dimension(400, 25)));
 
-                amountField = new TextField();
-                amountField.setPreferredSize(new Dimension(100, 30));
                 JLabel amountLabel = new JLabel("Deposit Amount:");
+                amountField = new TextField();
+                amountField.setPreferredSize(new Dimension(200, 30));
 
                 add(amountLabel);
                 add(amountField);
+
+                add(Box.createRigidArea(new Dimension(400, 25)));
+
                 add(confirmButton);
             }
         }
@@ -80,6 +93,7 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener 
 
         creditCardPane.add(cb);
 
+        creditCardPane.setOpaque(false);
 
         add(creditCardPane);
     }

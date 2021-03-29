@@ -4,10 +4,13 @@ import model.User;
 import persistence.JsonAccountReader;
 import persistence.JsonAccountWriter;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 //CITATION: Structure of this GUI is modeled after SimpleDrawingPlayer
 //          URL: https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Complete
@@ -21,7 +24,6 @@ public class MainApp extends JFrame implements ActionListener {
     private static JsonAccountWriter jsonAccountWriter = new JsonAccountWriter(JSON_ACCOUNT_STORE);
     private static User user;
     private JLabel status = new JLabel();
-
     private JPanel container;
 
     public MainApp() {
@@ -80,21 +82,30 @@ public class MainApp extends JFrame implements ActionListener {
     //EFFECTS: Creates app layout and adds all pages to app
     public void initializeAppPages() {
         container = new JPanel(new CardLayout());
-        JPanel welcomePage = new WelcomePage(this);
-        JPanel createAccountPage = new AccountPage(this);
-        JPanel createMenuPage = new MenuPage(this);
-        JPanel addCashPage = new DepositPage(this);
-        JPanel cashOutPage = new WithdrawalPage(this);
-        JPanel createPurchasePage = new PurchasePage(this);
+        container.setOpaque(false);
 
-        container.add(welcomePage, Pages.WELCOME.name());
-        container.add(createAccountPage, Pages.CREATE_ACCOUNT.name());
-        container.add(createMenuPage, Pages.MENU.name());
-        container.add(addCashPage, Pages.DEPOSIT.name());
-        container.add(cashOutPage, Pages.WITHDRAW.name());
-        container.add(createPurchasePage, Pages.PURCHASE.name());
-        initializeMoreAppPages();
-        add(container, BorderLayout.CENTER);
+        try {
+            JPanel welcomePage = new WelcomePage(this);
+
+            JPanel createAccountPage = new AccountPage(this);
+            JPanel createMenuPage = new MenuPage(this);
+            JPanel addCashPage = new DepositPage(this);
+            JPanel cashOutPage = new WithdrawalPage(this);
+            JPanel createPurchasePage = new PurchasePage(this);
+
+            container.add(welcomePage, Pages.WELCOME.name());
+            container.add(createAccountPage, Pages.CREATE_ACCOUNT.name());
+            container.add(createMenuPage, Pages.MENU.name());
+            container.add(addCashPage, Pages.DEPOSIT.name());
+            container.add(cashOutPage, Pages.WITHDRAW.name());
+            container.add(createPurchasePage, Pages.PURCHASE.name());
+
+            initializeMoreAppPages();
+
+            add(container, BorderLayout.CENTER);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     //MODIFY: this
@@ -112,6 +123,7 @@ public class MainApp extends JFrame implements ActionListener {
         container.add(addCreditCard, Pages.ADD_CREDIT_CARD.name());
         container.add(transactionHistoryPage, Pages.TRANSACTION.name());
     }
+
 
     // Starts CashApp
     public static void main(String[] args) {

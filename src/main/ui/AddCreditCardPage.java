@@ -12,7 +12,7 @@ import java.awt.event.ComponentEvent;
 //class that creates page to allow user to add new credit card
 public class AddCreditCardPage extends JPanel implements ActionListener {
     MainApp app;
-    JButton confirmButton = new JButton("Confirm Add Credit Card");
+    JButton confirmButton = new JButton("Add Credit Card");
     TextField typeField;
     TextField numField;
     TextField expiryYearField;
@@ -36,14 +36,17 @@ public class AddCreditCardPage extends JPanel implements ActionListener {
         });
 
         confirmButton.addActionListener(this);
+
+        setOpaque(false);
     }
 
     //MODIFY: this
     //EFFECTS: create page to gather user input for credit card info and adds it to panel
     public void createPage() {
-        setLayout(new GridLayout(0, 2, 5, 5));
+        new PageTitle(this, "Add Credit Card");
 
         initializeFields();
+
         JLabel typeLabel = new JLabel("Credit Card Type:");
 
         JLabel numLabel = new JLabel("Credit Card Number:");
@@ -55,26 +58,37 @@ public class AddCreditCardPage extends JPanel implements ActionListener {
 
         add(typeLabel);
         add(typeField);
+
         add(numLabel);
         add(numField);
+
         add(expiryYearLabel);
         add(expiryYearField);
+
         add(expiryMonthLabel);
         add(expiryMonthField);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
         add(confirmButton);
+
+        add(new ReturnToMenuButton(this.app.getContainer()));
     }
 
     // Modify: this
     //EFFECTS: initializes new text fields and sets preferred dimensions
     public void initializeFields() {
         typeField = new TextField();
-        typeField.setPreferredSize(new Dimension(100, 5));
+        typeField.setPreferredSize(new Dimension(200, 30));
+
         numField = new TextField();
-        numField.setPreferredSize(new Dimension(100, 5));
+        numField.setPreferredSize(new Dimension(200, 30));
+
         expiryYearField = new TextField();
-        expiryYearField.setPreferredSize(new Dimension(100, 30));
+        expiryYearField.setPreferredSize(new Dimension(200, 30));
+
         expiryMonthField = new TextField();
-        expiryMonthField.setPreferredSize(new Dimension(100, 30));
+        expiryMonthField.setPreferredSize(new Dimension(200, 30));
     }
 
     //MODIFY: this

@@ -34,25 +34,40 @@ public class SendMoneyPage extends JPanel implements ActionListener {
                 repaint();
             }
         });
+
         confirmButton.addActionListener(this);
+
+        setOpaque(false);
     }
 
     //MODIFY: this
     //EFFECTS: creates page that allows user to input what amount they want to send
     public void createPage() {
-        recipientUsername = new TextField();
-        recipientUsername.setPreferredSize(new Dimension(100, 30));
-        JLabel usernameLabel = new JLabel("Recipient Username:");
+        new PageTitle(this, "Send Money");
 
-        sendAmount = new TextField();
-        sendAmount.setPreferredSize(new Dimension(100, 30));
-        JLabel amountLabel = new JLabel("Send Amount:");
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
+        JLabel usernameLabel = new JLabel("Recipient Username:");
+        recipientUsername = new TextField();
+        recipientUsername.setPreferredSize(new Dimension(200, 30));
 
         add(usernameLabel);
         add(recipientUsername);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
+        JLabel amountLabel = new JLabel("Send Amount:");
+        sendAmount = new TextField();
+        sendAmount.setPreferredSize(new Dimension(200, 30));
+
         add(amountLabel);
         add(sendAmount);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
         add(confirmButton);
+
+        add(new ReturnToMenuButton(app.getContainer()));
     }
 
 

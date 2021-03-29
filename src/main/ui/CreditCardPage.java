@@ -38,14 +38,20 @@ public class CreditCardPage extends JPanel implements ActionListener {
 
         addCreditCardButton.addActionListener(this);
         removeCardButton.addActionListener(this);
+
+        setOpaque(false);
     }
 
     //MODIFY: this
     //EFFECTS: creates page that displays available credit cards
     public void createPage() {
+        new PageTitle(this, "Credit Cards");
+
         listModel = new DefaultListModel();
 
         add(addCreditCardButton);
+
+        add(Box.createRigidArea(new Dimension(400, 25)));
 
         if (this.app.getUser() != null) {
             creditCardList = this.app.getUser().getAccount().getCreditCards();
@@ -56,12 +62,16 @@ public class CreditCardPage extends JPanel implements ActionListener {
 
             creditCardsJList = new JList(listModel);
             creditCardsJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            creditCardsJList.setPreferredSize(new Dimension(400, 150));
 
             add(creditCardsJList);
+
+            add(Box.createRigidArea(new Dimension(400, 25)));
         }
 
-        add(new ReturnToMenuButton(this.app.getContainer()));
         add(removeCardButton);
+
+        add(new ReturnToMenuButton(this.app.getContainer()));
     }
     //MODIFY: this
     // EFFECTS: action listener that listens to add btn to redirects page & remove btn to remove card

@@ -12,7 +12,9 @@ public class ReturnToMenuButton extends JButton implements ActionListener {
     //EFFECTS: constructor that sets text of button and adds action listener
     public ReturnToMenuButton(JPanel app) {
         this.app = app;
-        this.setText("Return to Menu");
+
+        setText("Return to Menu");
+
         addActionListener(this);
     }
 

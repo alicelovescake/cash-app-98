@@ -33,13 +33,16 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
 
         confirmButton.addActionListener(this);
         addCreditCardBtn.addActionListener(this);
+
+        setOpaque(false);
     }
     //MODIFY: this
     //EFFECTS: creates page that displays credit cards and allows user to input what amount they want to withdraw
 
     public void createPage() {
-        if (this.app.getUser() != null) {
+        new PageTitle(this, "Withdraw");
 
+        if (this.app.getUser() != null) {
             int creditCardCount = this.app.getUser().getAccount().getCreditCards().size();
 
             if (creditCardCount == 0) {
@@ -47,13 +50,17 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
                 add(addCreditCardBtn);
             } else {
                 displayCreditCards();
+                add(Box.createRigidArea(new Dimension(400, 25)));
 
-                amountField = new TextField();
-                amountField.setPreferredSize(new Dimension(100, 30));
                 JLabel amountLabel = new JLabel("Withdraw Amount:");
+                amountField = new TextField();
+                amountField.setPreferredSize(new Dimension(200, 30));
 
                 add(amountLabel);
                 add(amountField);
+
+                add(Box.createRigidArea(new Dimension(400, 25)));
+
                 add(confirmButton);
             }
         }
@@ -81,6 +88,7 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
         cb.addItemListener(this);
 
         creditCardPane.add(cb);
+        creditCardPane.setOpaque(false);
 
         add(creditCardPane);
     }
