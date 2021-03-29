@@ -3,6 +3,7 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
+//class to style page title component
 public class PageTitle {
     public PageTitle(JPanel page, String text) {
         JLabel title = new JLabel(text);

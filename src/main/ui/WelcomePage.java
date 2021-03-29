@@ -3,7 +3,6 @@ package ui;
 import model.Account;
 import persistence.JsonAccountReader;
 
-import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
