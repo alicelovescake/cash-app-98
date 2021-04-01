@@ -95,7 +95,6 @@ public class SendMoneyPage extends JPanel implements ActionListener {
 
         if (currentBalance - sendAmtData >= 0) {
             this.app.setStatus("Congrats! $" + sendAmtData + " was sent to " + recipientUsername.getText());
-            this.app.getUser().getAccount().decrementBalance(sendAmtData);
 
             Transaction newTransaction = new Transaction(recipientAccount, senderAccount, sendAmtData,
                     Transaction.Type.EXCHANGE, Transaction.Status.PENDING);

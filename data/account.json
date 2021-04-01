@@ -1,167 +1,192 @@
 {
     "creditCards": [
         {
-            "cardType": "vis",
-            "expiryMonth": 5,
-            "id": "950f93f8-69af-4607-80c4-10dee82be9b6",
-            "expiryYear": 2040,
-            "cardNumber": 40404
+            "cardType": "visa",
+            "expiryMonth": 9,
+            "id": "0f372c15-67cb-4d9c-9be4-c2df2122c77f",
+            "expiryYear": 2025,
+            "cardNumber": 234
         },
         {
             "cardType": "visa",
-            "expiryMonth": 5,
-            "id": "eb4ac886-7f50-47d5-8c07-7a64ac3b0392",
-            "expiryYear": 2040,
-            "cardNumber": 666
-        },
-        {
-            "cardType": "MasterCard",
-            "expiryMonth": 4,
-            "id": "7e677adb-8d54-4f0b-83e1-ed59fcce0c7c",
-            "expiryYear": 2040,
-            "cardNumber": 443422
+            "expiryMonth": 9,
+            "id": "20075473-1852-4f20-b22e-7143fe1e3fd0",
+            "expiryYear": 2025,
+            "cardNumber": 2123
         }
     ],
-    "balance": 79098,
-    "id": "7839c5ba-c2cf-4da2-94ee-c7eb55f33a5a",
+    "balance": 10,
+    "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
     "boosts": [],
     "transactions": [
         {
-            "date": "2021-03-28",
-            "amount": 343434,
+            "date": "2021-04-01",
+            "amount": 20,
             "sender": {
-                "balance": 516846,
-                "id": "7839c5ba-c2cf-4da2-94ee-c7eb55f33a5a",
+                "balance": 10,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
                 "user": {
-                    "firstName": "asds",
-                    "lastName": "asdas",
+                    "firstName": "alice",
+                    "lastName": "zhao",
                     "referredFriends": [],
-                    "location": "adsa",
-                    "id": "961d2269-4f98-4cda-9d9d-0754daccd0c8",
+                    "location": "van",
+                    "id": "0017e307-524c-40b0-90e9-7ac6187762bb",
                     "userType": "PERSONAL",
-                    "username": "asdasd"
+                    "username": "alicelovescake"
                 }
             },
             "recipient": {
-                "balance": 348434,
-                "id": "7839c5ba-c2cf-4da2-94ee-c7eb55f33a5a",
+                "balance": 5000,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
                 "user": {
                     "companyName": "Amazon",
                     "location": "Seattle",
-                    "id": "2114177c-467a-420c-9aed-95856b16681a",
-                    "userType": "BUSINESS",
-                    "businessType": "RETAILER",
-                    "username": "daddy"
-                }
-            },
-            "id": "a7ca58fb-81fc-40ed-97be-0648f3c67d29",
-            "type": "EXCHANGE",
-            "status": "COMPLETE"
-        },
-        {
-            "date": "2021-03-28",
-            "amount": 28752,
-            "sender": {
-                "balance": 326010,
-                "id": "7839c5ba-c2cf-4da2-94ee-c7eb55f33a5a",
-                "user": {
-                    "firstName": "asds",
-                    "lastName": "asdas",
-                    "referredFriends": [],
-                    "location": "adsa",
-                    "id": "961d2269-4f98-4cda-9d9d-0754daccd0c8",
-                    "userType": "PERSONAL",
-                    "username": "asdasd"
-                }
-            },
-            "recipient": {
-                "balance": 33752,
-                "id": "7839c5ba-c2cf-4da2-94ee-c7eb55f33a5a",
-                "user": {
-                    "companyName": "Amazon",
-                    "location": "Seattle",
-                    "id": "9cdd5511-40de-4dc4-8cc0-84ba02dfa245",
+                    "id": "77c63186-163b-4894-9ec6-d5f17f648a6d",
                     "userType": "BUSINESS",
                     "businessType": "RETAILER",
                     "username": "anthony"
                 }
             },
-            "id": "5d311b98-ef6f-43a6-861b-2355e1292d1b",
+            "id": "842145de-7dda-4fc2-8c86-633399446c8f",
+            "type": "REQUEST",
+            "status": "PENDING"
+        },
+        {
+            "date": "2021-04-01",
+            "amount": 50,
+            "sender": {
+                "balance": 10,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
+                "user": {
+                    "firstName": "alice",
+                    "lastName": "zhao",
+                    "referredFriends": [],
+                    "location": "van",
+                    "id": "0017e307-524c-40b0-90e9-7ac6187762bb",
+                    "userType": "PERSONAL",
+                    "username": "alicelovescake"
+                }
+            },
+            "recipient": {
+                "balance": 5050,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
+                "user": {
+                    "companyName": "Amazon",
+                    "location": "Seattle",
+                    "id": "4655500e-5184-4c4e-a2c3-be3db06ca5e6",
+                    "userType": "BUSINESS",
+                    "businessType": "RETAILER",
+                    "username": "mom"
+                }
+            },
+            "id": "17949d5d-c0b0-4af9-8570-1f0931d8d01c",
             "type": "EXCHANGE",
             "status": "COMPLETE"
         },
         {
-            "date": "2021-03-28",
-            "amount": 66666,
+            "date": "2021-04-01",
+            "amount": 10,
             "sender": {
-                "balance": 326010,
-                "id": "7839c5ba-c2cf-4da2-94ee-c7eb55f33a5a",
+                "balance": 10,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
                 "user": {
-                    "firstName": "asds",
-                    "lastName": "asdas",
+                    "firstName": "alice",
+                    "lastName": "zhao",
                     "referredFriends": [],
-                    "location": "adsa",
-                    "id": "961d2269-4f98-4cda-9d9d-0754daccd0c8",
+                    "location": "van",
+                    "id": "0017e307-524c-40b0-90e9-7ac6187762bb",
                     "userType": "PERSONAL",
-                    "username": "asdasd"
+                    "username": "alicelovescake"
                 }
             },
             "recipient": {
-                "balance": 71666,
-                "id": "7839c5ba-c2cf-4da2-94ee-c7eb55f33a5a",
+                "balance": 5010,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
                 "user": {
                     "companyName": "Amazon",
                     "location": "Seattle",
-                    "id": "10790567-8fa0-4ac7-b236-8311df82847f",
+                    "id": "c95c1739-da4d-4431-b7d5-84bdcdf27732",
                     "userType": "BUSINESS",
                     "businessType": "RETAILER",
-                    "username": "anthony"
+                    "username": "amazon"
                 }
             },
-            "id": "4e49ea06-6a3f-4a7d-ab8f-e92c198d39f4",
+            "id": "1a60388c-656e-4594-9189-5a3866685a89",
             "type": "EXCHANGE",
             "status": "COMPLETE"
         },
         {
-            "date": "2021-03-28",
-            "amount": 123456,
+            "date": "2021-04-01",
+            "amount": 10,
             "sender": {
-                "balance": 79098,
-                "id": "7839c5ba-c2cf-4da2-94ee-c7eb55f33a5a",
+                "balance": 10,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
                 "user": {
-                    "firstName": "asds",
-                    "lastName": "asdas",
+                    "firstName": "alice",
+                    "lastName": "zhao",
                     "referredFriends": [],
-                    "location": "adsa",
-                    "id": "961d2269-4f98-4cda-9d9d-0754daccd0c8",
+                    "location": "van",
+                    "id": "0017e307-524c-40b0-90e9-7ac6187762bb",
                     "userType": "PERSONAL",
-                    "username": "asdasd"
+                    "username": "alicelovescake"
                 }
             },
             "recipient": {
-                "balance": 128456,
-                "id": "7839c5ba-c2cf-4da2-94ee-c7eb55f33a5a",
+                "balance": 5010,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
                 "user": {
                     "companyName": "Amazon",
                     "location": "Seattle",
-                    "id": "b755c6b1-8579-4545-a307-2989b42ca616",
+                    "id": "706ce685-56c3-4016-b55a-4e3f9423c14b",
                     "userType": "BUSINESS",
                     "businessType": "RETAILER",
-                    "username": "Monthly"
+                    "username": "sdf"
                 }
             },
-            "id": "81bd65c1-c7ce-4d37-beb3-114fceb4b6a2",
+            "id": "f600dd35-2600-4d6e-9418-0e89d4ced365",
+            "type": "EXCHANGE",
+            "status": "COMPLETE"
+        },
+        {
+            "date": "2021-04-01",
+            "amount": 10,
+            "sender": {
+                "balance": 10,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
+                "user": {
+                    "firstName": "alice",
+                    "lastName": "zhao",
+                    "referredFriends": [],
+                    "location": "van",
+                    "id": "0017e307-524c-40b0-90e9-7ac6187762bb",
+                    "userType": "PERSONAL",
+                    "username": "alicelovescake"
+                }
+            },
+            "recipient": {
+                "balance": 5010,
+                "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
+                "user": {
+                    "companyName": "Amazon",
+                    "location": "Seattle",
+                    "id": "bcf12e95-62fc-4529-94a1-01bb51e2b347",
+                    "userType": "BUSINESS",
+                    "businessType": "RETAILER",
+                    "username": "mom"
+                }
+            },
+            "id": "6fa2d855-1fda-4e60-9c1d-1c96b636762c",
             "type": "EXCHANGE",
             "status": "COMPLETE"
         }
     ],
     "user": {
-        "firstName": "asds",
-        "lastName": "asdas",
+        "firstName": "alice",
+        "lastName": "zhao",
         "referredFriends": [],
-        "location": "adsa",
-        "id": "961d2269-4f98-4cda-9d9d-0754daccd0c8",
+        "location": "van",
+        "id": "0017e307-524c-40b0-90e9-7ac6187762bb",
         "userType": "PERSONAL",
-        "username": "asdasd"
+        "username": "alicelovescake"
     }
 }

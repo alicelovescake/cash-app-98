@@ -91,10 +91,8 @@ public class PurchasePage extends JPanel implements ActionListener {
         Account recipientAccount = new Account(recipientUser, 5000);
         Account senderAccount = this.app.getUser().getAccount();
 
-        if (currentBalance - sendAmtData >= 0) {
+        if (currentBalance >= sendAmtData) {
             this.app.setStatus("Congrats! Your purchase went through!");
-            this.app.getUser().getAccount().decrementBalance(sendAmtData);
-
             Transaction newTransaction = new Transaction(recipientAccount, senderAccount, sendAmtData,
                     Transaction.Type.EXCHANGE, Transaction.Status.PENDING);
             this.app.getUser().getAccount().addToTransactions(newTransaction);
