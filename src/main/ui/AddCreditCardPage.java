@@ -10,7 +10,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 //class that creates page to allow user to add new credit card
-public class AddCreditCardPage extends JPanel implements ActionListener {
+public class AddCreditCardPage extends JPanel implements ActionListener, Page {
     MainApp app;
     JButton confirmButton = new JButton("Add Credit Card");
     TextField typeField;
@@ -42,6 +42,7 @@ public class AddCreditCardPage extends JPanel implements ActionListener {
 
     //MODIFY: this
     //EFFECTS: create page to gather user input for credit card info and adds it to panel
+    @Override
     public void createPage() {
         new PageTitle(this, "Add Credit Card");
 

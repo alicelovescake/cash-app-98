@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 //class that creates withdraw page that allows user to cash out of account
-public class WithdrawalPage extends JPanel implements ActionListener, ItemListener {
+public class WithdrawalPage extends JPanel implements ActionListener, ItemListener, Page {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Withdraw");
     JButton addCreditCardBtn = new JButton("Add card");
@@ -36,9 +36,10 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
 
         setOpaque(false);
     }
+
     //MODIFY: this
     //EFFECTS: creates page that displays credit cards and allows user to input what amount they want to withdraw
-
+    @Override
     public void createPage() {
         new PageTitle(this, "Withdraw");
 
@@ -122,6 +123,5 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-
     }
 }

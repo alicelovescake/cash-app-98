@@ -8,7 +8,7 @@ import java.awt.event.*;
 import java.util.List;
 
 // This class creates a page for user to deposit cash into account
-public class DepositPage extends JPanel implements ActionListener, ItemListener {
+public class DepositPage extends JPanel implements ActionListener, ItemListener, Page {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Deposit");
     JButton addCreditCardBtn = new JButton("Add card");
@@ -40,6 +40,7 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener 
 
     //MODIFY: this
     //EFFECTS: creates page that displays available credit cards and accepts user input for amount to deposit
+    @Override
     public void createPage() {
         new PageTitle(this, "Deposit");
 

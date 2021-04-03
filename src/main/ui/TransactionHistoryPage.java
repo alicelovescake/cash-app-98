@@ -11,7 +11,7 @@ import java.awt.event.ComponentEvent;
 import java.util.List;
 
 // This class creates a page to display transaction history of the user
-public class TransactionHistoryPage extends JPanel implements ActionListener {
+public class TransactionHistoryPage extends JPanel implements ActionListener, Page {
     MainApp app;
 
     private List<Transaction> completedTransactions;
@@ -37,9 +37,10 @@ public class TransactionHistoryPage extends JPanel implements ActionListener {
 
         setOpaque(false);
     }
+
     //MODIFY: this
     //EFFECTS: creates page that displays and adds a table to app with completed, pending, and failed transactions
-
+    @Override
     public void createPage() {
         new PageTitle(this, "Transactions");
 

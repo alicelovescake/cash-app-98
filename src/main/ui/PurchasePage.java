@@ -13,7 +13,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 //class that creates purchase page that allows user to send money for purchase
-public class PurchasePage extends JPanel implements ActionListener {
+public class PurchasePage extends JPanel implements ActionListener, Page {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Purchase");
     TextField sendAmount;
@@ -43,6 +43,7 @@ public class PurchasePage extends JPanel implements ActionListener {
 
     //MODIFY: this
     //EFFECTS: creates page that displays credit cards and allows user to input what amount they want to purchase
+    @Override
     public void createPage() {
         new PageTitle(this, "Make Purchase");
 

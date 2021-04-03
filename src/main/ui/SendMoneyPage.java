@@ -13,7 +13,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 //class that creates send money page that allows user to send funds to another user
-public class SendMoneyPage extends JPanel implements ActionListener {
+public class SendMoneyPage extends JPanel implements ActionListener, Page{
     MainApp app;
     JButton confirmButton = new JButton("Confirm Send");
     TextField recipientUsername;
@@ -42,6 +42,7 @@ public class SendMoneyPage extends JPanel implements ActionListener {
 
     //MODIFY: this
     //EFFECTS: creates page that allows user to input what amount they want to send
+    @Override
     public void createPage() {
         new PageTitle(this, "Send Money");
 

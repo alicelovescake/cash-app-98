@@ -13,7 +13,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 //class that creates request money page that allows user to request funds from another user
-public class RequestMoneyPage extends JPanel implements ActionListener {
+public class RequestMoneyPage extends JPanel implements ActionListener, Page {
     MainApp app;
     JButton confirmButton = new JButton("Confirm Request");
     TextField recipientUsername;
@@ -42,6 +42,7 @@ public class RequestMoneyPage extends JPanel implements ActionListener {
 
     //MODIFY: this
     //EFFECTS: creates page that accepts user input for request amount and recipient. Adds to app.
+    @Override
     public void createPage() {
         new PageTitle(this, "Request Money");
 

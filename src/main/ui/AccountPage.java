@@ -13,7 +13,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 //class to create account creation page that accepts user input to create an account
-public class AccountPage extends JPanel implements ActionListener {
+public class AccountPage extends JPanel implements ActionListener, Page {
     TextField username;
     TextField firstName;
     TextField lastname;
@@ -56,6 +56,7 @@ public class AccountPage extends JPanel implements ActionListener {
 
     //MODIFY: this
     // EFFECTS: Creates account page with radio buttons and text fields and adds to this panel
+    @Override
     public void createPage() {
         new PageTitle(this, "Create Account");
 

@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 //class that creates welcome page that contains create account and login options
-public class WelcomePage extends JPanel implements ActionListener {
+public class WelcomePage extends JPanel implements ActionListener, Page {
     MainApp app;
     JButton createAccButton = new JButton("Create Account");
     JButton loginButton = new JButton("Login");
@@ -52,6 +52,7 @@ public class WelcomePage extends JPanel implements ActionListener {
 
     //MODIFY: this
     //EFFECTS: creates welcome page with logo and create account/login button
+    @Override
     public void createPage() {
         try {
             ImageIcon imageIcon = new ImageIcon("./data/logo.png"); // load the image to a imageIcon

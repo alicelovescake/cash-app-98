@@ -11,7 +11,7 @@ import java.awt.event.ComponentEvent;
 import java.util.List;
 
 // class to create credit card page that displays options for updating credit cards
-public class CreditCardPage extends JPanel implements ActionListener {
+public class CreditCardPage extends JPanel implements ActionListener, Page {
     private MainApp app;
     private JButton addCreditCardButton = new JButton("Add New Card");
     private JButton removeCardButton = new JButton("Remove Card");
@@ -44,6 +44,7 @@ public class CreditCardPage extends JPanel implements ActionListener {
 
     //MODIFY: this
     //EFFECTS: creates page that displays available credit cards
+    @Override
     public void createPage() {
         new PageTitle(this, "Credit Cards");
 

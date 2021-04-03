@@ -57,7 +57,11 @@ There is only one question for you to consider:
 - As a user, I want to save all my account changes and transactions to file.
 - As a user, I want to load all my previous account changes and transactions from a file.
 - As a user, I can create, view and edit my account through a graphical user interface.
- 
+
+---
+### Phase 4: Task 2 ✅
+- Type hierarchy is implemented in the UI package. Page is the interface with method `createPage()` that is implemented 
+and overridden in every subclass that end in page (i.e DepositPage).
 
 
 
