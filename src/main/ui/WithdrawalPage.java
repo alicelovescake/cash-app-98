@@ -110,15 +110,14 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
     public void checkBalance() {
         String amountData = amountField.getText();
         int withdrawAmt = Integer.valueOf(amountData);
-        int currentBalance = (int) this.app.getUser().getAccount().getBalance();
 
-        if (withdrawAmt <= currentBalance) {
+        try {
             this.app.getUser().getAccount().decrementBalance(withdrawAmt);
             this.app.setStatus("Success! Your withdraw of $" + withdrawAmt + " was completed");
-        } else {
+        } catch (Exception e) {
             this.app.setStatus("Sorry! Your balance is insufficient for this withdraw");
+            System.out.println(e.getMessage());
         }
-
     }
 
     @Override

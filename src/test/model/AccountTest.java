@@ -2,6 +2,8 @@ package model;
 
 
 import model.boosts.*;
+import model.exceptions.InsufficientFundsException;
+import model.exceptions.InvalidCardException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +18,8 @@ class AccountTest {
     private BusinessUser testBusinessUser;
     private CreditCard testCard;
     private Boost highRoller;
-    private  Boost shopaholic;
-    private  Boost foodie;
+    private Boost shopaholic;
+    private Boost foodie;
 
     @BeforeEach
     void setUp() {
@@ -45,7 +47,13 @@ class AccountTest {
     @Test
     void testDeposit() {
         testAccountA.addCreditCard(testCard);
-        testAccountA.deposit(testCard, 500.50);
+        try {
+            testAccountA.deposit(testCard, 500.50);
+            //pass
+        } catch (Exception e) {
+            fail("should not have caught invalid card exception");
+        }
+
         assertEquals(601.0, testAccountA.getBalance());
     }
 
@@ -53,33 +61,68 @@ class AccountTest {
     void testDepositInvalidCreditCard() {
         CreditCard invalidCard = new CreditCard("Visa", 2324, 1990, 1);
         testAccountA.addCreditCard(invalidCard);
-        testAccountA.deposit(invalidCard, 500.50);
+        try {
+            testAccountA.deposit(invalidCard, 500.50);
+            fail("Should have caught invalid card exception");
+        } catch (Exception e) {
+            //pass
+        }
+
         assertEquals(100.50, testAccountA.getBalance());
     }
 
     @Test
     void testWithdrawSufficientFunds() {
         testAccountA.addCreditCard(testCard);
-        assertTrue(testAccountA.withdraw(testCard, 50.50));
+        try {
+            assertTrue(testAccountA.withdraw(testCard, 50.50));
+        } catch (Exception e){
+            fail ("Should not have caught exception");
+        }
+
         assertEquals(50.0, testAccountA.getBalance());
     }
 
     @Test
     void testMultipleDeposits() {
         testAccountA.addCreditCard(testCard);
-        testAccountA.deposit(testCard, 500.50);
-        testAccountA.deposit(testCard, 10.50);
+        try {
+            testAccountA.deposit(testCard, 500.50);
+            testAccountA.deposit(testCard, 10.50);
+            //pass
+        } catch (Exception e) {
+            fail("should not have caught invalid card exception");
+        }
+
         assertEquals(611.50, testAccountA.getBalance());
     }
 
     @Test
     void testMultipleWithdrawInsufficientFunds() {
         testAccountA.addCreditCard(testCard);
-        assertTrue(testAccountA.withdraw(testCard, 10.00));
+        try {
+            assertTrue(testAccountA.withdraw(testCard, 10.00));
+        } catch (Exception e ){
+            fail("No Exception here");
+        }
+
         assertEquals(90.50, testAccountA.getBalance());
-        assertTrue(testAccountA.withdraw(testCard, 20.00));
+        try {
+            assertTrue(testAccountA.withdraw(testCard, 20.00));
+        } catch (Exception e ){
+            fail("No Exception here");
+        }
+
         assertEquals(70.50, testAccountA.getBalance());
-        assertFalse(testAccountA.withdraw(testCard, 100.00));
+
+        try {
+            testAccountA.withdraw(testCard, 100.00);
+        } catch (InsufficientFundsException e ){
+            //pass
+        } catch (InvalidCardException e) {
+            fail("card should be valid");
+        }
+
         assertEquals(70.50, testAccountA.getBalance());
     }
 
@@ -88,8 +131,13 @@ class AccountTest {
         CreditCard testExpiredYearCard = new CreditCard
                 ("Visa", 17897, 1999, 11);
         testAccountA.addCreditCard(testExpiredYearCard);
-        assertFalse(testAccountA.withdraw(testExpiredYearCard, 100.00));
-
+        try {
+            testAccountA.withdraw(testExpiredYearCard, 100.00);
+        } catch (InsufficientFundsException e ){
+            fail("funds should be valid");
+        } catch (InvalidCardException e) {
+            //pass
+        }
     }
 
     @Test
@@ -104,7 +152,7 @@ class AccountTest {
     }
 
     @Test
-    void testSendMoneyMultipleInsufficientFunds(){
+    void testSendMoneyMultipleInsufficientFunds() {
         testAccountA.sendMoney(testAccountB, 60.0);
         testAccountA.sendMoney(testAccountB, 200.0);
 
@@ -276,7 +324,12 @@ class AccountTest {
     @Test
     void testMakePurchaseBoost() {
         testAccountA.addBoost(highRoller);
-        testAccountA.deposit(testCard, 1000);
+        try {
+            testAccountA.deposit(testCard, 1000);
+        } catch (Exception e) {
+            fail("Should not have caught invalid card exception");
+        }
+
         testAccountA.makePurchase(testBusinessAccount, 1000);
         assertEquals(200.5, testAccountA.getBalance());
     }
@@ -284,7 +337,13 @@ class AccountTest {
     @Test
     void testMakePurchaseNoBoost() {
         testAccountA.addBoost(highRoller);
-        testAccountA.deposit(testCard, 1000);
+        try {
+            testAccountA.deposit(testCard, 1000);
+            // pass
+        } catch (Exception e) {
+            fail("Should not have caught invalid card exception");
+        }
+
         testAccountA.makePurchase(testBusinessAccount, 999);
         assertEquals(101.5, testAccountA.getBalance());
     }

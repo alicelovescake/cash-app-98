@@ -64,7 +64,13 @@ public class JsonAccountReaderTest extends JsonAccountTest {
         foodie = new FoodieBoost();
         highRoller = new HighRollerBoost();
         testPersonalAccount.addCreditCard(testCard);
-        testPersonalAccount.deposit(testCard, 1000);
+        try {
+            testPersonalAccount.deposit(testCard, 1000);
+            //pass
+        } catch (Exception e) {
+            fail("should not have caught invalid card exception");
+        }
+
         testPersonalAccount.addBoost(shopaholic);
         testPersonalAccount.addBoost(foodie);
         testPersonalAccount.addBoost(highRoller);

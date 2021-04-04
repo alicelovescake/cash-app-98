@@ -1,6 +1,8 @@
 package model;
 
+import model.exceptions.InsufficientFundsException;
 import model.boosts.*;
+import model.exceptions.InvalidCardException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -99,9 +101,12 @@ public class Account implements Writable {
         this.balance += amount;
     }
 
-    public void decrementBalance(double amount) {
-        if (amount < this.balance) {
+    // Effects: Decrement balance, throws insufficient funds exception is amount is greater than balance
+    public void decrementBalance(double amount) throws InsufficientFundsException {
+        if (amount <= this.balance) {
             this.balance -= amount;
+        } else {
+            throw new InsufficientFundsException("Balance is going to be negative!");
         }
     }
 
@@ -119,26 +124,34 @@ public class Account implements Writable {
     }
 
 
-    // REQUIRES: amount >= 0 and valid credit card
     // MODIFY: this
-    // EFFECTS: amount is added to balance from given card (if valid) and updated balance is returned
-    public double deposit(CreditCard card, double amount) {
+    // EFFECTS: amount is added to balance from given card (if valid) and updated balance is returned, throws invalid
+    // card exception if card is not valid
+    public double deposit(CreditCard card, double amount) throws InvalidCardException {
         if (card.getIsValid()) {
             this.balance += amount;
+        } else {
+            throw new InvalidCardException("Credit Card Not Valid!");
         }
         return balance;
     }
 
-    //REQUIRES: amount >= 0 and valid credit card
     //MODIFY: this
     //EFFECTS: if sufficient funds, amount is withdrawn from account into given card, balance updated
-    //          return true. If insufficient funds, return false and balance unchanged
-    public Boolean withdraw(CreditCard card, double amount) {
-        if (this.balance >= amount && card.getIsValid()) {
+    //          return true. If insufficient funds, throws insufficient funds exception return false and balance
+    //          unchanged. If invalid card, throws invalid card exception
+
+    public Boolean withdraw(CreditCard card, double amount) throws InvalidCardException, InsufficientFundsException {
+        if (!card.getIsValid()) {
+            throw new InvalidCardException("Credit Card Not Valid");
+        }
+        if (this.balance < amount) {
+            throw new InsufficientFundsException("Not enough balance!");
+        } else {
             this.balance -= amount;
             return true;
         }
-        return false;
+
     }
 
     //REQUIRES: amount >= 0 and valid user of cash app as recipient

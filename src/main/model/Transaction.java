@@ -92,7 +92,11 @@ public class Transaction implements Writable {
     // EFFECTS: Process transaction, status changes to complete if sender has sufficient funds, status FAILED otherwise
     public void completeTransaction() {
         if (sender.getBalance() >= amount) {
-            sender.decrementBalance(amount);
+            try {
+                sender.decrementBalance(amount);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             recipient.incrementBalance(amount);
             this.status = Status.COMPLETE;
         } else {

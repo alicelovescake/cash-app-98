@@ -79,7 +79,13 @@ public class JsonAccountWriterTest extends JsonAccountTest{
         try {
             testPersonalAccount.addCreditCard(testCard);
             //balance should be 1100 after deposit
-            testPersonalAccount.deposit(testCard, 1000);
+            try {
+                testPersonalAccount.deposit(testCard, 1000);
+                //pass
+            } catch (Exception e) {
+                fail("should not have caught invalid card exception");
+            }
+
             //boosts should be size 1
             testPersonalAccount.addBoost(shopaholic);
             testPersonalAccount.addBoost(foodie);

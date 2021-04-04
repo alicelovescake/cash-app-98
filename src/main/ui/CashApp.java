@@ -2,6 +2,8 @@ package ui;
 
 import model.*;
 import model.boosts.Boost;
+import model.exceptions.InsufficientFundsException;
+import model.exceptions.InvalidCardException;
 import persistence.JsonAccountReader;
 import persistence.JsonAccountWriter;
 
@@ -307,7 +309,12 @@ public class CashApp {
 
         CreditCard creditCard = (CreditCard) user.getAccount().getCreditCards().get(0);
 
-        user.getAccount().deposit(creditCard, depositAmount);
+        try {
+            user.getAccount().deposit(creditCard, depositAmount);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
 
         System.out.println("\nWe have deposited $" + depositAmount + " into your account.");
         System.out.println("\nYour new balance is $" + user.getAccount().getBalance() + ".");
@@ -327,11 +334,15 @@ public class CashApp {
 
         CreditCard creditCard = (CreditCard) user.getAccount().getCreditCards().get(0);
 
-        if (user.getAccount().withdraw(creditCard, withdrawAmount)) {
+        try {
+            user.getAccount().withdraw(creditCard, withdrawAmount);
             System.out.println("\nThe withdraw was successful. It make take a few days until you see it on your card.");
-        } else {
+        } catch (InvalidCardException e) {
+            System.out.println("Darn, looks like you don't have a valid credit card");
+        } catch (InsufficientFundsException e) {
             System.out.println("\nDarn, it looks like you don't have enough funds for that!");
         }
+
     }
 
     //MODIFY: this
