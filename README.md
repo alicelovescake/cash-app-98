@@ -59,10 +59,41 @@ There is only one question for you to consider:
 - As a user, I can create, view and edit my account through a graphical user interface.
 
 ---
-### Phase 4: Task 2 ✅
+### Design Constructs ✅
 - Type hierarchy is implemented in the UI package. Page is the interface with method `createPage()` that is implemented 
-and overridden in every subclass that end in page (i.e DepositPage).
+and overridden in every subclass that end in `*page` (i.e DepositPage).
 
+---
+### Future Improvements ✅
+Great apps take iteration and thoughtful design to achieve readability and maintainability. 
+
+Here are some things I'd like to do in Cash App 2.0:
+- *Improve cohesion by ensuring each class has a single responsibility*
+  - **Problem:** Currently the account class has 18 different methods performing different functions. This results in 
+      different clusters of methods that represent different responsibilities. 
+      
+  - **Solution:** It would be best to refactor each cluster into its own class. So splitting all the transaction related 
+    methods into a class, the credit card management into another class, and boost management into a separate class.
+    
+- *Reducing coupling so modules are easy to test, reuse, and avoid compiling errors*
+  - **Problem:** Currently the pages in the UI class are tightly coupled. All the pages share implementation details 
+    with each other such as the `addComponentListener` and the `createPage` method.
+    
+  - **Solution:** I've already added a type hierarchy to refactor all the pages to implement a page interface. I 
+    could also add an Abstract Class that includes the shared implementation details so that changes happen 
+    at a single place. 
+    
+- *Complete robustness so every class has exception handling*
+  - **Problem:** Not all classes have exception handling. For instance, if a user enters a string input instead of integer 
+    as their credit card number, the program will crash.
+    
+  - **Solution:** Add additional exceptions in all methods with REQUIRE claus and include them in tests to ensure that all 
+    inputs are handled to make the program more robust.
+    
+- *Future Feature Improvements:*
+  - Add multiple users to app and include messaging notifications that can go to different people
+  - Messaging and notifications would be a great feature to utilize the observer design principle to ensure all users 
+    are subscribed to and respond appropriately to changes in state. 
 
 
 
