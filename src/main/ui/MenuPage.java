@@ -11,7 +11,7 @@ import java.awt.event.ComponentEvent;
 import java.io.FileNotFoundException;
 
 //class that creates menu card for to display options to users and directs them to other pages
-public class MenuPage extends JPanel implements ActionListener, Page{
+public class MenuPage extends JPanel implements ActionListener, Page {
     JButton button;
     MainApp app;
     JLabel balanceLabel;
