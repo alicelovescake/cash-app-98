@@ -33,8 +33,9 @@ With **Cash App '98**, everyone with a bank account can take part in defining *a
 
 ### Why build this? 🚀
 Equitable access and freedom with money is the key to *an inclusive economy*.
-Cash App '98 is inspired by modern, 21st century tools like [Venmo](https://venmo.com/) and [Cash App](cash.app), 
-both part of the fastest growing financial brands in the world, with a combined user base of over 100 million monthly 
+Cash App '98 is inspired by modern, 21st century tools like [Venmo](https://venmo.com/) and 
+[Cash App](https://cash.app/), both part of the fastest growing financial brands in the world, 
+with a combined user base of over 100 million monthly 
 active users. Cash App '98 aims to empower people during the rise of the internet in the 90s, 
 so that everyone can have equal access to opportunity. 
 
@@ -61,7 +62,7 @@ There is only one question for you to consider:
 ---
 ### Design Constructs ✅
 - Type hierarchy is implemented in the UI package. Page is the interface with method `createPage()` that is implemented 
-and overridden in every subclass that end in `*page` (i.e DepositPage).
+and overridden in every subclass that end in `*page` (i.e. DepositPage).
 
 ---
 ### Future Improvements ✅
@@ -72,8 +73,9 @@ Here are some things I'd like to do in Cash App 2.0:
   - **Problem:** Currently the account class has 18 different methods performing different functions. This results in 
       different clusters of methods that represent different responsibilities. 
       
-  - **Solution:** It would be best to refactor each cluster into its own class. So splitting all the transaction related 
-    methods into a class, the credit card management into another class, and boost management into a separate class.
+  - **Solution:** It would be best to refactor each cluster into its own class. So splitting all the transaction 
+    related methods into a class, the credit card management into another class, and boost management into a separate 
+    class.
     
 - *Reducing coupling so modules are easy to test, reuse, and avoid compiling errors*
   - **Problem:** Currently the pages in the UI class are tightly coupled. All the pages share implementation details 
@@ -84,11 +86,11 @@ Here are some things I'd like to do in Cash App 2.0:
     at a single place. 
     
 - *Complete robustness so every class has exception handling*
-  - **Problem:** Not all classes have exception handling. For instance, if a user enters a string input instead of integer 
-    as their credit card number, the program will crash.
+  - **Problem:** Not all classes have exception handling. For instance, if a user enters a string input instead of 
+    integer as their credit card number, the program will crash.
     
-  - **Solution:** Add additional exceptions in all methods with REQUIRE claus and include them in tests to ensure that all 
-    inputs are handled to make the program more robust.
+  - **Solution:** Add additional exceptions in all methods with REQUIRE claus and include them in tests to ensure that 
+    all inputs are handled to make the program more robust.
     
 - *Future Feature Improvements:*
   - Add multiple users to app and include messaging notifications that can go to different people
