@@ -2,7 +2,7 @@
 
 ### What if I gave you a million pieces of paper? 💰
 
-Think it's worthless? What if I told you that Elon Musk will let you to buy *a Tesla* with these pieces of paper? 
+Think it's worthless? What if I told you that Elon Musk will let you buy *a Tesla* with these pieces of paper? 
 
 **Money**, in and of it itself, has no actual value. Yet when it moves from one hand to another, it starts to function 
 as a medium of exchange and a storehouse of wealth. 
