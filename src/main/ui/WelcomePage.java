@@ -5,6 +5,7 @@ import persistence.JsonAccountReader;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +17,11 @@ import java.io.IOException;
 //class that creates welcome page that contains create account and login options
 public class WelcomePage extends JPanel implements ActionListener, Page {
     MainApp app;
-    JButton createAccButton = new JButton("Create Account");
-    JButton loginButton = new JButton("Login");
+    private JButton createAccButton = new JButton("Create Account");
+    private JButton loginButton = new JButton("Login");
+    private Font titleFont = new Font("Serif", Font.ITALIC, 20);
+    private Font titleFont2 = new Font("Serif", Font.ITALIC, 16);
+    private JPanel missionPanel;
     private AudioInputStream audioInputStream = AudioSystem
             .getAudioInputStream(new File("./data/ch-ching.wav").getAbsoluteFile());
     private Clip clip = AudioSystem.getClip();
@@ -54,10 +58,11 @@ public class WelcomePage extends JPanel implements ActionListener, Page {
     //EFFECTS: creates welcome page with logo and create account/login button
     @Override
     public void createPage() {
+        add(Box.createRigidArea(new Dimension(400, 100)));
         try {
             ImageIcon imageIcon = new ImageIcon("./data/logo.png"); // load the image to a imageIcon
             Image image = imageIcon.getImage(); // transform it
-            Image newimg = image.getScaledInstance(400, 180,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+            Image newimg = image.getScaledInstance(400, 180, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
             imageIcon = new ImageIcon(newimg);
 
             JLabel picLabel = new JLabel(imageIcon);
@@ -66,13 +71,7 @@ public class WelcomePage extends JPanel implements ActionListener, Page {
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        add(Box.createRigidArea(new Dimension(400, 25)));
-
-        add(new JLabel("Our mission is to create an inclusive economy"));
-        add(new JLabel("by helping you send, receive, and spend money easier"));
-
-        add(Box.createRigidArea(new Dimension(400, 25)));
+        initiateMissionPanel();
 
         add(createAccButton);
         add(loginButton);
@@ -85,6 +84,26 @@ public class WelcomePage extends JPanel implements ActionListener, Page {
         } catch (Exception exception) {
             System.out.println(exception);
         }
+    }
+
+    public void initiateMissionPanel() {
+        add(Box.createRigidArea(new Dimension(400, 25)));
+
+        JLabel mission1 = new JLabel("<html>Our mission is to create an <b><font color=green>inclusive economy</font></b>");
+        mission1.setFont(titleFont);
+        JLabel mission2 = new JLabel("by helping you send, receive, and spend money easier");
+        mission2.setFont(titleFont2);
+
+        missionPanel = new JPanel();
+        missionPanel.setBackground(Color.white);
+        missionPanel.setBorder(new EtchedBorder(10, Color.green, Color.gray));
+        missionPanel.setPreferredSize(new Dimension(400, 140));
+        missionPanel.add(Box.createRigidArea(new Dimension(400, 20)));
+        missionPanel.add(mission1);
+        missionPanel.add(Box.createRigidArea(new Dimension(400, 20)));
+        missionPanel.add(mission2);
+        add(missionPanel);
+        add(Box.createRigidArea(new Dimension(400, 75)));
     }
 
     //MODIFY: this

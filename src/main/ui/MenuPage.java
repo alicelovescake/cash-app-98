@@ -62,6 +62,8 @@ public class MenuPage extends JPanel implements ActionListener, Page {
         balanceAmountLabel.setFont(new Font(balanceAmountLabel.getName(), Font.BOLD, 45));
 
         balanceLabel = new JLabel("BALANCE");
+        Font f = balanceLabel.getFont();
+        balanceLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
         balanceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         balanceLabel.setForeground(Color.DARK_GRAY);
 

@@ -3,24 +3,24 @@
         {
             "cardType": "visa",
             "expiryMonth": 9,
-            "id": "0f372c15-67cb-4d9c-9be4-c2df2122c77f",
+            "id": "cb8e6f30-56bb-43ad-8a77-46911017b634",
             "expiryYear": 2025,
             "cardNumber": 234
         },
         {
             "cardType": "visa",
             "expiryMonth": 9,
-            "id": "20075473-1852-4f20-b22e-7143fe1e3fd0",
+            "id": "aafc94b6-3f85-4b3a-872c-bf91d73c3b77",
             "expiryYear": 2025,
             "cardNumber": 2123
         }
     ],
     "balance": 10,
     "id": "68ee5441-0b85-41c2-ad37-e0ec38affecd",
-    "boosts": [],
+    "boosts": [{"boostType": "SHOPAHOLIC"}],
     "transactions": [
         {
-            "date": "2021-04-01",
+            "date": "2021-04-09",
             "amount": 20,
             "sender": {
                 "balance": 10,
@@ -52,7 +52,7 @@
             "status": "PENDING"
         },
         {
-            "date": "2021-04-01",
+            "date": "2021-04-09",
             "amount": 50,
             "sender": {
                 "balance": 10,
@@ -84,7 +84,7 @@
             "status": "COMPLETE"
         },
         {
-            "date": "2021-04-01",
+            "date": "2021-04-09",
             "amount": 10,
             "sender": {
                 "balance": 10,
@@ -116,7 +116,7 @@
             "status": "COMPLETE"
         },
         {
-            "date": "2021-04-01",
+            "date": "2021-04-09",
             "amount": 10,
             "sender": {
                 "balance": 10,
@@ -148,7 +148,7 @@
             "status": "COMPLETE"
         },
         {
-            "date": "2021-04-01",
+            "date": "2021-04-09",
             "amount": 10,
             "sender": {
                 "balance": 10,
