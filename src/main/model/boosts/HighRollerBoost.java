@@ -2,6 +2,8 @@ package model.boosts;
 
 import model.Transaction;
 import org.json.JSONObject;
+
+import java.util.Objects;
 // A boost to give cashback for purchases > 1000
 
 public class HighRollerBoost implements Boost {
@@ -22,6 +24,24 @@ public class HighRollerBoost implements Boost {
             return true;
         }
         return false;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof HighRollerBoost)) {
+            return false;
+        }
+        HighRollerBoost that = (HighRollerBoost) o;
+        return boostType == that.boostType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(boostType);
     }
 
     @Override

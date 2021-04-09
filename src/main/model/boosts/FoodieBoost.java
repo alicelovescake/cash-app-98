@@ -5,6 +5,8 @@ import model.Transaction;
 import model.User;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 // A boost to give cashback for purchases to cafe or restaurants
 public class FoodieBoost implements Boost {
     BoostType boostType;
@@ -31,6 +33,23 @@ public class FoodieBoost implements Boost {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof FoodieBoost)) {
+            return false;
+        }
+        FoodieBoost that = (FoodieBoost) o;
+        return boostType == that.boostType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(boostType);
     }
 
     @Override

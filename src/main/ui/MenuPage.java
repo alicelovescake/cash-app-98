@@ -19,6 +19,7 @@ public class MenuPage extends JPanel implements ActionListener, Page {
     double balance;
 
     static final String ADD_CREDIT_CARD = "Add Credit Card";
+    static final String ADD_BOOST = "Add Boost";
     static final String ADD_CASH = "Add Cash";
     static final String CASH_OUT = "Cash Out";
     static final String MAKE_PURCHASE = "Make Purchase";
@@ -108,6 +109,7 @@ public class MenuPage extends JPanel implements ActionListener, Page {
         add(Box.createRigidArea(new Dimension(5, 25)));
 
         addMenuButton(UPDATE_CREDIT_CARDS);
+        addMenuButton(ADD_BOOST);
         add(Box.createRigidArea(new Dimension(5, 25)));
 
         addMenuButton(TRANSACTION_HISTORY);
@@ -169,6 +171,9 @@ public class MenuPage extends JPanel implements ActionListener, Page {
                 break;
             case ADD_CREDIT_CARD:
                 cl.show(this.app.getContainer(), Pages.ADD_CREDIT_CARD.name());
+                break;
+            case ADD_BOOST:
+                cl.show(this.app.getContainer(), Pages.ADD_BOOST.name());
                 break;
         }
     }

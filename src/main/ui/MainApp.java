@@ -116,12 +116,14 @@ public class MainApp extends JFrame implements ActionListener {
         JPanel creditCardPage = new CreditCardPage(this);
         JPanel addCreditCard = new AddCreditCardPage(this);
         JPanel transactionHistoryPage = new TransactionHistoryPage(this);
+        JPanel addBoostPage = new AddBoostPage(this);
 
         container.add(requestMoneyPage, Pages.REQUEST.name());
         container.add(sendMoneyPage, Pages.SEND.name());
         container.add(creditCardPage, Pages.CREDIT_CARD.name());
         container.add(addCreditCard, Pages.ADD_CREDIT_CARD.name());
         container.add(transactionHistoryPage, Pages.TRANSACTION.name());
+        container.add(addBoostPage, Pages.ADD_BOOST.name());
     }
 
 

@@ -38,6 +38,18 @@ public class ShopaholicBoost implements Boost {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ShopaholicBoost)) {
+            return false;
+        }
+        ShopaholicBoost that = (ShopaholicBoost) o;
+        return boostType == that.boostType;
+    }
+
+    @Override
     //EFFECTS: returns this boost as a JSON object
     public JSONObject toJson() {
         JSONObject boostJson = new JSONObject();

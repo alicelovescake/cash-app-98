@@ -4,8 +4,8 @@
 
 Think it's worthless? What if I told you that Elon Musk will let you buy *a Tesla* with these pieces of paper? 
 
-**Money**, in and of it itself, has no actual value. Yet when it moves from one hand to another, it starts to function 
-as a medium of exchange and a storehouse of wealth. 
+**Money**, by itself, has no actual value. Yet when it moves from one hand to another, 
+it becomes a medium of exchange and a storehouse of wealth.
 
 ### How can we make it easier to send money, spend money and save money? 🤯
 
