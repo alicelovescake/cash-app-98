@@ -59,9 +59,9 @@ public class MenuPage extends JPanel implements ActionListener, Page {
 
         balanceAmountLabel = new JLabel("$" + balance);
         balanceAmountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        balanceAmountLabel.setFont(new Font(balanceAmountLabel.getName(), Font.BOLD, 45));
+        balanceAmountLabel.setFont(new Font(balanceAmountLabel.getName(), Font.BOLD, 60));
 
-        balanceLabel = new JLabel("BALANCE");
+        balanceLabel = new JLabel("********** BALANCE **********");
         Font f = balanceLabel.getFont();
         balanceLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
         balanceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -69,9 +69,11 @@ public class MenuPage extends JPanel implements ActionListener, Page {
 
         addAppStatus();
 
+        add(Box.createRigidArea(new Dimension(5, 50)));
         add(balanceAmountLabel);
+        add(Box.createRigidArea(new Dimension(5, 10)));
         add(balanceLabel);
-        add(Box.createRigidArea(new Dimension(5, 25)));
+        add(Box.createRigidArea(new Dimension(5, 50)));
 
         int creditCardCount = this.app.getUser().getAccount().getCreditCards().size();
 

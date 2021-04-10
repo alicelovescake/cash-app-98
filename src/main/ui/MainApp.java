@@ -126,7 +126,6 @@ public class MainApp extends JFrame implements ActionListener {
         container.add(addBoostPage, Pages.ADD_BOOST.name());
     }
 
-
     // Starts CashApp
     public static void main(String[] args) {
         new MainApp();
@@ -139,3 +138,4 @@ public class MainApp extends JFrame implements ActionListener {
 
 
 }
+

@@ -206,7 +206,7 @@ public class AccountPage extends JPanel implements ActionListener, Page {
             this.app.setUser(createdUser);
 
             this.app.setStatus("Welcome from "
-                    + locationData + "!" + " Your username $" + usernameData + " is ready to be used! Woooot!");
+                    + locationData + "!" + "$" + usernameData + " is ready to be used!");
 
             cl.show(this.app.getContainer(), Pages.MENU.name());
         }

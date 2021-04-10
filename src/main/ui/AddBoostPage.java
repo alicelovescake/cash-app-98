@@ -147,17 +147,17 @@ public class AddBoostPage extends JPanel implements Page, ActionListener, ItemLi
 
         switch (selectedBoost) {
             case 1:
-                if (!listModel.contains("HIGH ROLLER BOOST")) {
+                if (!listModel.contains("HIGHROLLER")) {
                     addHighRollerBoost(userAccount);
                 }
                 break;
             case 2:
-                if (!listModel.contains("SHOPAHOLIC BOOST")) {
+                if (!listModel.contains("SHOPAHOLIC")) {
                     addShopaholicBoost(userAccount);
                 }
                 break;
             case 3:
-                if (!listModel.contains("FOODIE BOOST")) {
+                if (!listModel.contains("FOODIE")) {
                     addFoodieBoost(userAccount);
                 }
                 break;
@@ -166,19 +166,19 @@ public class AddBoostPage extends JPanel implements Page, ActionListener, ItemLi
 
     private void addHighRollerBoost(Account userAccount) {
         userAccount.addBoost(highRollerBoost);
-        listModel.addElement("HIGH ROLLER BOOST");
+        listModel.addElement("HIGHROLLER");
         status.setText(highRollerStatus);
     }
 
     private void addShopaholicBoost(Account userAccount) {
         userAccount.addBoost(shopaholicBoost);
-        listModel.addElement("SHOPAHOLIC BOOST");
+        listModel.addElement("SHOPAHOLIC");
         status.setText(shopaholicStatus);
     }
 
     private void addFoodieBoost(Account userAccount) {
         userAccount.addBoost(foodieBoost);
-        listModel.addElement("FOODIE BOOST");
+        listModel.addElement("FOODIE");
         status.setText(foodieStatus);
     }
 }
