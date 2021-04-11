@@ -41,7 +41,8 @@ public class WithdrawalPage extends JPanel implements ActionListener, ItemListen
     //EFFECTS: creates page that displays credit cards and allows user to input what amount they want to withdraw
     @Override
     public void createPage() {
-        new PageTitle(this, "Withdraw");
+        ImageIcon withdraw = this.app.getEmoji("withdraw", 50, 50);
+        new PageTitle(this, "Withdraw", withdraw);
 
         if (this.app.getUser() != null) {
             int creditCardCount = this.app.getUser().getAccount().getCreditCards().size();

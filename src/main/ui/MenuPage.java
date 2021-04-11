@@ -17,6 +17,7 @@ public class MenuPage extends JPanel implements ActionListener, Page {
     JLabel balanceLabel;
     JLabel balanceAmountLabel;
     double balance;
+    ImageIcon imageIcon;
 
     static final String ADD_CREDIT_CARD = "Add Credit Card";
     static final String ADD_BOOST = "Add Boost";
@@ -54,18 +55,17 @@ public class MenuPage extends JPanel implements ActionListener, Page {
     @Override
     public void createPage() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
+        this.app.getContentPane().setBackground(new Color(0, 212, 75));
+        imageIcon = this.app.getEmoji("money", 100, 100);
         balance = this.app.getUser() == null ? 0 : this.app.getUser().getAccount().getBalance();
 
         balanceAmountLabel = new JLabel("$" + balance);
         balanceAmountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         balanceAmountLabel.setFont(new Font(balanceAmountLabel.getName(), Font.BOLD, 60));
+        balanceAmountLabel.setForeground(Color.WHITE);
 
-        balanceLabel = new JLabel("********** BALANCE **********");
-        Font f = balanceLabel.getFont();
-        balanceLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
-        balanceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        balanceLabel.setForeground(Color.DARK_GRAY);
+        balanceLabel = new JLabel(imageIcon, JLabel.CENTER);
+        balanceLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 
         addAppStatus();
 
@@ -73,6 +73,7 @@ public class MenuPage extends JPanel implements ActionListener, Page {
         add(balanceAmountLabel);
         add(Box.createRigidArea(new Dimension(5, 10)));
         add(balanceLabel);
+
         add(Box.createRigidArea(new Dimension(5, 50)));
 
         int creditCardCount = this.app.getUser().getAccount().getCreditCards().size();
@@ -196,4 +197,5 @@ public class MenuPage extends JPanel implements ActionListener, Page {
             this.app.setStatus("Oops! Something went wrong with saving your file");
         }
     }
+
 }

@@ -58,7 +58,8 @@ public class AccountPage extends JPanel implements ActionListener, Page {
     // EFFECTS: Creates account page with radio buttons and text fields and adds to this panel
     @Override
     public void createPage() {
-        new PageTitle(this, "Create Account");
+        ImageIcon person = this.app.getEmoji("person", 50, 50);
+        new PageTitle(this, "Create Account", person);
 
         initializeAccountRadioButtons();
 
@@ -204,9 +205,10 @@ public class AccountPage extends JPanel implements ActionListener, Page {
             }
 
             this.app.setUser(createdUser);
+            ImageIcon tada = this.app.getEmoji("party", 25, 25);
 
-            this.app.setStatus("Welcome from "
-                    + locationData + "!" + "$" + usernameData + " is ready to be used!");
+            this.app.setStatus("Welcome " + usernameData + " from "
+                    + locationData + "!  ", tada);
 
             cl.show(this.app.getContainer(), Pages.MENU.name());
         }

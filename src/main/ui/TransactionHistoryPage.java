@@ -42,7 +42,8 @@ public class TransactionHistoryPage extends JPanel implements ActionListener, Pa
     //EFFECTS: creates page that displays and adds a table to app with completed, pending, and failed transactions
     @Override
     public void createPage() {
-        new PageTitle(this, "Transactions");
+        ImageIcon book = this.app.getEmoji("book", 50, 50);
+        new PageTitle(this, "Transactions", book);
 
         String[] columnNames = {"DATE", "RECIPIENT", "SENDER", "AMOUNT", "STATUS"};
         Object[][] data = new Object[0][columnNames.length];
@@ -58,9 +59,9 @@ public class TransactionHistoryPage extends JPanel implements ActionListener, Pa
 
             data = new Object[totalTransactions][columnNames.length];
 
-            displayTransactions(columnNames, data, completedTransactions);
-            displayTransactions(columnNames, data, pendingTransactions);
-            displayTransactions(columnNames, data, failedTransactions);
+            displayTransactions(columnNames, data, completedTransactions, 0);
+            displayTransactions(columnNames, data, pendingTransactions, completedTransactions.size());
+            displayTransactions(columnNames, data, failedTransactions, pendingTransactions.size());
         }
 
         JTable table = new JTable(data, columnNames);
@@ -76,7 +77,7 @@ public class TransactionHistoryPage extends JPanel implements ActionListener, Pa
     }
 
     //EFFECTS: prints all transactions with give parameters
-    public void displayTransactions(String[] columnNames, Object[][] data, List<Transaction> transactions) {
+    public void displayTransactions(String[] columnNames, Object[][] data, List<Transaction> transactions, int offset) {
         for (int i = 0; i < transactions.size(); i++) {
             String[] transactionArray = {
                     String.valueOf(transactions.get(i).getDate()),
@@ -85,7 +86,7 @@ public class TransactionHistoryPage extends JPanel implements ActionListener, Pa
                     String.valueOf(transactions.get(i).getAmount()),
                     transactions.get(i).getStatus().name(),
             };
-            data[i] = transactionArray;
+            data[i + offset] = transactionArray;
         }
     }
 

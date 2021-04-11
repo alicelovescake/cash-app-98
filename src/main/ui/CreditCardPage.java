@@ -46,7 +46,8 @@ public class CreditCardPage extends JPanel implements ActionListener, Page {
     //EFFECTS: creates page that displays available credit cards
     @Override
     public void createPage() {
-        new PageTitle(this, "Credit Cards");
+        ImageIcon card = this.app.getEmoji("card", 50, 50);
+        new PageTitle(this, "Credit Cards", card);
 
         listModel = new DefaultListModel();
 

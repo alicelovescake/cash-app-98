@@ -42,7 +42,8 @@ public class DepositPage extends JPanel implements ActionListener, ItemListener,
     //EFFECTS: creates page that displays available credit cards and accepts user input for amount to deposit
     @Override
     public void createPage() {
-        new PageTitle(this, "Deposit");
+        ImageIcon bank = this.app.getEmoji("bank", 50, 50);
+        new PageTitle(this, "Deposit", bank);
 
         if (this.app.getUser() != null) {
             int creditCardCount = this.app.getUser().getAccount().getCreditCards().size();

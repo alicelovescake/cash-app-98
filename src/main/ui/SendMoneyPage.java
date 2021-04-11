@@ -44,7 +44,8 @@ public class SendMoneyPage extends JPanel implements ActionListener, Page {
     //EFFECTS: creates page that allows user to input what amount they want to send
     @Override
     public void createPage() {
-        new PageTitle(this, "Send Money");
+        ImageIcon send = this.app.getEmoji("send", 50, 50);
+        new PageTitle(this, "Send Money", send);
 
         add(Box.createRigidArea(new Dimension(400, 25)));
 

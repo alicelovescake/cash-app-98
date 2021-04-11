@@ -61,6 +61,11 @@ public class MainApp extends JFrame implements ActionListener {
         status.setText(msg);
     }
 
+    public void setStatus(String msg, ImageIcon icon) {
+        status.setText(msg);
+        status.setIcon(icon);
+    }
+
     public static void setUser(User user) {
         MainApp.user = user;
     }
@@ -73,7 +78,6 @@ public class MainApp extends JFrame implements ActionListener {
         setResizable(false);
         setSize(WIDTH, HEIGHT);
 
-        getContentPane().setBackground(new Color(228, 233, 216));
         initializeAppPages();
         setVisible(true);
     }
@@ -134,6 +138,19 @@ public class MainApp extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    public ImageIcon getEmoji(String img, int width, int height) {
+        ImageIcon imageIcon = new ImageIcon();
+        try {
+            imageIcon = new ImageIcon("./data/" + img + ".png"); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it
+            Image newimg = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(newimg);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return imageIcon;
     }
 
 

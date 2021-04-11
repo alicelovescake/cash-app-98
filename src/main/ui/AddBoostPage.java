@@ -34,6 +34,7 @@ public class AddBoostPage extends JPanel implements Page, ActionListener, ItemLi
             + "You'll get " + "<b><font color=red>10% cashback</font></b>" + " on every purchase > $1,000";
     private String foodieStatus = "<html>"
             + "You'll get " + "<b><font color=red>3% cashback</font></b>" + " on every yummy purchase";
+    private ImageIcon imageIcon;
 
 
     public AddBoostPage(MainApp app) {
@@ -54,8 +55,6 @@ public class AddBoostPage extends JPanel implements Page, ActionListener, ItemLi
         addBoostButton.addActionListener(this);
         removeBoostButton.addActionListener(this);
         status = new JLabel("Your current boosts");
-//        Font f = status.getFont();
-//        status.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
 
         setOpaque(false);
     }
@@ -64,8 +63,8 @@ public class AddBoostPage extends JPanel implements Page, ActionListener, ItemLi
     //EFFECTS: creates page that displays available boosts
     @Override
     public void createPage() {
-
-        new PageTitle(this, "Your Boosts");
+        ImageIcon tada = this.app.getEmoji("party", 50, 50);
+        new PageTitle(this, "Your Boosts", tada);
         listModel = new DefaultListModel();
 
         initializeComboList();
@@ -143,7 +142,7 @@ public class AddBoostPage extends JPanel implements Page, ActionListener, ItemLi
 
     private void processSelection(int selectedBoost) {
         Account userAccount = this.app.getUser().getAccount();
-
+        imageIcon = this.app.getEmoji("party", 20, 20);
 
         switch (selectedBoost) {
             case 1:
@@ -168,19 +167,23 @@ public class AddBoostPage extends JPanel implements Page, ActionListener, ItemLi
         userAccount.addBoost(highRollerBoost);
         listModel.addElement("HIGHROLLER");
         status.setText(highRollerStatus);
+        status.setIcon(imageIcon);
     }
 
     private void addShopaholicBoost(Account userAccount) {
         userAccount.addBoost(shopaholicBoost);
         listModel.addElement("SHOPAHOLIC");
         status.setText(shopaholicStatus);
+        status.setIcon(imageIcon);
     }
 
     private void addFoodieBoost(Account userAccount) {
         userAccount.addBoost(foodieBoost);
         listModel.addElement("FOODIE");
         status.setText(foodieStatus);
+        status.setIcon(imageIcon);
     }
+
 }
 
 

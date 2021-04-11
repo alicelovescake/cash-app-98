@@ -44,7 +44,8 @@ public class RequestMoneyPage extends JPanel implements ActionListener, Page {
     //EFFECTS: creates page that accepts user input for request amount and recipient. Adds to app.
     @Override
     public void createPage() {
-        new PageTitle(this, "Request Money");
+        ImageIcon man = this.app.getEmoji("man", 50, 50);
+        new PageTitle(this, "Request Money", man);
 
         add(Box.createRigidArea(new Dimension(400, 25)));
 

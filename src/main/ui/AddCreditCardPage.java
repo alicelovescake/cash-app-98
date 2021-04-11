@@ -44,7 +44,8 @@ public class AddCreditCardPage extends JPanel implements ActionListener, Page {
     //EFFECTS: create page to gather user input for credit card info and adds it to panel
     @Override
     public void createPage() {
-        new PageTitle(this, "Add Credit Card");
+        ImageIcon card = this.app.getEmoji("card", 50, 50);
+        new PageTitle(this, "Add Credit Card", card);
 
         initializeFields();
 

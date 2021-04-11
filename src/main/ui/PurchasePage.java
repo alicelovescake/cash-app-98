@@ -18,6 +18,7 @@ public class PurchasePage extends JPanel implements ActionListener, Page {
     JButton confirmButton = new JButton("Confirm Purchase");
     TextField sendAmount;
     TextField recipientUsername;
+    ImageIcon money;
 
     //MODIFY: this
     //EFFECTS: creates page that displays and adds a table to app with completed, pending, and failed transactions
@@ -45,7 +46,8 @@ public class PurchasePage extends JPanel implements ActionListener, Page {
     //EFFECTS: creates page that displays credit cards and allows user to input what amount they want to purchase
     @Override
     public void createPage() {
-        new PageTitle(this, "Make Purchase");
+        money = this.app.getEmoji("bag", 50, 50);
+        new PageTitle(this, "Make Purchase", money);
 
         add(Box.createRigidArea(new Dimension(400, 25)));
 
@@ -57,8 +59,8 @@ public class PurchasePage extends JPanel implements ActionListener, Page {
         add(recipientUsername);
 
         add(Box.createRigidArea(new Dimension(400, 25)));
-
         JLabel amountLabel = new JLabel("Purchase Amount:");
+
         sendAmount = new TextField();
         sendAmount.setPreferredSize(new Dimension(200, 30));
 
@@ -96,6 +98,9 @@ public class PurchasePage extends JPanel implements ActionListener, Page {
             this.app.setStatus("Congrats! Your purchase went through!");
             Transaction newTransaction = new Transaction(recipientAccount, senderAccount, sendAmtData,
                     Transaction.Type.EXCHANGE, Transaction.Status.PENDING);
+            System.out.println(newTransaction);
+            System.out.println(newTransaction.getStatus());
+            System.out.println(newTransaction.getAmount());
             this.app.getUser().getAccount().addToTransactions(newTransaction);
 
         } else {
