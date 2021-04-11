@@ -1,3 +1,5 @@
+Check out the [demo here](https://www.loom.com/share/98d32866e2de4b3cbcf1cf7b372e079c)!
+
 # Cash App '98  💸
 
 ### What if I gave you a million pieces of paper? 💰
@@ -42,9 +44,6 @@ so that everyone can have equal access to opportunity.
 There is only one question for you to consider:
 
 > Are you ready to re-invent the future with us?
-
-
-Check out the [demo here](https://www.loom.com/share/98d32866e2de4b3cbcf1cf7b372e079c)
 
 ---
 
